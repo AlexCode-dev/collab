@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Asignaturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => Yii::$app->security->encryptByPassword($model->id, $oUser->password)]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="asignaturas-update">$model->id
+<div class="asignaturas-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

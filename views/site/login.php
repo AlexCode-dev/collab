@@ -37,5 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
     <?php ActiveForm::end(); ?>
-
+    
+    <div style="background-color:#74F7F8;width: 40%;padding: 20px;">
+        <?= Html::a('¿Olvidaste tu contrase&ntilde;a? Haz clic aqu&iacute; para recuperarla.', ['recuperar-password']) ?>
+    </div>
 </div>

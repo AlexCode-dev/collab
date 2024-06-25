@@ -9,11 +9,19 @@ use yii\grid\GridView;
 
 $this->title = 'Asignaturas';
 $this->params['breadcrumbs'][] = $this->title;
+
+$usuario = Yii::$app->user->identity->id;
+$oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
+$rolesUsuario = Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->id);
 ?>
 <div class="asignaturas-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    
+    <p>
+        <?= (array_key_exists('estudiante', $rolesUsuario)) ? Html::a('Asociarse a asignatura', ['asignaturas-alumnos/create-asociation'], ['class' => 'btn btn-success']) : '' ?>
+    </p>
 
     <?=
     GridView::widget([

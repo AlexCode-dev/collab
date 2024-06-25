@@ -23,7 +23,7 @@ $script = <<< JS
                     var aAlumnos = JSON.parse(data);
                     var i = 0;
                     while (i < aAlumnos.length){
-                        $('#contenedorAlumnos').append('<span id="' + aAlumnos[i].alumno.idUsuario + '" class="divAlumno draggable">' + aAlumnos[i].alumno.apellido + ', ' + aAlumnos[i].alumno.nombre + '</span>');
+                        $('#contenedorAlumnos').append('<div id="' + aAlumnos[i].alumno.idUsuario + '" class="divAlumno draggable">' + aAlumnos[i].alumno.apellido + ', ' + aAlumnos[i].alumno.nombre + '</div>');
                         i = i + 1;
                     }
                     $(".draggable").draggable();
@@ -117,14 +117,18 @@ $this->registerJs($script, yii\web\View::POS_END);
     <?= $form->field($model, 'cantidadintegrantes')->textInput() ?>        
 
     <?= $form->field($model, 'metodos_formacion_id')->dropDownList(app\models\MetodosFormacion::getListaMetodosFormacion()); ?>
-    
+
     <?= $form->field($model, 'alumnosPorGrupo')->hiddenInput()->label(''); ?>   
 
-    <div id='contenedorAlumnos'></div><br/>
+    <div>
+        <div id='contenedorAlumnos' style="width: 180px;float:left;"></div>
 
-    <div id='contenedorGrupos'></div>    
+        <div id='contenedorGrupos' style="float:left;"></div>    
 
-    <br style='clear: both;'/>
+        <br style='clear: both;'/>
+    </div>
+
+
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

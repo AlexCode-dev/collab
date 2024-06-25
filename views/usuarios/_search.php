@@ -22,6 +22,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'nombre') ?>
 
     <?= $form->field($model, 'apellido') ?>
+    
+    <?= $form->field($model, 'fechanacimiento') ?>
+    
+    <?= $form->field($model, 'email') ?>
 
     <?php // echo $form->field($model, 'tipo')->checkbox() ?>
 

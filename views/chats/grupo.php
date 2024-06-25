@@ -7,20 +7,23 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ChatsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$asignatura = app\models\Asignaturas::findOne(['id' => $tarea->asignaturas_id])->nombre;
-
-$this->title = 'Chat - ' . $tarea->descripcion;
-$this->params['breadcrumbs'][] = $this->title;
+$miembrosChat = app\models\Chats::getMiembrosChat($grupo_id);
 $usuarioid = Yii::$app->user->identity->id;
 
 // urls para hacer llamados AJAX
 $recuperarChat = Yii::$app->urlManager->createUrl(['chats/recuperar-chat', 'chatid' => $chatid]);
+$recuperarUltimaSentenciaChat = Yii::$app->urlManager->createUrl(['chats/recuperar-ultima-sentencia-chat', 'chatid' => $chatid]);
 $enviarSentencia = Yii::$app->urlManager->createUrl(['sentencias/crear-con-ajax']);
 $enviarReporteEstadoAnimo = Yii::$app->urlManager->createUrl(['emociones/crear-con-ajax']);
 $sentenciasApertura = Yii::$app->urlManager->createUrl(['sentencias-apertura/recuperar-sentencias']);
 $rEstadoAnimo = ($tarea->reportar_estado_animo) ? 1 : 0;
 $rConflicto = ($tarea->reportar_conflicto) ? 1 : 0;
-$enviarCuestionario = Yii::$app->urlManager->createUrl(['cuestionarios-conflicto/crear-con-ajax']);
+$enviarReporteConflicto = Yii::$app->urlManager->createUrl(['conflictos/crear-con-ajax']);
+$urlUploads = Yii::$app->request->baseUrl . "/uploads/$directorio/";
+
+$this->title = $asignatura . " - " . $tarea->nombre_t . " / Grupo " . $miembrosChat[0]["grupos_formados_id"] . " - " . $miembrosChat[0]["alumnos"] ;
+$this->params['breadcrumbs'][] = $this->title;
+
 
 /* $this->registerCssFile("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
   $this->registerCssFile(Yii::$app->request->baseUrl . "/emoji-picker/css/emoji.css"); */
@@ -48,6 +51,17 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/emoji-picker/js/emoji-pick
 
 $base = Yii::$app->request->baseUrl;
 $script = <<< JS
+    function enviarArchivo(nombreArchivo){        
+        sentenciaEnviar = "<a href='$urlUploads" + nombreArchivo + "' target='_blank'>" + nombreArchivo + "</a>";
+        $.ajax({
+            method: 'GET',
+            url: "$enviarSentencia",
+            data: {sentencia: sentenciaEnviar, usuarios_id:$usuarioid, chats_id: $chatid},
+        }).done(function (data) {           
+            return true;
+        });         
+    }
+        
     $(function () {
         var bSeleccionSentencia = 0;
         var rEstadoAnimo = $rEstadoAnimo;
@@ -56,33 +70,8 @@ $script = <<< JS
         var scrollTopBefore = 0;
         var cargaInicial = 0;
         var lastScrollHeight = 0;
-        var cuestionario = {
-            nc1:0,
-            nc2:0,
-            nc3:0,
-            nc4:0,
-            nc5:0,
-            cc1:0,
-            cc2:0,
-            cc3:0,
-            cc4:0,
-            cc5:0,
-            cc6:0,
-            cc7:0,
-            cc8:0,
-            cc9:0,
-            cc10:0,
-            cc11:0,
-            cc12:0,
-            cc13:0,
-            cc14:0,
-            cc15:0,
-            cc16:0,
-            cc17:0,
-            cc18:0,
-            cc19:0,
-            cc20:0
-        };
+        var ultimaSentencia = "";
+
         
         $('#divChat').scroll(function(){
             var objDiv = document.getElementById("divChat");
@@ -96,32 +85,43 @@ $script = <<< JS
             $('#goBottom').hide();
         });
         
+        $.ajax({
+            url: "$recuperarChat",
+        }).done(function (data) {
+            $('#divChat').append(data);
+            var objDiv = document.getElementById("divChat");
+            objDiv.scrollTop = objDiv.scrollHeight; 
+            lastScrollHeight = objDiv.scrollHeight;                      
+        });
+        
+        $.ajax({
+            url: "$recuperarUltimaSentenciaChat",
+        }).done(function (data) {
+            ultimaSentencia = data;                    
+        });
+        
         var interval = setInterval(function(){
             $.ajax({
-                url: "$recuperarChat",
+                url: "$recuperarUltimaSentenciaChat",
             }).done(function (data) {
-                $('#divChat').html(data);
-                var objDiv = document.getElementById("divChat");
-                if (cargaInicial == 0){
-                    objDiv.scrollTop = objDiv.scrollHeight; 
-                    lastScrollHeight = objDiv.scrollHeight;
-                    cargaInicial = 1;
-                } else{
+                if (ultimaSentencia !== data){
+                    var objDiv = document.getElementById("divChat");
+                    $('#divChat').append(data);
+                    ultimaSentencia = data;  
                     diferencia = objDiv.scrollHeight - scrollTopBefore;
                     if( diferencia > 300 && diferencia < 490 ){
                         objDiv.scrollTop = objDiv.scrollHeight;                    
                         lastScrollHeight = objDiv.scrollHeight;
-                    } else {
-                        
+                    } else {                        
                         objDiv.scrollTop = scrollTopBefore;
                         if (lastScrollHeight < objDiv.scrollHeight){
                             $('#goBottom').show();
                         }                        
-                    }          
-                }              
+                    }
+                }           
             });
-        }, 1000);  
-        
+        }, 1000);
+            
         $('#cbxSubhabilidad').change(function () {
             $.ajax({
                 url: "$sentenciasApertura",
@@ -160,146 +160,51 @@ $script = <<< JS
                     data: {sentencia: sentenciaEnviar, usuarios_id:$usuarioid, chats_id: $chatid},
                 }).done(function (data) {
                     $('#txtSentencia').val('');
-                    $('.emoji-wysiwyg-editor').html("");
-        
-                    // Se reporta el estado de animo
-                    if (rEstadoAnimo == 1){
-                        $.ajax({
-                            method: 'GET',
-                            url: "$enviarReporteEstadoAnimo",
-                            data: {id: data,valence: $('#pleasure').val(), arousal:$('#arousal').val(), dominance:$('#dominance').val()},
-                        }).done(function () {
-                            return true;
-                        });
-                    }  
-                       
-                    if (rConflicto == 1){
-                        opcionSeleccionada = $('input[name=conflicto]:checked').val();
-                        if (opcionSeleccionada == 'yes'){
-                            presenciaConflicto = 1;
-                        } else {
-                            if (opcionSeleccionada == 'no' && presenciaConflicto == 1){                                
-                                presenciaConflicto = 0;
-                                $("#frmNC").data('sentenciaid', data).dialog("open");
-                            }
-                        }
-                    }
+                    $('.emoji-wysiwyg-editor').html("");  
+
                     return true;
                 });        
             }        
-        });
+        });                
         
         if (rEstadoAnimo == 1){
+            // Se establece una emoción por defecto
+            if ($('#lblEmocionSeleccionada').html().length == 0){
+                $('#pleasure').val('0.000');
+                $('#arousal').val('0.000');
+                $('#dominance').val('0.000');
+                $('#imgEmocionSeleccionada').attr('class', 'neutral');
+                $('#lblEmocionSeleccionada').html('Neutral');
+            }
+        
             $('input[type="button"].btnEmociones').click(function(){
                 $('#pleasure').val($(this).data('pleasure'));
                 $('#arousal').val($(this).data('arousal'));
                 $('#dominance').val($(this).data('dominance'));
                 $('#imgEmocionSeleccionada').attr('class', $(this).attr('class'));
                 $('#lblEmocionSeleccionada').html($(this).data('emocion'));
+
+                $.ajax({
+                    method: 'GET',
+                    url: "$enviarReporteEstadoAnimo",
+                    data: {id: $chatid, valence: $('#pleasure').val(), arousal: $('#arousal').val(), dominance: $('#dominance').val(), usuarios_id:$usuarioid},
+                }).done(function () {
+                    return true;
+                });   
             });                
         }   
         
         if (rConflicto == 1){
-            var i = 1;
-            var j = 1;
-            while(i <= 8){
-                $('#ncp' + i).rateYo({
-                    precision: 0,
-                });
-                i = i + 1;
-            }
-        
-            while(j <= 20){
-                $('#ccp' + j).rateYo({
-                    precision: 0,
-                });
-                j = j + 1;
-            }
-        
-            function enviarRespuestasNaturalezaConflicto(){
-                cuestionario.nc1 = parseFloat($('#ncp1').rateYo("rating")); 
-                cuestionario.nc2 = parseFloat($('#ncp2').rateYo("rating")); 
-                cuestionario.nc3 = parseFloat($('#ncp3').rateYo("rating")); 
-                cuestionario.nc4 = parseFloat($('#ncp4').rateYo("rating")); 
-                cuestionario.nc5 = parseFloat($('#ncp5').rateYo("rating")); 
-                cuestionario.nc6 = parseFloat($('#ncp6').rateYo("rating")); 
-                cuestionario.nc7 = parseFloat($('#ncp7').rateYo("rating")); 
-                cuestionario.nc8 = parseFloat($('#ncp8').rateYo("rating")); 
-                $('#frmNC').dialog("close");
-                $('#frmCC').data('sentenciaid', $('#frmNC').data('sentenciaid'));
-                return true;
-            }
-        
-            function enviarRespuestasComportamientoConflicto(){
-                cuestionario.cc1 = parseFloat($('#ccp1').rateYo("rating")); 
-                cuestionario.cc2 = parseFloat($('#ccp2').rateYo("rating")); 
-                cuestionario.cc3 = parseFloat($('#ccp3').rateYo("rating")); 
-                cuestionario.cc4 = parseFloat($('#ccp4').rateYo("rating")); 
-                cuestionario.cc5 = parseFloat($('#ccp5').rateYo("rating")); 
-                cuestionario.cc6 = parseFloat($('#ccp6').rateYo("rating")); 
-                cuestionario.cc7 = parseFloat($('#ccp7').rateYo("rating")); 
-                cuestionario.cc8 = parseFloat($('#ccp8').rateYo("rating")); 
-                cuestionario.cc9 = parseFloat($('#ccp9').rateYo("rating")); 
-                cuestionario.cc10 = parseFloat($('#ccp10').rateYo("rating")); 
-                cuestionario.cc11 = parseFloat($('#ccp11').rateYo("rating")); 
-                cuestionario.cc12 = parseFloat($('#ccp12').rateYo("rating")); 
-                cuestionario.cc13 = parseFloat($('#ccp13').rateYo("rating")); 
-                cuestionario.cc14 = parseFloat($('#ccp14').rateYo("rating")); 
-                cuestionario.cc15 = parseFloat($('#ccp15').rateYo("rating")); 
-                cuestionario.cc16 = parseFloat($('#ccp16').rateYo("rating")); 
-                cuestionario.cc17 = parseFloat($('#ccp17').rateYo("rating")); 
-                cuestionario.cc18 = parseFloat($('#ccp18').rateYo("rating")); 
-                cuestionario.cc19 = parseFloat($('#ccp19').rateYo("rating")); 
-                cuestionario.cc20 = parseFloat($('#ccp20').rateYo("rating")); 
-                datac = JSON.stringify(cuestionario);
-                $('#frmPC').dialog("close");
+            $('#btnReporteConflicto').click(function () {
                 $.ajax({
-                    method: 'POST',
-                    url: "$enviarCuestionario",
-                    data: {sentenciaid: $('#frmNC').data('sentenciaid'), datacuestionario:datac},
+                    method: 'GET',
+                    url: "$enviarReporteConflicto",
+                    data: {idChat: $chatid, usuarios_id:$usuarioid},
                 }).done(function () {
                     return true;
                 });
-                return true;
-            }
-
-            dialog = $("#frmNC").dialog({
-                autoOpen: false,
-                height: 400,
-                width: 350,
-                modal: true,
-                buttons: {
-                    "Responder": enviarRespuestasNaturalezaConflicto
-                },
-                close: function () {                    
-                    $('#frmPC').dialog("open");
-                }
             });        
-        
-            dialog = $("#frmPC").dialog({
-                autoOpen: false,
-                height: 400,
-                width: 350,
-                modal: true,
-                buttons: {
-                    "Responder": enviarRespuestasComportamientoConflicto
-                },
-                close: function () {   
-                    var i = 1;
-                    var j = 1;
-                    while(i <= 8){
-                        $('#ncp' + i).rateYo("option", "rating", 0);
-                        i = i + 1;
-                    }
-
-                    while(j <= 20){
-                        $('#ccp' + j).rateYo("option", "rating", 0);
-                        j = j + 1;
-                    }                    
-                    return true;
-                }
-            });         
-        }
+        }        
         
         // Initializes and creates emoji set from sprite sheet
         window.emojiPicker = new EmojiPicker({
@@ -317,9 +222,9 @@ $this->registerJs($script, yii\web\View::POS_END);
 $sentenciaApertura = new app\models\SentenciasApertura();
 ?>
 
-<div class="chats-index">
-    <h1><?= Html::encode($asignatura) ?></h1>
-    <h2><?= Html::encode($this->title) ?></h2>
+
+<div class="chats-index">    
+    <p style="background-color: #BEF7F8; padding: 10px; font-size: 1.3em;"><b>Consigna:</b><br/><?= $tarea->consigna ?></p>
 
     <div style="float:left; margin: 0px auto 10px auto;">
         <div id='divChat' style="width: 700px; height: 350px; overflow-y: scroll;"></div>
@@ -327,35 +232,7 @@ $sentenciaApertura = new app\models\SentenciasApertura();
         <div id="goBottom" style="margin: 0 auto; width: 200px; display: none;">
             <input id="btnGoBottom" type="button" style="background-color: #FEE300;  text-align: center; padding: 5px;" value="Tienes nuevos mensajes"/>            
         </div>
-    </div>
 
-
-
-    <div style=" width:360px; margin:0 20px; float:left;">
-        <?php if ($tarea->reportar_estado_animo == 1): ?>
-            <p>Estado de &aacute;nimo seleccionado: <br/><img id='imgEmocionSeleccionada' style="border:0px;"/> <label id='lblEmocionSeleccionada'></label></p>
-            <b>Me siento...</b><br/>
-            <input type="button" id="btnAngry" class='btnEmociones angry' data-arousal="0.59" data-pleasure="-0.51" data-dominance="0.25" data-emocion='Enojado'/>
-            <input type="button" id="btnFear" class='btnEmociones fear' data-arousal="0.60" data-pleasure="-0.64" data-dominance="-0.43" data-emocion='Preocupado'/>
-            <input type="button" id="btnJoy" class='btnEmociones joy' data-arousal="0.2" data-pleasure="0.4" data-dominance=0.1 data-emocion='Alegre'/>
-            <input type="button" id="btnSadness" class='btnEmociones sadness' data-arousal="-0.2" data-pleasure="-0.4" data-dominance="-0.1" data-emocion='Cansado'/>
-            <input type="button" id="btnSurprise" class='btnEmociones surprise' data-arousal="0.59" data-pleasure="0.87" data-dominance="-0.87" data-emocion='Sorprendido'/>
-            <input id="pleasure" type="hidden" value="0" min="-1" max="1" step="0.05" size="4" />
-            <input id="arousal" type="hidden" value="0" min="-1" max="1" step="0.05" />
-            <input id="dominance" type="hidden" value="0" min="-1" max="1" step="0.05" />
-            <br/><br/>
-        <?php endif; ?>
-
-        <?php if ($tarea->reportar_conflicto == 1): ?>
-            <div style="border: black 1px solid;padding: 10px;">
-                <input type="radio" name="conflicto" value="no" checked="checked"> No hay diferencias en el grupo<br>
-                <input type="radio" name="conflicto" value="yes"> Siento que estamos con diferencias en el grupo<br>                            
-            </div>
-        <?php endif; ?>
-    </div>
-
-
-    <div style="clear:both;">
         <form id="frmChat">
             <?php if ($tarea->usar_sentencias_apertura == 1): ?>
                 <label><b>Empeza tu aporte con alguna de estas frases:</b></label><br/>
@@ -376,89 +253,54 @@ $sentenciaApertura = new app\models\SentenciasApertura();
             </p>
 
             <input type="submit" id="btnEnviar" name="btnEnviar" value="Enviar"/>
-        </form>
+        </form>  
     </div>
 
-    <?php if ($tarea->reportar_conflicto == 1): ?>
-        <div id="frmNC" title="Naturaleza del Conflicto" sentencia-id="">
-
-            ¿En qu&eacute; grado hay diferencias de opini&oacute;n en su grupo?
-            <div id="ncp1"></div>
-
-            ¿Cu&aacute;n frecuente los miembros de su grupo manifiestan desacuerdo respecto a c&oacute;mo deberían ser hechas las cosas?
-            <div id="ncp2"></div>
 
 
-            ¿Cu&aacute;n frecuente los miembros de su grupo manifiestan desacuerdo sobre cu&aacute;les procedimientos deber&iacute;an ser usados para realizar el trabajo?
-            <div id="ncp3"></div>
+    <div style=" width:400px; margin:0 20px; float:left;">
+        <?php if ($tarea->reportar_estado_animo == 1): ?>
+            <p>Estado de &aacute;nimo seleccionado: <br/><img id='imgEmocionSeleccionada' style="border:0px;"/> <label id='lblEmocionSeleccionada'></label></p>
+            <b>Me siento...</b><br/>
+            <input type="button" id="btnNeutral" class='btnEmociones neutral' data-arousal="0" data-pleasure="0" data-dominance="0" data-emocion='Neutral' title="Neutral"/>
+            <input type="button" id="btnAngry" class='btnEmociones angry' data-arousal="0.59" data-pleasure="-0.51" data-dominance="0.25" data-emocion='Enojado' title="Enojado"/>
+            <input type="button" id="btnFear" class='btnEmociones fear' data-arousal="0.60" data-pleasure="-0.64" data-dominance="-0.43" data-emocion='Preocupado' title="Preocupado"/>
+            <input type="button" id="btnJoy" class='btnEmociones joy' data-arousal="0.2" data-pleasure="0.4" data-dominance=0.1 data-emocion='Alegre' title="Alegre"/>
+            <input type="button" id="btnSadness" class='btnEmociones sadness' data-arousal="-0.2" data-pleasure="-0.4" data-dominance="-0.1" data-emocion='Cansado' title="Cansado"/>
+            <input type="button" id="btnSurprise" class='btnEmociones surprise' data-arousal="0.59" data-pleasure="0.87" data-dominance="-0.87" data-emocion='Sorprendido' title="Sorprendido"/>
+            <input id="pleasure" type="hidden" value="0" min="-1" max="1" step="0.05" size="4" />
+            <input id="arousal" type="hidden" value="0" min="-1" max="1" step="0.05" />
+            <input id="dominance" type="hidden" value="0" min="-1" max="1" step="0.05" />
+            <br/><br/>
+        <?php endif; ?>
+
+        <?php if ($tarea->reportar_conflicto == 1): ?>
+            <div style="padding: 10px;">
+                <input type="button" id="btnReporteConflicto" name="btnReporteConflicto" value="Siento que estamos con diferencias en el grupo" style="background-color: #FCE9C3; padding:10px;"/><br/>                        
+            </div>
+        <?php endif; ?>
+
+        <?php
+        $userid = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $userid]);
+        echo \kato\DropZone::widget([
+            'options' => [
+                'url' => Yii::$app->urlManager->createUrl(['chats/grupo', 'chatid' => Yii::$app->security->encryptByPassword($chatid, $oUser->password)]),
+                'maxFilesize' => '2',
+                'dictDefaultMessage' => "Coloque aquí los archivos para compartir",
+            ],
+            'clientEvents' => [
+                'complete' => "function(file){console.log(file); if (file.status!='error') enviarArchivo(file.name);}",
+                'removedfile' => "function(file){alert(file.name + ' is removed')}"
+            ],
+        ]);
+        ?>
+
+        <br/>
+    </div>
 
 
-            ¿En qu&eacute; grado estos argumentos est&aacute;n relacionados a la tarea?
-            <div id="ncp4"></div>
+    <div style="clear:both;">
 
-
-            ¿En qu&eacute; medida son evidentes los choques de personalidad en tu equipo?
-            <div id="ncp5"></div>
-
-
-            ¿Cu&aacute;nta tensi&oacute;n hay entre los miembros de su equipo?
-            <div id="ncp6"></div>
-
-
-            ¿Cu&aacute;n frecuente los miembros de su grupo se ponen enojados mientras trabajan en grupo?
-            <div id="ncp7"></div>
-
-
-            ¿Cu&aacute;nta rivalidad existe entre los miembros de su grupo?
-            <div id="ncp8"></div>
-        </div>
-
-        <div id="frmPC" title="Comportamientos ante el Conflicto" sentencia-id="">
-            <b>Flexible</b><br/>
-            1.	Me rindo a los deseos de la otra parte  
-            <div id="ccp1"></div>
-            2.	Estoy de acuerdo con la otra parte  
-            <div id="ccp2"></div>
-            3.	Intento acomodar a la otra parte  
-            <div id="ccp3"></div>
-            4.	Me adapto a los intereses y objetivos de la otra parte  
-            <div id="ccp4"></div>
-            <b>Comprometido</b><br/>
-            1.	Trat&eacute; de darme cuenta de una soluci&oacute;n a mitad de camino. 
-            <div id="ccp5"></div>
-            2.	Enfatizo que tenemos que encontrar una soluci&oacute;n de compromiso.  
-            <div id="ccp6"></div>
-            3.	Insisto en que ambos cedamos un poco.  
-            <div id="ccp7"></div>
-            4.	Me esfuerzo cuando sea posible hacia un compromiso del cincuenta y cincuenta.  
-            <div id="ccp8"></div>
-            <b>Violento – Dominante</b><br/>
-            1.	Yo empujo mi propio punto de vista.  
-            <div id="ccp9"></div>
-            2.	Busco ganancias.  
-            <div id="ccp10"></div>
-            3.	Lucho por un buen resultado para m&iacute;.
-            <div id="ccp11"></div>
-            4.	Hago todo por ganar.  
-            <div id="ccp12"></div>
-            <b>Revolvedor de problema - Colaborador</b><br/>
-            1.	Examino los problemas hasta que encuentre una soluci&oacute;n que realmente me satisfaga a m&iacute; y a la otra parte.  
-            <div id="ccp13"></div>
-            2.	Defiendo los objetivos e intereses propios y ajenos.
-            <div id="ccp14"></div>
-            3.	Examino ideas de ambas partes para encontrar una soluci&oacute;n mutua &oacute;ptima.
-            <div id="ccp15"></div>
-            4.	Elaboro una soluci&oacute;n que sirve tanto a m&iacute; como a los intereses de los dem&aacute;s lo mejor posible.  
-            <div id="ccp16"></div>
-            <b>Evasor</b><br/>
-            1.	Evito una confrontaci&oacute;n sobre nuestras diferencias.
-            <div id="ccp17"></div>
-            2.	Evito diferencias de opini&oacute;n tanto como sea posible.  
-            <div id="ccp18"></div>
-            3.	Intento hacer que las diferencias sean menos severas.  
-            <div id="ccp19"></div>
-            4.	Intento evitar una confrontaci&oacute;n con el otro.  
-            <div id="ccp20"></div>
-        </div>
-    <?php endif; ?>
+    </div>
 </div>

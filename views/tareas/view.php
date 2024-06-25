@@ -5,9 +5,11 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Tareas */
+$usuario = Yii::$app->user->identity->id;
+$oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
 
 $this->title = 'Actividad Correspondiente a ' . app\models\Asignaturas::findOne(['id' => $model->asignaturas_id])->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Tareas', 'url' => ['index', 'asigid' => $model->asignaturas_id]];
+$this->params['breadcrumbs'][] = ['label' => 'Tareas', 'url' => ['index', 'asigid' => Yii::$app->security->encryptByPassword($model->asignaturas_id, $oUser->password)]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tareas-view">
@@ -32,7 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'descripcion',
+            [
+                'attribute' => 'nombre_t',
+                'label' => 'Actividad',
+            ],
+            'consigna',
+            'descripcion',            
             'year',
             [
                 'attribute' => 'usar_sentencias_apertura',
@@ -58,5 +65,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ])
     ?>
+
+    <?php
+    $chatsxGrupo = app\models\Chats::getChatsGrupos($model->id);
+    ?>
+
+    <h2>Chats asociados a los grupos</h2>
+    <?php foreach ($chatsxGrupo as $alumno): ?>
+        Grupo <?= $alumno["grupos_formados_id"] ?> - <?= $alumno["alumnos"] ?> [<?= Html::a('ver chat', ['chats/grupo', 'chatid' => Yii::$app->security->encryptByPassword($alumno["id"], $oUser->password)]) ?>]<br/>
+    <?php endforeach; ?>
 
 </div>

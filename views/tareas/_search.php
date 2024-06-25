@@ -16,6 +16,10 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'id') ?>
+    
+    <?= $form->field($model, 'nombre_t') ?>
+    
+    <?= $form->field($model, 'consigna') ?>
 
     <?= $form->field($model, 'descripcion') ?>
 

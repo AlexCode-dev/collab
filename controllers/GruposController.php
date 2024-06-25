@@ -160,7 +160,7 @@ class GruposController extends Controller {
                     $alumnos[] = array('nombre' => $alumnoInscripto['usuarios_id'], 'ea' => $estilo);
                 }
 
-                $grupos = $model->optimizarAG($alumnos, $model->cantidadintegrantes)[0];
+                $grupos = $model->optimizarAG($alumnos, $model->cantidadintegrantes);
                 $cont = 1;
                 foreach ($grupos["grupos"] as $grupo) {
                     $objGrupo = new \app\models\GruposFormados();

@@ -22,10 +22,10 @@ class UsuariosController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'view', 'update', 'delete', 'create'],
+                'only' => ['index', 'view', 'update', 'delete', 'create', 'test-felder-silverman'],
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'update'],
+                        'actions' => ['index', 'view', 'actualizar-perfil', 'test-felder-silverman'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -35,7 +35,7 @@ class UsuariosController extends Controller {
                         'roles' => ['administrador'],
                     ],
                     [
-                        'actions' => ['create'],
+                        'actions' => ['create', 'update'],
                         'allow' => true,
                         'roles' => ['?', 'administrador', 'profesor'],
                     ],
@@ -48,7 +48,7 @@ class UsuariosController extends Controller {
                 ],
             ],
         ];
-    }       
+    }
 
     /**
      * Lists all Usuarios models.
@@ -61,8 +61,8 @@ class UsuariosController extends Controller {
         } else {
             $rolesUsuario = [];
         }
-        
-        if (array_key_exists('estudiante', $rolesUsuario)){
+
+        if (array_key_exists('estudiante', $rolesUsuario) && !array_key_exists('profesor', $rolesUsuario)) {
             return $this->redirect(['site/index']);
         }
 
@@ -96,6 +96,16 @@ class UsuariosController extends Controller {
         ]);
     }
 
+    public function actionFicha($id) {
+        $usuario = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
+        $idUsuario = Yii::$app->security->decryptByPassword($id, $oUser->password);
+
+        return $this->render('ficha', [
+                    'model' => $this->findModel($idUsuario),
+        ]);
+    }
+
     /**
      * Creates a new Usuarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -111,7 +121,7 @@ class UsuariosController extends Controller {
             $model->tipo = 2;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {            //&& $model->aceptaterminos == 1
             $rbac = Yii::$app->authManager;
             if ($t == 'a') {
                 $estudiante = $rbac->getRole('estudiante');
@@ -137,6 +147,20 @@ class UsuariosController extends Controller {
         ]);
     }
 
+    public function actionPromoverDocente($id) {
+        $usuario = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
+        $idUsuario = Yii::$app->security->decryptByPassword($id, $oUser->password);
+
+        $rbac = Yii::$app->authManager;
+        $profesor = $rbac->getRole('profesor');
+        $rbac->assign($profesor, $idUsuario);
+        $usuarioActualizar = \app\models\Usuarios::findOne(['id' => $idUsuario]);
+        $usuarioActualizar->tipo = 1;
+        $usuarioActualizar->save();
+        return $this->render('promover-docente');
+    }
+
     public function actionAltaExitosa() {
         return $this->render('alta-exitosa');
     }
@@ -156,6 +180,23 @@ class UsuariosController extends Controller {
         }
 
         return $this->render('update', [
+                    'model' => $model,
+        ]);
+    }
+
+    public function actionActualizarPerfil($id) {
+        $usuario = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
+        $idUsuario = Yii::$app->security->decryptByPassword($id, $oUser->password);
+
+
+        $model = $this->findModel($idUsuario);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['ficha', 'id' => Yii::$app->security->encryptByPassword($model->id, $oUser->password)]);
+        }
+
+        return $this->render('actualizar-perfil', [
                     'model' => $model,
         ]);
     }
@@ -316,6 +357,64 @@ class UsuariosController extends Controller {
         } else {
 
             return $this->render('test-felder-silverman', [
+                        'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionTestBigFive() {
+
+        $model = $this->findModel(Yii::$app->user->identity->id);
+
+        if ($model->load(Yii::$app->request->post())) {
+            $b = true;
+            for ($i = 1; $i <= 44; $i++) {
+                $respuesta = "preg" . $i . '_bf';
+                if (!isset($model->$respuesta)) {
+                    $b = false;
+                    break;
+                }
+            }
+
+            if ($b) {
+                $rv6 = 6 - (int) $model->preg6_bf;
+                $rv27 = 6 - (int) $model->preg27_bf;
+                $rv16 = 6 - (int) $model->preg16_bf;
+                $rv2 = 6 - (int) $model->preg2_bf;
+                $rv13 = 6 - (int) $model->preg13_bf;
+                $rv33 = 6 - (int) $model->preg33_bf;
+                $rv22 = 6 - (int) $model->preg22_bf;
+                $rv42 = 6 - (int) $model->preg42_bf;
+                $rv8 = 6 - (int) $model->preg8_bf;
+                $rv25 = 6 - (int) $model->preg25_bf;
+                $rv18 = 6 - (int) $model->preg18_bf;
+                $rv35 = 6 - (int) $model->preg35_bf;
+                $rv19 = 6 - (int) $model->preg19_bf;
+                $rv9 = 6 - (int) $model->preg9_bf;
+                $rv44 = 6 - (int) $model->preg44_bf;
+                $rv12 = 6 - (int) $model->preg12_bf;
+
+                $extra = ((int) $model->preg43_bf + (int) $model->preg1_bf + (int) $model->preg40_bf + (int) $model->preg32_bf + (int) $model->preg11_bf + $rv6 + $rv27 + $rv16) / 8;
+                $agrea = ((int) $model->preg37_bf + (int) $model->preg41_bf + (int) $model->preg7_bf + (int) $model->preg28_bf + (int) $model->preg24_bf + $rv2 + $rv13 + $rv33 + $rv22) / 9;
+                $consc = ((int) $model->preg3_bf + (int) $model->preg29_bf + (int) $model->preg34_bf + (int) $model->preg14_bf + (int) $model->preg21_bf + $rv42 + $rv8 + $rv25 + $rv18) / 9;
+                $neuro = ((int) $model->preg26_bf + (int) $model->preg15_bf + (int) $model->preg38_bf + (int) $model->preg30_bf + (int) $model->preg4_bf + $rv35 + $rv19 + $rv9) / 8;
+                $openn = ((int) $model->preg5_bf + (int) $model->preg23_bf + (int) $model->preg20_bf + (int) $model->preg36_bf + (int) $model->preg17_bf + (int) $model->preg31_bf + (int) $model->preg10_bf + (int) $model->preg39_bf + $rv44 + $rv12) / 10;
+
+
+                $model->personalidad = 'extra:' . number_format($extra, 2) . ',agrea:' . number_format($agrea, 2) . ',consc:' . number_format($consc, 2) . ',neuro:' . number_format($neuro, 2) . ',openn:' . number_format($openn, 2);
+
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                } else {
+                    echo strlen($model->personalidad);
+                    var_dump($model->errors);
+                    echo "estamos en problema...";
+                }
+            } else {
+                echo "Hay preguntas a las que no respondio. No se puede determinar su personalidad.";
+            }
+        } else {
+            return $this->render('test-big-five', [
                         'model' => $model,
             ]);
         }

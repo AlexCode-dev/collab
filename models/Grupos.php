@@ -22,7 +22,7 @@ use Yii;
  * @property GruposAlumnos[] $gruposAlumnos
  */
 class Grupos extends \yii\db\ActiveRecord {
-    
+
     public $alumnosPorGrupo;
 
     /**
@@ -189,7 +189,7 @@ class Grupos extends \yii\db\ActiveRecord {
             $alumnosSeleccionados = [];
             $grupos = [];
             $totalAlumnos = count($alumnos);
-            for ($i = 0; $i <= ceil($totalAlumnos / $cantidadIntegrantes) - 1; $i++) {
+            for ($i = 0; $i <= floor($totalAlumnos / $cantidadIntegrantes) - 1; $i++) {
                 for ($j = 1; ($j <= $cantidadIntegrantes) && (count($alumnosSeleccionados) != count($alumnos)); $j++) {
                     do {
                         $miembro = rand(0, $totalAlumnos - 1);
@@ -199,10 +199,26 @@ class Grupos extends \yii\db\ActiveRecord {
                 }
             }
 
+            //$this->controlarRepetidos($grupos, "formarGruposAzar");
+
             $poblacion[] = ["grupos" => $grupos, "fitness" => $this->determinarFitness($grupos, $alumnos)];
         }
 
         return $poblacion;
+    }
+
+    function controlarRepetidos($gruposFormados, $funcion) {
+        $miembrosEnGrupos = array();
+        foreach ($gruposFormados as $indice => $grupo) {
+            foreach ($grupo as $miembro) {
+                if (in_array($miembro, $miembrosEnGrupos)) {
+                    echo "Miembro repetido en otro grupo. Error ocasionado en la función: $funcion<br/>";
+                    die();
+                } else {
+                    $miembrosEnGrupos[] = $miembro;
+                }
+            }
+        }
     }
 
     function imprimirGrupo($grupos, $alumnos) {
@@ -282,29 +298,89 @@ class Grupos extends \yii\db\ActiveRecord {
         return $matingPool;
     }
 
-    function realizarCruzamiento($padre1, $padre2) {
-        if (random() < 0.5) {
-            $puntoCruce = rand(0, min(count($padre1), count($padre2)) - 1);
+    function realizarCruzamiento($padre1, $padre2, $cantidadIntegrantes) {
+        $v1 = [];
+        $v2 = [];
+        foreach($padre1 as $i => $grupos){
+            foreach ($grupos as $j => $miembro){
+                $v1[] = $miembro;
+            }
+        }
+        foreach($padre2 as $i => $grupos){
+            foreach ($grupos as $j => $miembro){
+                $v2[] = $miembro;
+            }
+        }
+
+        //var_dump($v1);
+        //echo "<br/>";
+        //var_dump($v2);
+        //echo "<br/><br/>";
+        //var_dump($padre2);
+        //$this->controlarRepetidos($padre1, "realizarCruzamiento - Padre 1");
+        //$this->controlarRepetidos($padre2, "realizarCruzamiento - Padre 2");
+
+        if ($this->random() < 0.5) {
+            $puntoCruce = rand(0, min(count($v1), count($v2)) - 1);
+            //echo "Punto de cruce : $puntoCruce <br/>";
             $hijo1 = [];
             $hijo2 = [];
+            
+            $h1 = [];
+            $h2 = [];
 
             for ($i = 0; $i <= $puntoCruce; $i++) {
-                $hijo1[$i] = $padre1[$i];
-                $hijo2[$i] = $padre2[$i];
+                $h1[] = $v1[$i];
+                $h2[] = $v2[$i];
             }
 
-            for ($i = $puntoCruce + 1; $i < count($padre2); $i++) {
-                $hijo1[$i] = $padre2[$i];
+            for ($i = $puntoCruce + 1; $i < count($v2); $i++) {
+                if (!in_array($v2[$i], $h1)){
+                    $h1[] = $v2[$i];
+                }                    
+            }
+            
+            // Deja los elementos del padre que no existen en el hijo
+            for ($i = $puntoCruce + 1; $i < count($v1); $i++) {
+                if (!in_array($v1[$i], $h1)){
+                    $h1[] = $v1[$i];
+                }                    
             }
 
-            for ($i = $puntoCruce + 1; $i < count($padre1); $i++) {
-                $hijo2[$i] = $padre1[$i];
+            for ($i = $puntoCruce + 1; $i < count($v1); $i++) {
+                if (!in_array($v1[$i], $h2)){
+                    $h2[] = $v1[$i];
+                }                    
+            }
+            
+            // Deja los elementos del padre que no existen en el hijo
+            for ($i = $puntoCruce + 1; $i < count($v2); $i++) {
+                if (!in_array($v2[$i], $h2)){
+                    $h2[] = $v2[$i];
+                }                    
+            }
+
+            // 
+            //var_dump($h1);
+            //echo "<br/><br/>";
+            $k = 0;
+            for ($i = 0; $i <= floor(count($h1) / $cantidadIntegrantes) - 1; $i++) {
+                for ($j = 1; $j <= $cantidadIntegrantes; $j++) {                    
+                    $hijo1[$i][] = $h1[$k];
+                    $hijo2[$i][] = $h2[$k];
+                    $k = $k + 1;
+                }
             }
         } else {
             $hijo1 = $padre1;
             $hijo2 = $padre2;
         }
 
+        //var_dump($hijo1); echo "<br/><br/>";
+        
+        $this->controlarRepetidos($hijo1, "realizarCruzamiento - Hijo 1");
+        $this->controlarRepetidos($hijo2, "realizarCruzamiento - Hijo 2");
+        //die();
         return [$hijo1, $hijo2];
     }
 
@@ -336,28 +412,40 @@ class Grupos extends \yii\db\ActiveRecord {
             $hijo2 = $padre2;
         }
 
+        $this->controlarRepetidos($hijo1, "realizarCruzamientoUniforme - Hijo 1");
+        $this->controlarRepetidos($hijo2, "realizarCruzamientoUniforme - Hijo 2");
+
         return [$hijo1, $hijo2];
     }
 
     function realizarMutacion($hijo) {
+        //echo "<br/>";
+        //var_dump($hijo);
         if ($this->random() < 0.03) {
             //Elije al azar dos grupos
             $grupo1 = rand(0, count($hijo) - 1);
             $grupo2 = rand(0, count($hijo) - 1);
 
+            //echo "Grupo 1: $grupo1 , Grupo 2: $grupo2 <br/>";
             //Elije los miembros a intercambiar
             $miembro1 = rand(0, count($hijo[$grupo1]) - 1);
             $miembro2 = rand(0, count($hijo[$grupo2]) - 1);
+
+            //echo "Miembro 1: $miembro1 , Miembro 2: $miembro2 <br/>";
 
             $aux = $hijo[$grupo1][$miembro1];
             $hijo[$grupo1][$miembro1] = $hijo[$grupo2][$miembro2];
             $hijo[$grupo2][$miembro2] = $aux;
         }
 
+        //var_dump($hijo);
+        //echo "<hr/>";
+
         return $hijo;
     }
 
     function realizarMutacionMezcla($hijo, $cantidadIntegrantes) {
+        //var_dump($hijo); die();
         if ($this->random() < 0.03) {
             // Selecciona los grupos al azar
             $gruposSeleccionados = [];
@@ -439,9 +527,9 @@ class Grupos extends \yii\db\ActiveRecord {
             $offspiring = [];
             $matingPool = $this->generarMatingPool($poblacion);
             for ($i = 0; $i < count($matingPool) - 1; $i++) {
-                $hijos = $this->realizarCruzamientoUniforme($matingPool[$i]["grupos"], $matingPool[$i + 1]["grupos"]);
-                $hijos[0] = $this->realizarMutacionMezcla($hijos[0], $cantidadMiembros);
-                $hijos[1] = $this->realizarMutacionMezcla($hijos[1], $cantidadMiembros);
+                $hijos = $this->realizarCruzamiento($matingPool[$i]["grupos"], $matingPool[$i + 1]["grupos"], $cantidadMiembros); //$this->realizarCruzamientoUniforme($matingPool[$i]["grupos"], $matingPool[$i + 1]["grupos"]);
+                $hijos[0] = $this->realizarMutacion($hijos[0]); //$this->realizarMutacionMezcla($hijos[0], $cantidadMiembros);
+                $hijos[1] = $this->realizarMutacion($hijos[1]); //$this->realizarMutacionMezcla($hijos[1], $cantidadMiembros);
                 $offspiring[] = $hijos[0];
                 $offspiring[] = $hijos[1];
             }
@@ -457,11 +545,27 @@ class Grupos extends \yii\db\ActiveRecord {
 
             $iteraciones += 1;
         }
-        //echo "<br/>Total iteraciones: " . ($iteraciones - 1) . "<br/><br/>";
-        return $poblacion;
+
+        //echo "<br/><br/>";
+        //var_dump($poblacion); 
+        echo "<br/><br/>";
+        $mayorFitness = -1;
+        $indiceMayor = -1;
+        foreach ($poblacion as $indice => $grupos) {
+            if ($grupos["fitness"] > $mayorFitness) {
+                $mayorFitness = $grupos["fitness"];
+                $indiceMayor = $indice;
+            }
+        }
+        //echo "<br/>Mayor fitness: " . $mayorFitness . " indice mayor: $indiceMayor<br/><br/>";
+        //$this->controlarRepetidos($poblacion[$indiceMayor]["grupos"], "realizarCruzamiento - Hijo 1");
+        //var_dump($poblacion[$indiceMayor]);
+
+        return $poblacion[$indiceMayor];
     }
 
     public static function getListaGrupos() {
         return yii\helpers\ArrayHelper::map(Grupos::find()->all(), 'id', 'codigo');
     }
+
 }

@@ -55,12 +55,17 @@ AppAsset::register($this);
             } elseif (array_key_exists('profesor', $rolesUsuario)) {
                 $opciones = [
                     ['label' => 'Asignaturas', 'url' => ['/asignaturas/index']],
-                    ['label' => 'Alumnos', 'url' => ['/usuarios/index', 't' => 'a']]
+                    ['label' => 'Alumnos', 'url' => ['/usuarios/index', 't' => 'a']],
+                    ['label' => 'Test de Estilos de Aprendizaje', 'url' => ['/usuarios/test-felder-silverman']],
+                    ['label' => 'Test de Personalidad', 'url' => ['/usuarios/test-big-five']]
                 ];
             } elseif (array_key_exists('estudiante', $rolesUsuario)) {
+                $oUser = \app\models\Usuarios::findOne(['id' => Yii::$app->user->identity->id]);
                 $opciones = [
+                    ['label' => 'Editar mis Datos', 'url' => ['/usuarios/actualizar-perfil', 'id' => Yii::$app->security->encryptByPassword(Yii::$app->user->identity->id, $oUser->password)]],
                     ['label' => 'Mis Asignaturas', 'url' => ['/asignaturas/asignaturas-alumnos']],
-                    ['label' => 'Test de Estilos de Aprendizaje', 'url' => ['/usuarios/test-felder-silverman']]
+                    ['label' => 'Test de Estilos de Aprendizaje', 'url' => ['/usuarios/test-felder-silverman']],
+                    ['label' => 'Test de Personalidad', 'url' => ['/usuarios/test-big-five']]
                 ];
             } elseif (Yii::$app->user->isGuest) {
                 $opciones = [

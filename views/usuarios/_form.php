@@ -11,14 +11,31 @@ use yii\widgets\ActiveForm;
 <div class="usuarios-form">
 
     <?php $form = ActiveForm::begin(); ?>
-   
+
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'apellido')->textInput(['maxlength' => true]) ?>
-    
+
+    <?=
+    $form->field($model, 'fechanacimiento')->widget(\yii\jui\DatePicker::class, [
+        'language' => 'es',
+        'dateFormat' => 'dd/MM/yyyy',
+        'clientOptions' => [
+            'changeMonth' => 'true',
+            'changeYear' => 'true',
+        ],
+    ])
+    ?>
+
+    <?= $form->field($model, 'pais_idpais')->dropDownList(app\models\Pais::getListaPaises())->label('País') ?>
+
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+
     <?= ($operacion == 'alta') ? $form->field($model, 'username')->textInput(['maxlength' => true]) : '' ?>
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+    
+    <!--< $form->field($model, 'aceptaterminos')->checkbox() >-->
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

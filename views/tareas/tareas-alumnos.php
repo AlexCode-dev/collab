@@ -23,7 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'descripcion',
+            [
+                'attribute' => 'nombre_t',
+                'label' => 'Actividad',
+            ],
+            'consigna',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{chat}',

@@ -25,9 +25,14 @@ class TareasController extends Controller {
                 'only' => ['index', 'view', 'update', 'delete', 'create'],
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'update', 'delete', 'create'],
+                        'actions' => ['index', 'view', 'update', 'create'],
                         'allow' => true,
                         'roles' => ['profesor'],
+                    ],
+                    [
+                        'actions' => ['index', 'view', 'update', 'delete', 'create'],
+                        'allow' => true,
+                        'roles' => ['administrador'],
                     ],
                 ],
             ],
@@ -45,6 +50,10 @@ class TareasController extends Controller {
      * @return mixed
      */
     public function actionIndex($asigid) {
+        $usuario = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
+        $asigid = Yii::$app->security->decryptByPassword($asigid, $oUser->password);
+        
         $searchModel = new TareasSearch();
         $searchModel->asignaturas_id = $asigid;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -129,6 +138,7 @@ class TareasController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
+        $model->usar_sentencias_apertura = ($model->usar_sentencias_apertura) ? 1 : 0;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -149,7 +159,7 @@ class TareasController extends Controller {
     public function actionDelete($id) {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['asignaturas/index']);
     }
 
     /**

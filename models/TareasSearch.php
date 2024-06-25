@@ -19,7 +19,7 @@ class TareasSearch extends Tareas
     {
         return [
             [['id', 'year', 'asignaturas_id', 'grupos_id'], 'integer'],
-            [['descripcion'], 'safe'],
+            [['nombre_t','descripcion', 'consigna'], 'safe'],
         ];
     }
 
@@ -64,7 +64,9 @@ class TareasSearch extends Tareas
             'asignaturas_id' => $this->asignaturas_id,
             'grupos_id' => $this->grupos_id,
         ]);
-
+        
+        $query->andFilterWhere(['like', 'nombre_t', $this->nombre_t]);
+        $query->andFilterWhere(['like', 'consigna', $this->nombre_t]);
         $query->andFilterWhere(['like', 'descripcion', $this->descripcion]);
         
         //echo ($query->createCommand()->sql); die();

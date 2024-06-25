@@ -110,6 +110,23 @@ class AsignaturasAlumnosController extends Controller
             'asigid' => $asigid,
         ]);
     }
+    
+    
+    public function actionCreateAsociation()
+    {
+        $usuario = Yii::$app->user->identity->id;
+        $model = new AsignaturasAlumnos();
+        $model->usuarios_id = $usuario;
+        $model->year = date("Y");
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['asignaturas/asignaturas-alumnos']);
+        }
+
+        return $this->render('create-asociation', [
+            'model' => $model,
+        ]);
+    }
 
     /**
      * Updates an existing AsignaturasAlumnos model.

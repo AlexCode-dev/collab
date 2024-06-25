@@ -11,8 +11,12 @@ use yii\widgets\ActiveForm;
 <div class="tareas-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    
+    <?= $form->field($model, 'nombre_t')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'consigna')->textarea() ?>
 
-    <?= $form->field($model, 'descripcion')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'descripcion')->textarea() ?>
 
     <?= $form->field($model, 'year')->textInput() ?>
     

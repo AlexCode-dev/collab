@@ -55,6 +55,7 @@ class AsignaturasController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
+	set_time_limit(500);
         $docente = Yii::$app->user->identity->id;
         $rolesUsuario = Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->id);
         $esAdministrador = false;
@@ -111,9 +112,11 @@ class AsignaturasController extends Controller {
      */
     public function actionCreate() {
         $model = new Asignaturas();
+        $userid = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $userid]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => Yii::$app->security->encryptByPassword($model->id, $oUser->password)]);
         }
 
         return $this->render('create', [

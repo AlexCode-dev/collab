@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "tareas".
  *
  * @property int $id
+ * @property string $nombre_t
  * @property string $descripcion
  * @property int $year
  * @property int $usar_sentencias_apertura
@@ -35,9 +36,10 @@ class Tareas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['descripcion', 'year', 'asignaturas_id', 'grupos_id'], 'required'],
+            [['nombre_t', 'year', 'asignaturas_id', 'grupos_id'], 'required'],
+            [['descripcion', 'consigna'], 'safe'],
             [['year', 'asignaturas_id', 'grupos_id', 'usar_sentencias_apertura', 'reportar_estado_animo', 'reportar_conflicto'], 'integer'],
-            [['descripcion'], 'string', 'max' => 255],
+            [['nombre_t'], 'string', 'max' => 255],
             [['asignaturas_id'], 'exist', 'skipOnError' => true, 'targetClass' => Asignaturas::className(), 'targetAttribute' => ['asignaturas_id' => 'id']],
             [['grupos_id'], 'exist', 'skipOnError' => true, 'targetClass' => Grupos::className(), 'targetAttribute' => ['grupos_id' => 'id']],
         ];
@@ -50,6 +52,8 @@ class Tareas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'nombre_t' => 'Nombre',
+            'consigna' => 'Consigna',
             'descripcion' => 'Descripción',
             'year' => 'Año',
             'usar_sentencias_apertura' => 'Emplear Sentencias de Apertura',

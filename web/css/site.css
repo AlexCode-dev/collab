@@ -162,9 +162,19 @@ a.desc:after {
   height: 60px;
   width: 60px;
 }
+
+.neutral{
+  background: url("../images/neutral.png") no-repeat scroll 0 0 transparent;
+  color: #000000;
+  cursor: pointer;
+  font-weight: bold;
+  height: 60px;
+  width: 60px;
+}
+
 .contenedorGrupos{
     border:black dotted 1px;
-    width: 150px;
+    width: 250px;
     height: 300px;
     margin: 20px;
     float:left;
