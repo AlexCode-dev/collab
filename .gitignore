@@ -34,3 +34,6 @@ tests/_support/_generated
 
 #vendor folder
 /.vendor
+
+#ignore configuraciones en db
+config/db.php
