@@ -36,6 +36,7 @@ class GruposFormadosController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'eliminar' => ['POST'],
                 ],
             ],
         ];
@@ -114,13 +115,17 @@ class GruposFormadosController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id, $model_id) {
+        $usuario = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
+        $id = Yii::$app->security->decryptByPassword($id, $oUser->password);
+        $model = $this->findModel($id);
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['grupos/view', 'id' => $model_id]);
     }
 
+ 
     /**
      * Finds the GruposFormados model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
