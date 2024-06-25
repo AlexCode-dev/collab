@@ -39,6 +39,7 @@ class Grupos extends \yii\db\ActiveRecord {
         return [
             [['alumnosPorGrupo'], 'safe'],
             [['asignaturas_id', 'metodos_formacion_id', 'codigo', 'cantidadintegrantes'], 'required'],
+            ['codigo', 'unique', 'targetClass' => '\app\models\Grupos', 'message' => 'Este codigo de grupo, ya existe.'],
             [['asignaturas_id', 'metodos_formacion_id', 'cantidadintegrantes'], 'integer'],
             [['year'], 'string', 'max' => 4],
             [['asignaturas_id'], 'exist', 'skipOnError' => true, 'targetClass' => Asignaturas::className(), 'targetAttribute' => ['asignaturas_id' => 'id']],
