@@ -134,6 +134,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
             [['username', 'password','pais_idpais','fechanacimiento', 'email', 'nombre', 'apellido'], 'required'],
             [['tipo'], 'integer'],
             [['username'], 'string', 'max' => 45],
+            ['username', 'unique', 'targetClass' => '\app\models\Usuarios', 'message' => 'Este nombre de usuario, ya existe.'],
             [['password'], 'string', 'max' => 255],
             [['nombre', 'apellido'], 'string', 'max' => 150],
             [['estiloaprendizaje'], 'string', 'max' => 30],
