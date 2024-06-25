@@ -20,7 +20,7 @@ $rolesUsuario = Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     
     <p>
-        <?= (array_key_exists('estudiante', $rolesUsuario)) ? Html::a('Asociarse a asignatura', ['asignaturas-alumnos/create-asociation'], ['class' => 'btn btn-success']) : '' ?>
+        <?= (array_key_exists('estudiante', $rolesUsuario)) ? Html::a('Ingresar a asignatura', ['asignaturas-alumnos/create-asociation'], ['class' => 'btn btn-success']) : '' ?>
     </p>
 
     <?=
