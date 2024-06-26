@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
   foreach ($grupos as $gr) {
       if ($titulo != $gr["nombre"]) {
           $varID = Yii::$app->security->encryptByPassword($gr["id"], $oUser->password);
-          echo "<h2>" . Html::encode($gr["nombre"]) . "-" . Html::encode($gr["id"]) . " " . Html::a('Eliminar', ['grupos-formados/delete', 'id' => $varID, 'model_id' => $model->id], [
+          echo "<h2>" . Html::encode($gr["nombre"]) . "-" ." ID: ".Html::encode($gr["id"]) . " " . Html::a('Eliminar', ['grupos-formados/delete', 'id' => $varID, 'model_id' => $model->id], [
               'class' => 'btn btn-danger',
               'data' => [
                   'confirm' => 'Está seguro que desea eliminar este grupo?',
