@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\GruposFormados;
 use app\models\GruposFormadosSearch;
+use app\models\Tareas;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -125,7 +126,44 @@ class GruposFormadosController extends Controller
         return $this->redirect(['grupos/view', 'id' => $model_id]);
     }
 
- 
+    public function actionClasificar($id)
+    {
+        $usuario = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
+        $id = Yii::$app->security->decryptByPassword($id, $oUser->password);
+        $model = $this->findModel($id);
+        $tareaExistente = Tareas::findOne(['grupos_id' => $model->grupos_id]);
+        $tarea = Tareas::findOne(['grupos_id' => $model->grupos_id]);
+       
+        if ($tarea === null) {
+            throw new NotFoundHttpException('La tarea no existe.');
+        }
+       
+        if (Yii::$app->request->post()) {
+            // Cargar solo los campos específicos
+            $tarea->nota = Yii::$app->request->post('Tareas')['nota'];
+            $tarea->descripcion_nota = Yii::$app->request->post('Tareas')['descripcion_nota'];
+    
+            // Guardar solo los campos específicos sin validar los demás
+            if ($tarea->save(false, ['nota', 'descripcion_nota'])) {
+                Yii::$app->session->setFlash('success', 'Nota actualizada correctamente.');
+                return $this->redirect(['grupos/view', 'id' => $model->grupos_id]);
+            } else {
+                Yii::$app->session->setFlash('error', 'No se pudo actualizar la tarea.');
+                Yii::error($tarea->errors); // Registro de errores en el log
+                // Mostrar errores de validación en la vista
+                echo '<pre>';
+                print_r($tarea->errors);
+                echo '</pre>';
+                exit;
+            }
+        }
+        return $this->render('clasificar', [
+            'model' => $model,  
+            'tarea' => $tarea,
+            'tareaExistente' => $tareaExistente,
+        ]);
+    }
     /**
      * Finds the GruposFormados model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -141,4 +179,6 @@ class GruposFormadosController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+  
 }

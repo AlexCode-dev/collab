@@ -62,7 +62,20 @@ class GruposFormados extends \yii\db\ActiveRecord {
     public function getGrupos() {
         return $this->hasOne(Grupos::className(), ['id' => 'grupos_id']);
     }
+    //un solo grupo
+    public static function getDetalleGrupo($grupos_formados_id)
+    {
+        $query = (new \yii\db\Query())
+            ->select(['gf.id', 'gf.nombre', 'g.codigo', 'u.nombre as nombreAlumno', 'u.apellido as apellidoAlumno'])
+            ->from('grupos_formados as gf')
+            ->innerJoin('grupos as g', 'gf.grupos_id = g.id')
+            ->innerJoin('grupos_alumnos as ga', 'gf.id = ga.grupos_formados_id')
+            ->innerJoin('usuarios as u', 'ga.usuarios_id = u.id')
+            ->where(['gf.id' => $grupos_formados_id]) //esta es la diferencia, aqui traeos 1 solo grupo
+            ->orderBy('gf.nombre');
 
+        return $query->all();
+    }
     public static function getDetalleGrupos($grupos_id) {
 
         $query = (new \yii\db\Query())
