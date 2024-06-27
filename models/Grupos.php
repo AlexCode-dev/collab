@@ -116,16 +116,22 @@ class Grupos extends \yii\db\ActiveRecord {
             "verbal" => 0,
             "neutral-vv" => 0
         );
-
+    
         foreach ($grupo as $miembro) {
-            // Se extrae los parentesis que abran y cierran
-            list($ar, $is, $vv, $sg) = explode(",", $alumnos[$miembro]["ea"]);
-            $item[$ar] += 1;
-            $item[$is] += 1;
-            $item[$vv] += 1;
-            $item[$sg] += 1;
+            // Se extrae los parentesis que abren y cierran
+            $estilos = explode(",", $alumnos[$miembro]["ea"]);
+            while (count($estilos) < 4) {
+                $estilos[] = 'neutral-sg'; // valor predeterminado
+            }
+            list($ar, $is, $vv, $sg) = $estilos;
+    
+            // Verificar si los estilos existen en el array antes de incrementarlos
+            if (isset($item[$ar])) $item[$ar] += 1;
+            if (isset($item[$is])) $item[$is] += 1;
+            if (isset($item[$vv])) $item[$vv] += 1;
+            if (isset($item[$sg])) $item[$sg] += 1;
         }
-
+    
         // Calculo las proporciones
         $item["intuitivo"] /= $cantidadMiembros;
         $item["sensitivo"] /= $cantidadMiembros;
@@ -139,7 +145,7 @@ class Grupos extends \yii\db\ActiveRecord {
         $item["visual"] /= $cantidadMiembros;
         $item["verbal"] /= $cantidadMiembros;
         $item["neutral-vv"] /= $cantidadMiembros;
-
+    
         $item["intuitivo"] = $this->DevolverClase($item["intuitivo"]);
         $item["sensitivo"] = $this->DevolverClase($item["sensitivo"]);
         $item["neutral-is"] = $this->DevolverClase($item["neutral-is"]);
@@ -152,9 +158,10 @@ class Grupos extends \yii\db\ActiveRecord {
         $item["visual"] = $this->DevolverClase($item["visual"]);
         $item["verbal"] = $this->DevolverClase($item["verbal"]);
         $item["neutral-vv"] = $this->DevolverClase($item["neutral-vv"]);
-
+    
         return $item;
     }
+    
 
     function DevolverClase($porcentaje) {
         if (($porcentaje >= 0) && ($porcentaje <= 0.445)) {
@@ -180,18 +187,30 @@ class Grupos extends \yii\db\ActiveRecord {
                 $cantidadPositivos += 1;
             }
         }
-
-        return $cantidadPositivos / count($propuesta);
+    
+        $totalGrupos = count($propuesta);
+        if ($totalGrupos === 0) {
+            return 0; // O cualquier valor que tenga sentido en tu lógica
+        }
+    
+        return $cantidadPositivos / $totalGrupos;
     }
 
     function formarGruposAzar($alumnos, $cantidadIntegrantes, $cantidadAlternativas) {
         $poblacion = [];
+        $totalAlumnos = count($alumnos);
+    
+        if ($cantidadIntegrantes == 0 || $totalAlumnos == 0) {
+            // Evitar división por cero y agregar manejo de errores
+            return $poblacion;
+        }
+    
         for ($k = 1; $k <= $cantidadAlternativas; $k++) {
             $alumnosSeleccionados = [];
             $grupos = [];
-            $totalAlumnos = count($alumnos);
+    
             for ($i = 0; $i <= floor($totalAlumnos / $cantidadIntegrantes) - 1; $i++) {
-                for ($j = 1; ($j <= $cantidadIntegrantes) && (count($alumnosSeleccionados) != count($alumnos)); $j++) {
+                for ($j = 1; ($j <= $cantidadIntegrantes) && (count($alumnosSeleccionados) != $totalAlumnos); $j++) {
                     do {
                         $miembro = rand(0, $totalAlumnos - 1);
                     } while (in_array($miembro, $alumnosSeleccionados));
@@ -199,14 +218,18 @@ class Grupos extends \yii\db\ActiveRecord {
                     $grupos[$i][] = $miembro;
                 }
             }
-
-            //$this->controlarRepetidos($grupos, "formarGruposAzar");
-
+    
+            if (empty($grupos)) {
+                // Evitar la adición de una propuesta vacía
+                continue;
+            }
+    
             $poblacion[] = ["grupos" => $grupos, "fitness" => $this->determinarFitness($grupos, $alumnos)];
         }
-
+    
         return $poblacion;
     }
+    
 
     function controlarRepetidos($gruposFormados, $funcion) {
         $miembrosEnGrupos = array();
@@ -517,39 +540,40 @@ class Grupos extends \yii\db\ActiveRecord {
 
     public function optimizarAG($alumnos, $cantidadMiembros) {
         $poblacion = $this->formarGruposAzar($alumnos, $cantidadMiembros, _TAMPOB_);
+        if (empty($poblacion)) {
+            // Manejar el caso en que no se pudo formar una población
+            return null;
+        }
+    
         usort($poblacion, array($this, "cmp"));
         $fitnessPrevio = 0;
-
+    
         $iteraciones = 1;
         while ($iteraciones <= 70) {
             $fitnessPrevio = $poblacion[0]["fitness"];
-
+    
             // Despues probar sin reposicion a la elección de padres
             $offspiring = [];
             $matingPool = $this->generarMatingPool($poblacion);
             for ($i = 0; $i < count($matingPool) - 1; $i++) {
-                $hijos = $this->realizarCruzamiento($matingPool[$i]["grupos"], $matingPool[$i + 1]["grupos"], $cantidadMiembros); //$this->realizarCruzamientoUniforme($matingPool[$i]["grupos"], $matingPool[$i + 1]["grupos"]);
-                $hijos[0] = $this->realizarMutacion($hijos[0]); //$this->realizarMutacionMezcla($hijos[0], $cantidadMiembros);
-                $hijos[1] = $this->realizarMutacion($hijos[1]); //$this->realizarMutacionMezcla($hijos[1], $cantidadMiembros);
+                $hijos = $this->realizarCruzamiento($matingPool[$i]["grupos"], $matingPool[$i + 1]["grupos"], $cantidadMiembros);
+                $hijos[0] = $this->realizarMutacion($hijos[0]);
+                $hijos[1] = $this->realizarMutacion($hijos[1]);
                 $offspiring[] = $hijos[0];
                 $offspiring[] = $hijos[1];
             }
-
-
+    
+            $aux = [];
             foreach ($offspiring as $grupos) {
                 $aux[] = ["grupos" => $grupos, "fitness" => $this->determinarFitness($grupos, $alumnos)];
             }
-
+    
             // Reemplazo generacional
-            //reemplazoGeneracional($poblacion, $aux);
             $this->reemplazoElitismo($poblacion, $aux);
-
+    
             $iteraciones += 1;
         }
-
-        //echo "<br/><br/>";
-        //var_dump($poblacion); 
-        echo "<br/><br/>";
+    
         $mayorFitness = -1;
         $indiceMayor = -1;
         foreach ($poblacion as $indice => $grupos) {
@@ -558,12 +582,10 @@ class Grupos extends \yii\db\ActiveRecord {
                 $indiceMayor = $indice;
             }
         }
-        //echo "<br/>Mayor fitness: " . $mayorFitness . " indice mayor: $indiceMayor<br/><br/>";
-        //$this->controlarRepetidos($poblacion[$indiceMayor]["grupos"], "realizarCruzamiento - Hijo 1");
-        //var_dump($poblacion[$indiceMayor]);
-
+    
         return $poblacion[$indiceMayor];
     }
+    
 
     public static function getListaGrupos() {
         return yii\helpers\ArrayHelper::map(Grupos::find()->all(), 'id', 'codigo');
