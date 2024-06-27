@@ -4,7 +4,10 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Grupos;
+use app\models\GruposAlumnos;
+use app\models\GruposFormados;
 use app\models\GruposSearch;
+use app\models\Usuarios;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -235,5 +238,48 @@ class GruposController extends Controller {
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    public function actionCambiarAlumno($alumno_id, $grupo_id, $view)
+    {
+        $alumno = Usuarios::findOne($alumno_id);
+        $grupoActual = GruposFormados::findOne($grupo_id); // Encuentra el modelo del grupo actual
+    
+        if ($alumno && $grupoActual) {
+            // Encuentra todos los grupos formados disponibles con el mismo grupos_id
+            $gruposDisponibles = GruposFormados::find()->where(['grupos_id' => $grupoActual->grupos_id])->all();
+    
+            $dynamicModel = new \yii\base\DynamicModel(['nuevo_grupo_formado_id']);
+            $dynamicModel->addRule(['nuevo_grupo_formado_id'], 'required');
+    
+            if (Yii::$app->request->isPost) {
+                $dynamicModel->load(Yii::$app->request->post());
+                if ($dynamicModel->validate()) {
+                    $nuevoGrupoFormadoId = $dynamicModel->nuevo_grupo_formado_id;
+    
+                    // Encuentra el registro del alumno en la tabla GruposAlumnos
+                    $grupoAlumno = GruposAlumnos::findOne(['usuarios_id' => $alumno_id, 'grupos_formados_id' => $grupo_id]);
+                    if ($grupoAlumno) {
+                        $grupoAlumno->grupos_formados_id = $nuevoGrupoFormadoId;
+                        if ($grupoAlumno->save()) {
+                            // Redirigir a la vista del grupo original después de guardar
+                            return $this->redirect(['grupos/view', 'id' =>  $view]);
+                        }
+                    }
+                }
+            }
+    
+            return $this->render('cambiar-alumno', [
+                'alumno' => $alumno,
+                'gruposDisponibles' => $gruposDisponibles,
+                'grupoActual' => $grupoActual,
+                'dynamicModel' => $dynamicModel,
+            ]);
+        } else {
+            throw new NotFoundHttpException('El alumno o grupo no existe.');
+        }
+    }
+    
+    
+    
+
 
 }

@@ -52,7 +52,9 @@ $this->params['breadcrumbs'][] = $this->title;
              "</h2>";
           $titulo = $gr["nombre"];
       }
-      echo Html::encode($gr["apellidoAlumno"]) . ", " . Html::encode($gr["nombreAlumno"]) . "<br/>";
+    //   var_dump($gr["alumnoId"]);
+      echo Html::a('Cambiar de grupo', ['grupos/cambiar-alumno', 'alumno_id' =>$gr["alumnoId"], 'grupo_id' => $gr["id"], 'view' => $model->id], ['class' => 'btn btn-primary btn-l', 
+      'style' => 'margin-bottom: 10px; margin-right: 10px;']) ." " .Html::encode($gr["apellidoAlumno"]) . ", " . Html::encode($gr["nombreAlumno"]). "<br/>";
   }
     ?>
 
