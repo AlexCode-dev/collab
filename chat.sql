@@ -15228,3 +15228,32 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+-- ELIMINAR USUARIOS DUPLICADOS , lO QUE HACE ESTO ES CREAR UNA TABLA PARA LOS USUARIOS DUPLICADOS QUE NO TIENEN ESTILO DE APRENDIZAJE Y LOS ELIMINA.
+-- Se supone que si no tiene estilo de aprendizaje es una cuenta que no se utiliza y no participo en un grupo
+-- ya que es lo priemero que te solicita el usuario hacer (el cuestionario)
+-- Los usuarios duplicados, tenian ese patron, que se repetian y uno si tenia Estilo de aprendizaje y el otro no.
+
+CREATE TEMPORARY TABLE keep_users AS
+SELECT id, username
+FROM usuarios
+WHERE estiloaprendizaje IS NOT NULL
+AND username IN (SELECT username FROM usuarios GROUP BY username HAVING COUNT(*) > 1);
+
+
+INSERT INTO keep_users (id, username)
+SELECT MIN(id) AS id, username
+FROM usuarios
+WHERE username IN (SELECT username FROM usuarios GROUP BY username HAVING COUNT(*) > 1)
+AND username NOT IN (SELECT username FROM keep_users)
+GROUP BY username;
+
+
+DELETE FROM usuarios
+WHERE id NOT IN (SELECT id FROM keep_users)
+AND username IN (SELECT username FROM keep_users);
+
+
+DROP TEMPORARY TABLE IF EXISTS keep_users;
