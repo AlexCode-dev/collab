@@ -54,12 +54,20 @@ class TareasController extends Controller {
      * Lists all Tareas models.
      * @return mixed
      */
+<<<<<<< HEAD
     public function actionIndex($asigid)
     {
         $usuario = Yii::$app->user->identity->id;
         $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
         $asigid = Yii::$app->security->decryptByPassword($asigid, $oUser->password);
     
+=======
+    public function actionIndex($asigid) {
+        $usuario = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
+        $asigid = Yii::$app->security->decryptByPassword($asigid, $oUser->password);
+        
+>>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
         $searchModel = new TareasSearch();
         $searchModel->asignaturas_id = $asigid;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

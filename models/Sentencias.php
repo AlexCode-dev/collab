@@ -133,5 +133,18 @@ class Sentencias extends \yii\db\ActiveRecord {
         //echo $query->createCommand()->sql; die();
         return $query->all();
     }
+    
+    public static function getUltimaSentenciaChat($chatid){
+        $query = (new \yii\db\Query())
+                ->select(['s.id', 's.sentencia','s.fecha_hora', 's.chats_id', 'u.username'])
+                ->from('sentencias as s')
+                ->innerJoin('usuarios as u', 's.usuarios_id = u.id')
+                ->where(['s.chats_id' => $chatid])
+                ->orderBy('s.id DESC')
+                ->limit(1);
+
+        //echo $query->createCommand()->sql; die();
+        return $query->all();
+    }
 
 }

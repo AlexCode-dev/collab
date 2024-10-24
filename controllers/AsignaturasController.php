@@ -54,8 +54,13 @@ class AsignaturasController extends Controller {
      * Lists all Asignaturas models.
      * @return mixed
      */
+<<<<<<< HEAD
     public function actionIndex()
     {
+=======
+    public function actionIndex() {
+	set_time_limit(500);
+>>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
         $docente = Yii::$app->user->identity->id;
         $rolesUsuario = Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->id);
         $esAdministrador = false;

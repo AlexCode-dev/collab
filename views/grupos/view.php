@@ -45,7 +45,14 @@ $this->params['breadcrumbs'][] = $this->title;
                   'confirm' => 'Está seguro que desea eliminar este grupo?',
                   'method' => 'post',
               ],
+<<<<<<< HEAD
           ]) . " " .
+=======
+          ]) . " " . 
+             Html::a('Clasificar Grupo', ['grupos-formados/clasificar', 'id' => $varID], [
+                'class' => 'btn btn-primary',
+             ]) . 
+>>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
              "</h2>";
           $titulo = $gr["nombre"];
       }

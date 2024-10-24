@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'estiloaprendizaje',
+<<<<<<< HEAD
             'email', 
             [
                 'attribute' => 'foto_perfil',  // El atributo del modelo que guarda la ruta de la imagen
@@ -43,6 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'label' => 'Foto de Perfil',  // Etiqueta personalizada
             ],           
+=======
+            'email',            
+>>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
         ],
     ]) ?>
 

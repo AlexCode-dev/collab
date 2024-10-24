@@ -19,7 +19,11 @@ use Yii;
  * @property string $auth_key
  * @property string $fechanacimiento
  * @property string $email
+<<<<<<< HEAD
  * @property string $foto_perfil
+=======
+ *
+>>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
  * @property AsignaturasDocentes[] $asignaturasDocentes
  * @property GruposAlumnos[] $gruposAlumnos
  * @property Sentencias[] $sentencias
@@ -145,10 +149,13 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
             [['fechanacimiento'], 'default', 'value' => null],
             [['email'], 'string', 'max' => 100],
             [['pais_idpais'], 'integer'],
+<<<<<<< HEAD
             [['foto_perfil'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024 * 2],
             [['cont_actividades_individuales'], 'integer'],
             [['cont_actividades_grupales'], 'integer'],
             
+=======
+>>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
             //[['aceptaterminos'], 'compare', 'compareValue' => 1, 'message' => 'Tienes que leer y aceptar nuestra política de datos'],            
             [['preg1', 'preg2', 'preg3', 'preg4', 'preg5', 'preg6', 'preg7', 'preg8', 'preg9', 'preg10',
             'preg11', 'preg12', 'preg13', 'preg14', 'preg15', 'preg16', 'preg17', 'preg18', 'preg19', 'preg20',

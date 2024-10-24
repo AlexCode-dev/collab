@@ -63,17 +63,27 @@ class ChatsController extends Controller {
         
     }
 
+<<<<<<< HEAD
     public function actionGrupo($chatid)
     {
         $userid = Yii::$app->user->identity->id; // ID del usuario actual
         $oUser = \app\models\Usuarios::findOne(['id' => $userid]);
         $chatiddecoded = Yii::$app->security->decryptByPassword($chatid, $oUser->password);
     
+=======
+    public function actionGrupo($chatid) {
+
+        $userid = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $userid]);
+        $chatiddecoded = Yii::$app->security->decryptByPassword($chatid, $oUser->password);
+
+>>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
         $oChat = Chats::findOne(['id' => $chatiddecoded]);
         $grupo = \app\models\GruposAlumnos::findOne(['grupos_formados_id' => $oChat->grupos_formados_id, 'usuarios_id' => $userid]);
         if (!$grupo && $oUser->tipo != 1) {
             throw new \yii\web\ForbiddenHttpException("No puede acceder a esta página");
         }
+<<<<<<< HEAD
     
         // Llamada a getSentenciasChat con ambos parámetros
         $chat = \app\models\Sentencias::getSentenciasChat($chatiddecoded, $userid);
@@ -317,6 +327,55 @@ class ChatsController extends Controller {
             'puntaje' => $puntaje,
             'rangoNombre' => $rangoNombre,
             'esProfesor' => $esProfesor,
+=======
+
+        $chat = \app\models\Sentencias::getSentenciasChat($chatiddecoded);
+        $datosChat = Chats::findOne(['id' => $chatiddecoded]);
+        $tarea = \app\models\Tareas::findOne(['id' => $datosChat->tareas_id]);
+        $asignatura = \app\models\Asignaturas::findOne(['id' => $tarea->asignaturas_id])->nombre;
+
+        $fileName = 'file';
+        $uploadPath = 'uploads/';
+        $directorio = md5($asignatura . " - " . $oChat->grupos_formados_id);
+        if (!is_dir($uploadPath . $directorio)) {
+            mkdir($uploadPath . $directorio, 0777);
+        }
+
+        if (isset($_FILES[$fileName])) {
+            $file = \yii\web\UploadedFile::getInstanceByName($fileName);
+            //Print file data
+            //print_r($file);
+
+            if ($file->saveAs($uploadPath . $directorio . '/' . $file->name)) {
+                //Now save file data to database
+                echo \yii\helpers\Json::encode($file);
+            }
+        }
+
+        return $this->render('grupo', [
+                    'chat' => $chat,
+                    'chatid' => $chatiddecoded,
+                    'tarea' => $tarea,
+                    'grupo_id' => $oChat->grupos_formados_id,
+                    'asignatura' => $asignatura,
+                    'directorio' => $directorio,
+        ]);
+    }
+
+    public function actionRecuperarChat($chatid) {
+        $chat = \app\models\Sentencias::getSentenciasChat($chatid);
+
+        return $this->renderAjax('recuperar-chat', [
+                    'chat' => $chat,
+        ]);
+    }
+
+    public function actionRecuperarUltimaSentenciaChat($chatid) {
+        $chat = \app\models\Sentencias::getUltimaSentenciaChat($chatid);
+
+        return $this->renderAjax('recuperar-ultima-sentencia-chat', [
+                    'chat' => $chat,
+>>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
         ]);
     }
     

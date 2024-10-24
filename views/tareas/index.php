@@ -5,6 +5,13 @@ use yii\helpers\ArrayHelper;
 use app\models\Tareas;
 use yii\widgets\ActiveForm;
 
+<<<<<<< HEAD
+=======
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\TareasSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+>>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
 $this->title = 'Actividades de ' . app\models\Asignaturas::findOne(['id' => $asigid])->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Asignaturas', 'url' => ['asignaturas/index', 'asigid' => $asigid]];
 $this->params['breadcrumbs'][] = $this->title;

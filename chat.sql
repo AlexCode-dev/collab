@@ -15257,6 +15257,7 @@ AND username IN (SELECT username FROM keep_users);
 
 
 DROP TEMPORARY TABLE IF EXISTS keep_users;
+<<<<<<< HEAD
 
 
 /*Gamificacion*/
@@ -15266,3 +15267,5 @@ ALTER TABLE tareas ADD COLUMN puntaje_tarea INT NOT NULL DEFAULT 0;
 
 /*se añade tipo de actividad para diferenciar entre una tarea individual y grupal*/
 ALTER TABLE tareas ADD COLUMN tipo_tarea ENUM('individual', 'grupal') NULL;
+=======
+>>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247

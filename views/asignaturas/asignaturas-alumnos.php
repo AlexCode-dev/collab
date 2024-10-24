@@ -15,6 +15,7 @@ $rolesUsuario = Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity
 ?>
 <div class="asignaturas-index">
 
+<<<<<<< HEAD
     <div class="title-container">
         <p>
             <?= (array_key_exists('estudiante', $rolesUsuario)) ? Html::a('Inscribite a una asignatura', ['asignaturas-alumnos/create-asociation'], ['class' => 'button-g4']) : '' ?>
@@ -36,6 +37,14 @@ $rolesUsuario = Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity
         </div>
         <?php endforeach; ?>
     </div>
+=======
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    
+    <p>
+        <?= (array_key_exists('estudiante', $rolesUsuario)) ? Html::a('Ingresar a asignatura', ['asignaturas-alumnos/create-asociation'], ['class' => 'btn btn-success']) : '' ?>
+    </p>
+>>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
 
 </div>
 

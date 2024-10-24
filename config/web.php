@@ -49,14 +49,15 @@ $config = [
             ],
         ],
         'db' => $db,
-    /*
+    
       'urlManager' => [
       'enablePrettyUrl' => true,
       'showScriptName' => false,
       'rules' => [
+        'grupos-formados/delete/<id:\w+>' => 'grupos-formados/delete',
       ],
       ],
-     */
+    
     ],
     'params' => $params,
 ];
