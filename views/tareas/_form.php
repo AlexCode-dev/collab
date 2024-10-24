@@ -20,16 +20,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'year')->textInput() ?>
     
-    <?= $form->field($model, 'usar_sentencias_apertura')->radioList(array('1'=>'Sí', '0'=>'No')) ?>
+    <?= $form->field($model, 'usar_sentencias_apertura')->radioList(array('1'=>'Sí','0'=>'No')) ?>
     
     <?= $form->field($model, 'reportar_estado_animo')->radioList(array('1'=>'Sí','0'=>'No')) ?>
     
     <?= $form->field($model, 'reportar_conflicto')->radioList(array('1'=>'Sí','0'=>'No')) ?>
     
     <?= $form->field($model, 'grupos_id')->dropDownList(app\models\Grupos::getListaGrupos()) ?>
+    <p>Nota: Recuerda el codigo de grupo que creaste en la <span style="font-weight:600; color:#FD8916;"> sección "grupos".</span> Tiene que coincidir con el año.</p>
+
+    <?= $form->field($model, 'puntaje_tarea')->textInput(['type' => 'number']) ?>
+    <p>Nota: Asigna un puntaje estimativo según el grado de dificultad de la tarea. Generalmente,<span style="font-weight:600; color:#FD8916;"> un valor entre 100 y 1000.</span></p>
+    
 
     <div class="form-group">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'button-g2']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

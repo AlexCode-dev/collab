@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\TareasSearch */
@@ -13,42 +12,84 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tareas-index">
 
-    <h1><?= Html::encode($asignatura) ?></h1>
-    <h2><?= Html::encode($this->title) ?></h2>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h2 class="perfil-title"><?= Html::encode($asignatura) ?><span>.</span></h2>
+    <h3><?= Html::encode($this->title) ?></h3>
+    <p>En esta sección, podrás visualizar todas las actividades y tareas asociadas a la asignatura seleccionada. Puedes ingresar al chat de cada actividad para interactuar con los demás miembros de tu grupo. ¡Mantente al tanto de tus tareas y actividades colaborativas!</p>
 
-    <?=
-    GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'attribute' => 'nombre_t',
-                'label' => 'Actividad',
-            ],
-            'consigna',
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{chat}',
-                'buttons' => [
-                    'chat' => function($url, $model) {
-                        $usuario = Yii::$app->user->identity->id;
-                        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
-                        
-                        $chats = \app\models\Chats::find()->where(['tareas_id' => $model->id])->all();
-                        $idChat = 0;
-                        foreach ($chats as $ch) {                            
-                            $grupo = \app\models\GruposAlumnos::findOne(['grupos_formados_id' => $ch->grupos_formados_id, 'usuarios_id' => $usuario]);
-                            if ($grupo){
-                                $idChat = $ch->id;
-                            } 
-                        }
-                        return Html::a('Chat', ['chats/grupo', 'chatid' => Yii::$app->security->encryptByPassword($idChat, $oUser->password)]);
-                    },
-                ],
-            ],
-        ],
-    ]);
-    ?>
+    <div class="actividades-container">
+        <?php foreach ($dataProvider->models as $actividad): ?>
+        <div class="actividad-card">
+            <h3 class="actividad-title"><?= Html::encode($actividad->nombre_t) ?></h3>
+            <p><strong>Consigna:</strong> <?= Html::encode($actividad->consigna) ?></p>
+            <p><strong>Año:</strong> <?= Html::encode($actividad->year) ?></p>
+            
+            <?php
+            // Lógica para obtener el ID del chat de la actividad correspondiente al usuario actual
+            $usuario = Yii::$app->user->identity->id;
+            $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
+            $chats = \app\models\Chats::find()->where(['tareas_id' => $actividad->id])->all();
+            $idChat = 0;
+            foreach ($chats as $ch) {                            
+                $grupo = \app\models\GruposAlumnos::findOne(['grupos_formados_id' => $ch->grupos_formados_id, 'usuarios_id' => $usuario]);
+                if ($grupo){
+                    $idChat = $ch->id;
+                } 
+            }
+            ?>
+
+            <div class="actividad-actions">
+                <?= Html::a('Ingresar a Chat', ['chats/grupo', 'chatid' => Yii::$app->security->encryptByPassword($idChat, $oUser->password)], ['class' => 'btn btn-info']) ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
 </div>
+
+<style>
+.actividades-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.actividad-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+    transition: transform 0.2s;
+}
+
+.actividad-card:hover {
+    transform: translateY(-5px);
+}
+
+.actividad-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.actividad-actions {
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-info {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #2980b9;
+}
+</style>

@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'dominancia') ?>
 
-    <?= $form->field($model, 'sentencias_id') ?>
+    <?= $form->field($model, 'chats_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -21,6 +21,9 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/new-site.css',
+        'css/gamificado/chat.css',
+        'css/gamificado/perfil.css',
         'css/jquery.rateyo.min.css',
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
         'emoji-picker/css/emoji.css',

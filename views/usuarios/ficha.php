@@ -33,7 +33,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'estiloaprendizaje',
-            'email',            
+            'email', 
+            [
+                'attribute' => 'foto_perfil',  // El atributo del modelo que guarda la ruta de la imagen
+                'format' => 'raw',  // Permite que se renderice HTML
+                'value' => function($model) {
+                    // Verifica si hay una imagen cargada
+                    return $model->foto_perfil ? Html::img(Yii::getAlias('@web') . '/' . $model->foto_perfil, ['width' => '100px']) : 'No image';
+                },
+                'label' => 'Foto de Perfil',  // Etiqueta personalizada
+            ],           
         ],
     ]) ?>
 

@@ -11,52 +11,53 @@ use Yii;
  * @property double $valencia
  * @property double $activacion
  * @property double $dominancia
- * @property int $sentencias_id
+ * @property int $chats_id
+ * @property int $usuarios_id
+ * @property string $time
  *
  * @property Sentencias $sentencias
  */
-class Emociones extends \yii\db\ActiveRecord
-{
+class Emociones extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'emociones';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['valencia', 'activacion', 'dominancia'], 'number'],
-            [['sentencias_id'], 'required'],
-            [['sentencias_id'], 'integer'],
-            [['sentencias_id'], 'exist', 'skipOnError' => true, 'targetClass' => Sentencias::className(), 'targetAttribute' => ['sentencias_id' => 'id']],
+            [['chats_id'], 'required'],
+            [['chats_id'], 'integer'],
+            [['usuarios_id'], 'safe'],
+            [['time'], 'safe'],            
+            [['chats_id'], 'exist', 'skipOnError' => true, 'targetClass' => Chats::className(), 'targetAttribute' => ['chats_id' => 'id']],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'valencia' => 'Valencia',
             'activacion' => 'Activacion',
             'dominancia' => 'Dominancia',
-            'sentencias_id' => 'Sentencias ID',
+            'chats_id' => 'Chat ID',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSentencias()
-    {
-        return $this->hasOne(Sentencias::className(), ['id' => 'sentencias_id']);
+    public function getChats() {
+        return $this->hasOne(Chats::className(), ['id' => 'chats_id']);
     }
+
 }

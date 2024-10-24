@@ -62,7 +62,7 @@ class UsuariosController extends Controller {
             $rolesUsuario = [];
         }
 
-        if (array_key_exists('estudiante', $rolesUsuario)) {
+        if (array_key_exists('estudiante', $rolesUsuario) && !array_key_exists('profesor', $rolesUsuario)) {
             return $this->redirect(['site/index']);
         }
 
@@ -95,12 +95,12 @@ class UsuariosController extends Controller {
                     'model' => $this->findModel($id),
         ]);
     }
-    
+
     public function actionFicha($id) {
         $usuario = Yii::$app->user->identity->id;
         $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
         $idUsuario = Yii::$app->security->decryptByPassword($id, $oUser->password);
-        
+
         return $this->render('ficha', [
                     'model' => $this->findModel($idUsuario),
         ]);
@@ -120,31 +120,58 @@ class UsuariosController extends Controller {
         } else {
             $model->tipo = 2;
         }
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $rbac = Yii::$app->authManager;
-            if ($t == 'a') {
-                $estudiante = $rbac->getRole('estudiante');
-                $rbac->assign($estudiante, $model->id);
-            } elseif ($t == 'd') {
-                $profesor = $rbac->getRole('profesor');
-                $rbac->assign($profesor, $model->id);
-            } else {
-                $administrador = $rbac->getRole('administrador');
-                $rbac->assign($administrador, $model->id);
+    
+        if ($model->load(Yii::$app->request->post())) {
+            // Subida de la imagen de perfil
+            $file = \yii\web\UploadedFile::getInstance($model, 'foto_perfil');
+            if ($file) {
+                $filePath = 'uploads/' . $file->baseName . '.' . $file->extension;
+                if ($file->saveAs($filePath)) {
+                    $model->foto_perfil = $filePath; // Guardar la ruta del archivo en la BD
+                }
             }
-
-            if (!isset(Yii::$app->user->identity->id)) {
-                return $this->redirect(['alta-exitosa']);
-            } else {
-                return $this->redirect(['view', 'id' => $model->id]);
+    
+            if ($model->save()) {
+                // Asignación de roles
+                $rbac = Yii::$app->authManager;
+                if ($t == 'a') {
+                    $estudiante = $rbac->getRole('estudiante');
+                    $rbac->assign($estudiante, $model->id);
+                } elseif ($t == 'd') {
+                    $profesor = $rbac->getRole('profesor');
+                    $rbac->assign($profesor, $model->id);
+                } else {
+                    $administrador = $rbac->getRole('administrador');
+                    $rbac->assign($administrador, $model->id);
+                }
+    
+                if (!isset(Yii::$app->user->identity->id)) {
+                    return $this->redirect(['alta-exitosa']);
+                } else {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
         }
-
+    
         return $this->render('create', [
-                    'model' => $model,
-                    'tipo' => $t,
+            'model' => $model,
+            'tipo' => $t,
         ]);
+    }
+    
+
+    public function actionPromoverDocente($id) {
+        $usuario = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
+        $idUsuario = Yii::$app->security->decryptByPassword($id, $oUser->password);
+
+        $rbac = Yii::$app->authManager;
+        $profesor = $rbac->getRole('profesor');
+        $rbac->assign($profesor, $idUsuario);
+        $usuarioActualizar = \app\models\Usuarios::findOne(['id' => $idUsuario]);
+        $usuarioActualizar->tipo = 1;
+        $usuarioActualizar->save();
+        return $this->render('promover-docente');
     }
 
     public function actionAltaExitosa() {
@@ -160,32 +187,88 @@ class UsuariosController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+    
+        if ($model->load(Yii::$app->request->post())) {
+            // Subida de la imagen de perfil
+            $file = \yii\web\UploadedFile::getInstance($model, 'foto_perfil');
+            if ($file) {
+                $filePath = 'uploads/' . $file->baseName . '.' . $file->extension;
+                if ($file->saveAs($filePath)) {
+                    $model->foto_perfil = $filePath; // Guardar la ruta del archivo en la BD
+                }
+            }
+    
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
-
+    
         return $this->render('update', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
-
     public function actionActualizarPerfil($id) {
+        // Obtener el usuario actual logueado
         $usuario = Yii::$app->user->identity->id;
         $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
         $idUsuario = Yii::$app->security->decryptByPassword($id, $oUser->password);
-
-
+    
+        // Buscar el modelo del usuario a actualizar
         $model = $this->findModel($idUsuario);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['ficha', 'id' => Yii::$app->security->encryptByPassword($model->id, $oUser->password)]);
+    
+        // Guardar la imagen antigua antes de cargar nuevos datos
+        $oldFotoPerfil = $model->foto_perfil;
+    
+        // Cargar los datos del formulario, incluido el archivo de imagen
+        if ($model->load(Yii::$app->request->post())) {
+            // Obtener la imagen de perfil desde el formulario
+            $file = \yii\web\UploadedFile::getInstance($model, 'foto_perfil');
+    
+            // Si hay una nueva imagen, guardarla
+            if ($file) {
+                // Definir la ruta de la imagen en @webroot (directorio raíz del servidor)
+                $filePath = Yii::getAlias('@webroot') . '/uploads/' . $file->baseName . '.' . $file->extension;
+                $webFilePath = 'uploads/' . $file->baseName . '.' . $file->extension;
+    
+                if ($file->saveAs($filePath)) {
+                    // Llamada a la acción para verificar perfil completado
+                    Yii::$app->runAction('desafios/verificar-completar-perfil', ['usuario_id' => $idUsuario]);
+    
+                    // Guardar la nueva ruta web de la imagen en la base de datos
+                    $model->foto_perfil = $webFilePath;
+                } else {
+                    Yii::$app->session->setFlash('error', 'No se pudo guardar la imagen.');
+                }
+            } else {
+                // Si no se ha subido una nueva imagen, mantener la imagen anterior
+                $model->foto_perfil = $oldFotoPerfil;
+            }
+    
+            // Intentar guardar el modelo
+            if ($model->save()) {
+                Yii::$app->runAction('desafios/verificar-completar-perfil', ['usuario_id' => $idUsuario]);
+                Yii::$app->session->setFlash('success', 'Perfil actualizado correctamente.');
+                return $this->redirect(['ficha', 'id' => Yii::$app->security->encryptByPassword($model->id, $oUser->password)]);
+            } else {
+                // Recopilar los errores del modelo y mostrar en el mensaje flash
+                $errors = $model->errors;
+                $errorMessage = '';
+                foreach ($errors as $field => $messages) {
+                    $errorMessage .= "$field: " . implode(', ', $messages) . "<br>";
+                }
+    
+                // Mostrar los errores en un mensaje flash
+                Yii::$app->session->setFlash('error', 'No se pudo actualizar el perfil. Errores: <br>' . $errorMessage);
+            }
         }
-
+    
+        // Renderizar la vista si no se han enviado datos por POST
         return $this->render('actualizar-perfil', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
+    
+    
 
     /**
      * Deletes an existing Usuarios model.
@@ -331,6 +414,7 @@ class UsuariosController extends Controller {
                 $model->estiloaprendizaje = $estiloAprendizaje;
 
                 if ($model->save()) {
+                    Yii::$app->runAction('desafios/verificar-primer-test-aprendizaje', ['usuario_id' => $model->id]);
                     return $this->redirect(['view', 'id' => $model->id]);
                 } else {
                     echo strlen($model->estiloaprendizaje);
@@ -343,6 +427,64 @@ class UsuariosController extends Controller {
         } else {
 
             return $this->render('test-felder-silverman', [
+                        'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionTestBigFive() {
+
+        $model = $this->findModel(Yii::$app->user->identity->id);
+
+        if ($model->load(Yii::$app->request->post())) {
+            $b = true;
+            for ($i = 1; $i <= 44; $i++) {
+                $respuesta = "preg" . $i . '_bf';
+                if (!isset($model->$respuesta)) {
+                    $b = false;
+                    break;
+                }
+            }
+
+            if ($b) {
+                $rv6 = 6 - (int) $model->preg6_bf;
+                $rv27 = 6 - (int) $model->preg27_bf;
+                $rv16 = 6 - (int) $model->preg16_bf;
+                $rv2 = 6 - (int) $model->preg2_bf;
+                $rv13 = 6 - (int) $model->preg13_bf;
+                $rv33 = 6 - (int) $model->preg33_bf;
+                $rv22 = 6 - (int) $model->preg22_bf;
+                $rv42 = 6 - (int) $model->preg42_bf;
+                $rv8 = 6 - (int) $model->preg8_bf;
+                $rv25 = 6 - (int) $model->preg25_bf;
+                $rv18 = 6 - (int) $model->preg18_bf;
+                $rv35 = 6 - (int) $model->preg35_bf;
+                $rv19 = 6 - (int) $model->preg19_bf;
+                $rv9 = 6 - (int) $model->preg9_bf;
+                $rv44 = 6 - (int) $model->preg44_bf;
+                $rv12 = 6 - (int) $model->preg12_bf;
+
+                $extra = ((int) $model->preg43_bf + (int) $model->preg1_bf + (int) $model->preg40_bf + (int) $model->preg32_bf + (int) $model->preg11_bf + $rv6 + $rv27 + $rv16) / 8;
+                $agrea = ((int) $model->preg37_bf + (int) $model->preg41_bf + (int) $model->preg7_bf + (int) $model->preg28_bf + (int) $model->preg24_bf + $rv2 + $rv13 + $rv33 + $rv22) / 9;
+                $consc = ((int) $model->preg3_bf + (int) $model->preg29_bf + (int) $model->preg34_bf + (int) $model->preg14_bf + (int) $model->preg21_bf + $rv42 + $rv8 + $rv25 + $rv18) / 9;
+                $neuro = ((int) $model->preg26_bf + (int) $model->preg15_bf + (int) $model->preg38_bf + (int) $model->preg30_bf + (int) $model->preg4_bf + $rv35 + $rv19 + $rv9) / 8;
+                $openn = ((int) $model->preg5_bf + (int) $model->preg23_bf + (int) $model->preg20_bf + (int) $model->preg36_bf + (int) $model->preg17_bf + (int) $model->preg31_bf + (int) $model->preg10_bf + (int) $model->preg39_bf + $rv44 + $rv12) / 10;
+
+
+                $model->personalidad = 'extra:' . number_format($extra, 2) . ',agrea:' . number_format($agrea, 2) . ',consc:' . number_format($consc, 2) . ',neuro:' . number_format($neuro, 2) . ',openn:' . number_format($openn, 2);
+
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                } else {
+                    echo strlen($model->personalidad);
+                    var_dump($model->errors);
+                    echo "estamos en problema...";
+                }
+            } else {
+                echo "Hay preguntas a las que no respondio. No se puede determinar su personalidad.";
+            }
+        } else {
+            return $this->render('test-big-five', [
                         'model' => $model,
             ]);
         }

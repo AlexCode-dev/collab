@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $nombre
+ * @property int $carreras_id
  *
  * @property AsignaturasDocentes[] $asignaturasDocentes
  * @property Grupos[] $grupos
@@ -28,6 +29,7 @@ class Asignaturas extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['nombre'], 'string', 'max' => 100],
+            [['carreras_id'], 'integer'],
         ];
     }
 
@@ -38,6 +40,7 @@ class Asignaturas extends \yii\db\ActiveRecord {
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
+            'carreras_id' => 'ID Carrera',
         ];
     }
 
@@ -54,14 +57,20 @@ class Asignaturas extends \yii\db\ActiveRecord {
     public function getGrupos() {
         return $this->hasMany(Grupos::className(), ['asignaturas_id' => 'id']);
     }
+    
+     public function getNombreCompleto() {
+        $objCarrera = Carreras::findOne(['id' => $this->carreras_id]);
+        return $this->nombre . ', ' . $objCarrera->nombre . ', ' . $objCarrera->universidad;
+    }
 
     public static function getListaAsignaturas() {
-        return yii\helpers\ArrayHelper::map(Asignaturas::find()->all(), 'id', 'nombre');
+        return yii\helpers\ArrayHelper::map(Asignaturas::find()->all(), 'id', 'nombrecompleto');
     }
 
     public static function getNombrePorId($id) {
         $objAsignatura = static::findOne(['id' => $id]);
-        return $objAsignatura->nombre;
+        $objCarrera = Carreras::findOne(['id' => $objAsignatura->carreras_id]);
+        return $objAsignatura->nombre . ', ' . $objCarrera->nombre . ', ' . $objCarrera->universidad;
     }
 
 }

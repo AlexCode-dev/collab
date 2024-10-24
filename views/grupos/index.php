@@ -15,9 +15,17 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="grupos-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2 class="perfil-title"><?= Html::encode($this->title) ?><span>.</span></h2>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <p>
+        En esta sección, se crean los códigos de los grupos a los cuales se les asignarán las actividades
+        correspondientes. Es importante
+        <span style="color:#FD8916;">tener en cuenta el año</span> asignado a cada grupo, ya que, dependiendo del año,
+        se podrán seleccionar los alumnos asociados a ese grupo.
+        Los alumnos pueden asociarse a la materia en el año actual en el que estamos, o bien pueden hacerlo desde el
+        menú de "Asignaturas" utilizando el botón
+        <strong>"Asociar alumnos a asignaturas"</strong>.
+    </p>
     <p>
         <?= Html::a('Crear Grupos', ['create', 'asigid' => Yii::$app->security->encryptByPassword($asigid, $oUser->password)], ['class' => 'btn btn-success']) ?>
     </p>

@@ -4,7 +4,10 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Grupos;
+use app\models\GruposAlumnos;
+use app\models\GruposFormados;
 use app\models\GruposSearch;
+use app\models\Usuarios;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -128,13 +131,13 @@ class GruposController extends Controller {
         $usuario = Yii::$app->user->identity->id;
         $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
         $asigid = Yii::$app->security->decryptByPassword($asigid, $oUser->password);
-
+    
         $model = new Grupos();
         $model->asignaturas_id = $asigid;
-
+    
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
             if ($model->metodos_formacion_id == 1) {
+                // Lógica para formar grupos manualmente
                 $grupos = json_decode($model->alumnosPorGrupo);
                 foreach ($grupos as $id => $alumnosGrupo) {
                     $objGrupo = new \app\models\GruposFormados();
@@ -149,41 +152,55 @@ class GruposController extends Controller {
                     }
                 }
             } elseif ($model->metodos_formacion_id == 2) {
-                // Invocar al algoritmo genetico
+                // Invocar al algoritmo genético
                 $alumnosporyear = \app\models\AsignaturasAlumnos::getListaAlumnosPorYear($model->year, $model->asignaturas_id);
-                $alumnos = array();
-                $grupos = array();
+                $alumnos = [];
                 foreach ($alumnosporyear as $alumnoInscripto) {
-                    list($e1, $e2, $e3, $e4) = explode('-', $alumnoInscripto['estiloaprendizaje']);
+                    $estilos = explode('-', $alumnoInscripto['estiloaprendizaje']);
+                    // Asegurar que siempre haya 4 elementos en el array
+                    while (count($estilos) < 4) {
+                        $estilos[] = 'NSG'; // o cualquier valor predeterminado
+                    }
+                    list($e1, $e2, $e3, $e4) = $estilos;
                     $estilo = $this->getEstilo($e1) . "," . $this->getEstilo($e2);
                     $estilo .= "," . $this->getEstilo($e3) . "," . $this->getEstilo($e4);
-                    $alumnos[] = array('nombre' => $alumnoInscripto['usuarios_id'], 'ea' => $estilo);
+                    $alumnos[] = ['nombre' => $alumnoInscripto['usuarios_id'], 'ea' => $estilo];
                 }
-
-                $grupos = $model->optimizarAG($alumnos, $model->cantidadintegrantes)[0];
-                $cont = 1;
-                foreach ($grupos["grupos"] as $grupo) {
-                    $objGrupo = new \app\models\GruposFormados();
-                    $objGrupo->nombre = "Grupo $cont";
-                    $objGrupo->grupos_id = $model->id;
-                    $objGrupo->save();
-                    foreach ($grupo as $miembro) {
-                        $objAlumnoGrupo = new \app\models\GruposAlumnos();
-                        $objAlumnoGrupo->usuarios_id = $alumnos[$miembro]["nombre"];
-                        $objAlumnoGrupo->grupos_formados_id = $objGrupo->id;
-                        $objAlumnoGrupo->save();
+    
+                if (!empty($alumnos)) {
+                    $grupos = $model->optimizarAG($alumnos, $model->cantidadintegrantes);
+                    if ($grupos && !empty($grupos["grupos"])) {
+                        $cont = 1;
+                        foreach ($grupos["grupos"] as $grupo) {
+                            $objGrupo = new \app\models\GruposFormados();
+                            $objGrupo->nombre = "Grupo $cont";
+                            $objGrupo->grupos_id = $model->id;
+                            $objGrupo->save();
+                            foreach ($grupo as $miembro) {
+                                $objAlumnoGrupo = new \app\models\GruposAlumnos();
+                                $objAlumnoGrupo->usuarios_id = $alumnos[$miembro]["nombre"];
+                                $objAlumnoGrupo->grupos_formados_id = $objGrupo->id;
+                                $objAlumnoGrupo->save();
+                            }
+                            $cont += 1;
+                        }
+                    } else {
+                        Yii::$app->session->setFlash('error', 'No se pudieron formar grupos.');
                     }
-                    $cont += 1;
+                } else {
+                    Yii::$app->session->setFlash('error', 'No hay alumnos disponibles para formar grupos.');
                 }
             }
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
+    
         return $this->render('create', [
-                    'model' => $model,
-                    'asigid' => $asigid,
+            'model' => $model,
+            'asigid' => $asigid,
         ]);
     }
+    
+    
 
     /**
      * Updates an existing Grupos model.
@@ -212,6 +229,10 @@ class GruposController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id) {
+        $usuario = Yii::$app->user->identity->id;
+        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
+        $id = Yii::$app->security->decryptByPassword($id, $oUser->password);
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -231,5 +252,48 @@ class GruposController extends Controller {
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    public function actionCambiarAlumno($alumno_id, $grupo_id, $view)
+    {
+        $alumno = Usuarios::findOne($alumno_id);
+        $grupoActual = GruposFormados::findOne($grupo_id); // Encuentra el modelo del grupo actual
+    
+        if ($alumno && $grupoActual) {
+            // Encuentra todos los grupos formados disponibles con el mismo grupos_id
+            $gruposDisponibles = GruposFormados::find()->where(['grupos_id' => $grupoActual->grupos_id])->all();
+    
+            $dynamicModel = new \yii\base\DynamicModel(['nuevo_grupo_formado_id']);
+            $dynamicModel->addRule(['nuevo_grupo_formado_id'], 'required');
+    
+            if (Yii::$app->request->isPost) {
+                $dynamicModel->load(Yii::$app->request->post());
+                if ($dynamicModel->validate()) {
+                    $nuevoGrupoFormadoId = $dynamicModel->nuevo_grupo_formado_id;
+    
+                    // Encuentra el registro del alumno en la tabla GruposAlumnos
+                    $grupoAlumno = GruposAlumnos::findOne(['usuarios_id' => $alumno_id, 'grupos_formados_id' => $grupo_id]);
+                    if ($grupoAlumno) {
+                        $grupoAlumno->grupos_formados_id = $nuevoGrupoFormadoId;
+                        if ($grupoAlumno->save()) {
+                            // Redirigir a la vista del grupo original después de guardar
+                            return $this->redirect(['grupos/view', 'id' =>  $view]);
+                        }
+                    }
+                }
+            }
+    
+            return $this->render('cambiar-alumno', [
+                'alumno' => $alumno,
+                'gruposDisponibles' => $gruposDisponibles,
+                'grupoActual' => $grupoActual,
+                'dynamicModel' => $dynamicModel,
+            ]);
+        } else {
+            throw new NotFoundHttpException('El alumno o grupo no existe.');
+        }
+    }
+    
+    
+    
+
 
 }

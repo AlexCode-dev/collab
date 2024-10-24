@@ -18,7 +18,7 @@ class EmocionesSearch extends Emociones
     public function rules()
     {
         return [
-            [['id', 'sentencias_id'], 'integer'],
+            [['id', 'chats_id'], 'integer'],
             [['valencia', 'activacion', 'dominancia'], 'number'],
         ];
     }
@@ -63,7 +63,7 @@ class EmocionesSearch extends Emociones
             'valencia' => $this->valencia,
             'activacion' => $this->activacion,
             'dominancia' => $this->dominancia,
-            'sentencias_id' => $this->sentencias_id,
+            'chats_id' => $this->chats_id,
         ]);
 
         return $dataProvider;

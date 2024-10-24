@@ -84,13 +84,51 @@ class Sentencias extends \yii\db\ActiveRecord {
         return $this->hasMany(Emociones::className(), ['sentencias_id' => 'id']);
     }    
     
-    public static function getSentenciasChat($chatid){
+    public static function getSentenciasChat($chatid, $currentUserId)
+    {
         $query = (new \yii\db\Query())
-                ->select(['s.id', 's.sentencia','s.fecha_hora', 's.chats_id', 'u.username'])
+            ->select([
+                's.id', 
+                's.sentencia', 
+                's.fecha_hora', 
+                's.chats_id', 
+                's.usuarios_id',
+                'u.username', 
+                'u.puntaje',
+                'r.nombre as rango_nombre',  // Obtener el nombre del rango
+                'rp.id AS respuesta_dada'  // Verificar si ya respondió a esta pregunta
+            ])
+            ->from('sentencias as s')
+            ->innerJoin('usuarios as u', 's.usuarios_id = u.id')
+            ->leftJoin(
+                '(SELECT ru.usuarios_id, r.nombre 
+                    FROM rangos_usuarios ru 
+                    JOIN rangos r ON ru.rangos_id = r.id 
+                    ORDER BY ru.rangos_id DESC 
+                    LIMIT 1) as r', 
+                's.usuarios_id = r.usuarios_id'
+            )
+            ->leftJoin('respuesta_preguntas as rp', 's.id = rp.evento_id AND rp.usuario_id = :userId')
+            ->where(['s.chats_id' => $chatid])
+            ->orderBy('s.id ASC')
+            ->addParams([':userId' => $currentUserId]);
+    
+        return $query->all();
+    }
+    
+
+    
+    
+    
+    
+    public static function getUltimaSentenciaChat($chatid){
+        $query = (new \yii\db\Query())
+                ->select(['s.id', 's.sentencia','s.fecha_hora', 's.chats_id', 'u.username','s.usuarios_id'])
                 ->from('sentencias as s')
                 ->innerJoin('usuarios as u', 's.usuarios_id = u.id')
                 ->where(['s.chats_id' => $chatid])
-                ->orderBy('s.id ASC');
+                ->orderBy('s.id DESC')
+                ->limit(1);
 
         //echo $query->createCommand()->sql; die();
         return $query->all();

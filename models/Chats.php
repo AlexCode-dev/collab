@@ -12,6 +12,8 @@ use Yii;
  * @property string $fecha
  * @property int $grupos_formados_id
  * @property int $tareas_id
+ * @property int $nota
+ * @property string $descripcion_nota
  *
  * @property Grupos $grupos
  * @property TareasYear $tareasYear
@@ -39,6 +41,9 @@ class Chats extends \yii\db\ActiveRecord
             [['descripcion'], 'string', 'max' => 255],
             [['grupos_formados_id'], 'exist', 'skipOnError' => true, 'targetClass' => GruposFormados::className(), 'targetAttribute' => ['grupos_formados_id' => 'id']],
             [['tareas_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tareas::className(), 'targetAttribute' => ['tareas_id' => 'id']],
+            [['nota'], 'number'],
+            [['descripcion_nota'], 'string'],
+
         ];
     }
 
@@ -53,6 +58,8 @@ class Chats extends \yii\db\ActiveRecord
             'fecha' => 'Fecha',
             'grupos_formados_id' => 'Grupos ID',
             'tareas_id' => 'Tarea',
+            'nota' => 'Nota',
+            'descripcion_nota' => 'Descripción de la Nota',
         ];
     }
 

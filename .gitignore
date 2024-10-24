@@ -31,3 +31,9 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+#vendor folder
+/.vendor
+
+#ignore configuraciones en db
+config/db.php

@@ -102,8 +102,11 @@ class SentenciasController extends Controller
         $model->usuarios_id = $usuarios_id;
         $model->chats_id = $chats_id;
         $model->sentencia = $sentencia;
+        Yii::$app->runAction('logros/actualizar-puntaje-por-mensaje', ['usuario_id' => $usuarios_id]);
+
         $model->save();
         return $model->id;
+        
     }
 
     /**
@@ -120,6 +123,8 @@ class SentenciasController extends Controller
         $model->fecha_hora = date('Y-m-d h:i:s', time());
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+       
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

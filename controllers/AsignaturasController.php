@@ -44,7 +44,7 @@ class AsignaturasController extends Controller {
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['POST', 'GET'],
                 ],
             ],
         ];
@@ -54,27 +54,33 @@ class AsignaturasController extends Controller {
      * Lists all Asignaturas models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $docente = Yii::$app->user->identity->id;
         $rolesUsuario = Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->id);
         $esAdministrador = false;
-
+    
         if (!array_key_exists('administrador', $rolesUsuario)) {
             $searchModel = new \app\models\AsignaturasDocentesSearch();
             $searchModel->usuarios_id = $docente;
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         } else {
             $esAdministrador = true;
             $searchModel = new \app\models\AsignaturasSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         }
-
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+    
+        // Configurar la paginación para mostrar 5 elementos por página
+        $dataProvider->pagination->pageSize = 5;
+    
         return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-                    'esAdministrador' => $esAdministrador,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'esAdministrador' => $esAdministrador,
         ]);
     }
+    
+    
 
     public function actionAsignaturasAlumnos() {
         $usuario = Yii::$app->user->identity->id;

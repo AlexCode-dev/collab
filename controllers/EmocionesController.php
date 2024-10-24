@@ -92,13 +92,16 @@ class EmocionesController extends Controller
         ]);
     }
     
-    public function actionCrearConAjax($id, $valence, $arousal, $dominance)
+    public function actionCrearConAjax($id, $valence, $arousal, $dominance, $usuarios_id)
     {
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
         $model = new Emociones();
-        $model->sentencias_id = $id;
+        $model->chats_id = $id;
         $model->valencia = $valence;
         $model->activacion = $arousal;
         $model->dominancia = $dominance;
+        $model->usuarios_id = $usuarios_id;
+        $model->time = date('Y-m-d h:i:s', time());
         $model->save();
         return true;
     }

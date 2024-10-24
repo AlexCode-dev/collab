@@ -1,6 +1,11 @@
+
+
+
 html,
 body {
     height: 100%;
+    font-family: "Poppins", sans-serif;
+
 }
 
 .wrap {
@@ -119,57 +124,69 @@ a.desc:after {
 }
 
 .angry {
-  background: url("../images/anger.png") no-repeat scroll 0 0 transparent;
+  background: url("../images/enojado.png") no-repeat scroll 0 0 transparent;
   color: #000000;
   cursor: pointer;
   font-weight: bold;
   height: 60px;
   width: 60px;
+  background-position-x: center;
+  background-position-y: center;
 }
 
 .fear {
-  background: url("../images/fear.png") no-repeat scroll 0 0 transparent;
+  background: url("../images/confundido.png") no-repeat scroll 0 0 transparent;
   color: #000000;
   cursor: pointer;
   font-weight: bold;
   height: 60px;
   width: 60px;
+  background-position-x: center;
+ background-position-y: center;
 }
 
 .joy {
-  background: url("../images/joy.png") no-repeat scroll 0 0 transparent;
+  background: url("../images/famoso.png") no-repeat scroll 0 0 transparent;
   color: #000000;
   cursor: pointer;
   font-weight: bold;
   height: 60px;
   width: 60px;
+  background-position-x: center;
+  background-position-y: center;
 }
 
 .sadness {
-  background: url("../images/sadness.png") no-repeat scroll 0 0 transparent;
+  background: url("../images/suenos.png") no-repeat scroll 0 0 transparent;
   color: #000000;
   cursor: pointer;
   font-weight: bold;
   height: 60px;
   width: 60px;
+  background-position-x: center;
+  background-position-y: center;    
 }
 
 .surprise{
-  background: url("../images/surprise.png") no-repeat scroll 0 0 transparent;
+  background: url("../images/asombrado_2.png") no-repeat scroll 0 0 transparent;
   color: #000000;
   cursor: pointer;
   font-weight: bold;
   height: 60px;
   width: 60px;
+ background-position-x: center;
+ background-position-y: center;
 }
 
 .neutral{
-  background: url("../images/neutral.png") no-repeat scroll 0 0 transparent;
+  background: url("../images/neutral_2.png") no-repeat scroll 0 0 transparent;
   color: #000000;
   cursor: pointer;
   font-weight: bold;
   height: 60px;
   width: 60px;
+  background-position-x: center;
+  background-position-y: center;
 }
 
 .contenedorGrupos{
@@ -185,4 +202,52 @@ a.desc:after {
     background-color: #FFE15F;
     padding: 5px;
     margin: 2px;
+}
+
+/*NAV BAR*/
+.navbar-nav li{
+    font-size: 12px;
+}
+.navbar-inverse{
+    background-color: #2a2a2a !important;
+    border-color: #fff;
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+.navbar-brand{
+    font-size: 30px;
+}
+
+.tipocuenta{
+    color: #8672FF !important;
+    text-decoration: none;
+    pointer-events: none;
+}
+.navbar-inverse .navbar-nav > .active > a{
+    color: #fff;
+    background-color: #080808;
+    border-radius: 10px;
+}
+
+.wrap > .container {
+    margin: 120px auto;
+    padding:0px;
+}
+.breadcrumb {
+    padding: 20px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    background-color: #262626;
+    border-radius: 10px;
+}
+
+.breadcrumb li{
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}
+.breadcrumb > .active {
+    color: #fff;
+    
 }

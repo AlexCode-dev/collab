@@ -14,7 +14,10 @@ $this->title = 'Actualización de datos';
 ?>
 <div class="usuarios-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<h2 class="perfil-title">Actualizar datos de <span>Perfil.</span></h2>
+<p style="font-size:16px;">Mantén tu perfil al día para destacar en la plataforma. 📋✨ Actualiza tu información, sube una nueva foto de perfil y muestra tu mejor versión.</p>
+
+
 
     <?=
     $this->render('_form', [
