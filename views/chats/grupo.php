@@ -12,10 +12,7 @@ $usuarioid = Yii::$app->user->identity->id;
 
 // URLs para hacer llamados AJAX
 $recuperarChat = Yii::$app->urlManager->createUrl(['chats/recuperar-chat', 'chatid' => $chatid]);
-<<<<<<< HEAD
 $recuperarEventosUrl = Yii::$app->urlManager->createUrl(['evento/recuperar-eventos', 'chatid' => $chatid]);
-=======
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
 $recuperarUltimaSentenciaChat = Yii::$app->urlManager->createUrl(['chats/recuperar-ultima-sentencia-chat', 'chatid' => $chatid]);
 $enviarSentencia = Yii::$app->urlManager->createUrl(['sentencias/crear-con-ajax']);
 $enviarReporteEstadoAnimo = Yii::$app->urlManager->createUrl(['emociones/crear-con-ajax']);
@@ -24,15 +21,8 @@ $rEstadoAnimo = ($tarea->reportar_estado_animo) ? 1 : 0;
 $rConflicto = ($tarea->reportar_conflicto) ? 1 : 0;
 $enviarReporteConflicto = Yii::$app->urlManager->createUrl(['conflictos/crear-con-ajax']);
 $urlUploads = Yii::$app->request->baseUrl . "/uploads/$directorio/";
-<<<<<<< HEAD
 $this->title = $asignatura . " - " . $tarea->nombre_t . " / Grupo " . $miembrosChat[0]["grupos_formados_id"] . " - " . $miembrosChat[0]["alumnos"];
 $this->params['breadcrumbs'][] = $this->title;
-=======
-
-$this->title = $asignatura . " - " . $tarea->nombre_t . " / Grupo " . $miembrosChat[0]["grupos_formados_id"] . " - " . $miembrosChat[0]["alumnos"] ;
-$this->params['breadcrumbs'][] = $this->title;
-
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
 
 $this->registerJsFile(Yii::$app->request->baseUrl . '/js/jquery.rateyo.min.js', ['depends' => [\yii\jui\JuiAsset::className()]]);
 $this->registerJsFile(Yii::$app->request->baseUrl . '/emoji-picker/js/config.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
@@ -52,11 +42,7 @@ $script = <<< JS
         $.ajax({
             method: 'GET',
             url: "$enviarSentencia",
-<<<<<<< HEAD
             data: {sentencia: sentenciaEnviar, usuarios_id: $usuarioid, chats_id: $chatid},
-=======
-            data: {sentencia: sentenciaEnviar, usuarios_id:$usuarioid, chats_id: $chatid},
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
         }).done(function (data) {           
             return true;
         });         
@@ -69,7 +55,6 @@ $script = <<< JS
         var scrollTopBefore = 0;
         var lastScrollHeight = 0;
         var ultimaSentencia = "";
-<<<<<<< HEAD
         var eventosMostrados = new Set(); // Conjunto para almacenar los IDs de eventos mostrados
         var ultimoEventoId = null; // Almacena el último ID de evento cargado
 
@@ -133,10 +118,6 @@ $script = <<< JS
             cargarEventosIniciales();
         });
 
-=======
-
-        
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
         $('#divChat').scroll(function(){
             var objDiv = document.getElementById("divChat");
             scrollTopBefore = objDiv.scrollTop;
@@ -150,28 +131,12 @@ $script = <<< JS
         });
         
         $.ajax({
-<<<<<<< HEAD
-=======
-            url: "$recuperarChat",
-        }).done(function (data) {
-            $('#divChat').append(data);
-            var objDiv = document.getElementById("divChat");
-            objDiv.scrollTop = objDiv.scrollHeight; 
-            lastScrollHeight = objDiv.scrollHeight;                      
-        });
-        
-        $.ajax({
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
             url: "$recuperarUltimaSentenciaChat",
         }).done(function (data) {
             ultimaSentencia = data;                    
         });
         
-<<<<<<< HEAD
         setInterval(function(){
-=======
-        var interval = setInterval(function(){
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
             $.ajax({
                 url: "$recuperarUltimaSentenciaChat",
             }).done(function (data) {
@@ -192,7 +157,6 @@ $script = <<< JS
                 }           
             });
         }, 1000);
-<<<<<<< HEAD
 
         // Verificar nuevos eventos cada 10 segundos
         setInterval(verificarNuevosEventos, 10000);
@@ -208,9 +172,6 @@ $script = <<< JS
             });
         });
 
-=======
-            
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
         $('#cbxSubhabilidad').change(function () {
             $.ajax({
                 url: "$sentenciasApertura",
@@ -233,7 +194,6 @@ $script = <<< JS
         $('#frmChat').submit(function (e) {
     e.preventDefault();                
 
-<<<<<<< HEAD
     if ($('#txtSentencia').val().length != 0) {
         var sentenciaApertura = '';
         if (bSeleccionSentencia == 1){                    
@@ -261,24 +221,6 @@ $script = <<< JS
            
         
         if (rEstadoAnimo == 1){
-=======
-                // Se envia el mensaje
-                $.ajax({
-                    method: 'GET',
-                    url: "$enviarSentencia",
-                    data: {sentencia: sentenciaEnviar, usuarios_id:$usuarioid, chats_id: $chatid},
-                }).done(function (data) {
-                    $('#txtSentencia').val('');
-                    $('.emoji-wysiwyg-editor').html("");  
-
-                    return true;
-                });        
-            }        
-        });                
-        
-        if (rEstadoAnimo == 1){
-            // Se establece una emoción por defecto
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
             if ($('#lblEmocionSeleccionada').html().length == 0){
                 $('#pleasure').val('0.000');
                 $('#arousal').val('0.000');
@@ -297,11 +239,7 @@ $script = <<< JS
                 $.ajax({
                     method: 'GET',
                     url: "$enviarReporteEstadoAnimo",
-<<<<<<< HEAD
                     data: {id: $chatid, valence: $('#pleasure').val(), arousal: $('#arousal').val(), dominance: $('#dominance').val(), usuarios_id: $usuarioid},
-=======
-                    data: {id: $chatid, valence: $('#pleasure').val(), arousal: $('#arousal').val(), dominance: $('#dominance').val(), usuarios_id:$usuarioid},
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
                 }).done(function () {
                     return true;
                 });   
@@ -313,21 +251,13 @@ $script = <<< JS
                 $.ajax({
                     method: 'GET',
                     url: "$enviarReporteConflicto",
-<<<<<<< HEAD
                     data: {idChat: $chatid, usuarios_id: $usuarioid},
-=======
-                    data: {idChat: $chatid, usuarios_id:$usuarioid},
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
                 }).done(function () {
                     return true;
                 });
             });        
         }        
         
-<<<<<<< HEAD
-=======
-        // Initializes and creates emoji set from sprite sheet
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
         window.emojiPicker = new EmojiPicker({
           emojiable_selector: '[data-emojiable=true]',
           assetsPath: '$base/emoji-picker/img/',
@@ -341,7 +271,6 @@ $this->registerJs($script, yii\web\View::POS_END);
 $sentenciaApertura = new app\models\SentenciasApertura();
 ?>
 
-<<<<<<< HEAD
 <div class="chats-index">
     <div class="consPointsNote">
         <div class="chat-tarea">
@@ -366,19 +295,6 @@ $sentenciaApertura = new app\models\SentenciasApertura();
                 style="background-color: #BDE5F8; text-align: center; padding: 5px;" value="Tienes un nuevo evento" />
         </div>
 
-=======
-
-<div class="chats-index">    
-    <p style="background-color: #BEF7F8; padding: 10px; font-size: 1.3em;"><b>Consigna:</b><br/><?= $tarea->consigna ?></p>
-
-    <div style="float:left; margin: 0px auto 10px auto;">
-        <div id='divChat' style="width: 700px; height: 350px; overflow-y: scroll;"></div>
-        <br/>
-        <div id="goBottom" style="margin: 0 auto; width: 200px; display: none;">
-            <input id="btnGoBottom" type="button" style="background-color: #FEE300;  text-align: center; padding: 5px;" value="Tienes nuevos mensajes"/>            
-        </div>
-
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
         <form id="frmChat">
             <?php if ($tarea->usar_sentencias_apertura == 1): ?>
             <label><b>Empeza tu aporte con alguna de estas frases:</b></label><br />
@@ -418,7 +334,6 @@ $sentenciaApertura = new app\models\SentenciasApertura();
         ?>
             </div>
 
-<<<<<<< HEAD
         </form>
     </div>
 
@@ -503,57 +418,3 @@ $sentenciaApertura = new app\models\SentenciasApertura();
             ¡Participa, suma puntos y escala hasta la cima! 🎉</p>
     </div>
 </div>
-=======
-            <input type="submit" id="btnEnviar" name="btnEnviar" value="Enviar"/>
-        </form>  
-    </div>
-
-
-
-    <div style=" width:400px; margin:0 20px; float:left;">
-        <?php if ($tarea->reportar_estado_animo == 1): ?>
-            <p>Estado de &aacute;nimo seleccionado: <br/><img id='imgEmocionSeleccionada' style="border:0px;"/> <label id='lblEmocionSeleccionada'></label></p>
-            <b>Me siento...</b><br/>
-            <input type="button" id="btnNeutral" class='btnEmociones neutral' data-arousal="0" data-pleasure="0" data-dominance="0" data-emocion='Neutral' title="Neutral"/>
-            <input type="button" id="btnAngry" class='btnEmociones angry' data-arousal="0.59" data-pleasure="-0.51" data-dominance="0.25" data-emocion='Enojado' title="Enojado"/>
-            <input type="button" id="btnFear" class='btnEmociones fear' data-arousal="0.60" data-pleasure="-0.64" data-dominance="-0.43" data-emocion='Preocupado' title="Preocupado"/>
-            <input type="button" id="btnJoy" class='btnEmociones joy' data-arousal="0.2" data-pleasure="0.4" data-dominance=0.1 data-emocion='Alegre' title="Alegre"/>
-            <input type="button" id="btnSadness" class='btnEmociones sadness' data-arousal="-0.2" data-pleasure="-0.4" data-dominance="-0.1" data-emocion='Cansado' title="Cansado"/>
-            <input type="button" id="btnSurprise" class='btnEmociones surprise' data-arousal="0.59" data-pleasure="0.87" data-dominance="-0.87" data-emocion='Sorprendido' title="Sorprendido"/>
-            <input id="pleasure" type="hidden" value="0" min="-1" max="1" step="0.05" size="4" />
-            <input id="arousal" type="hidden" value="0" min="-1" max="1" step="0.05" />
-            <input id="dominance" type="hidden" value="0" min="-1" max="1" step="0.05" />
-            <br/><br/>
-        <?php endif; ?>
-
-        <?php if ($tarea->reportar_conflicto == 1): ?>
-            <div style="padding: 10px;">
-                <input type="button" id="btnReporteConflicto" name="btnReporteConflicto" value="Siento que estamos con diferencias en el grupo" style="background-color: #FCE9C3; padding:10px;"/><br/>                        
-            </div>
-        <?php endif; ?>
-
-        <?php
-        $userid = Yii::$app->user->identity->id;
-        $oUser = \app\models\Usuarios::findOne(['id' => $userid]);
-        echo \kato\DropZone::widget([
-            'options' => [
-                'url' => Yii::$app->urlManager->createUrl(['chats/grupo', 'chatid' => Yii::$app->security->encryptByPassword($chatid, $oUser->password)]),
-                'maxFilesize' => '2',
-                'dictDefaultMessage' => "Coloque aquí los archivos para compartir",
-            ],
-            'clientEvents' => [
-                'complete' => "function(file){console.log(file); if (file.status!='error') enviarArchivo(file.name);}",
-                'removedfile' => "function(file){alert(file.name + ' is removed')}"
-            ],
-        ]);
-        ?>
-
-        <br/>
-    </div>
-
-
-    <div style="clear:both;">
-
-    </div>
-</div>
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247

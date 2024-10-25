@@ -76,7 +76,6 @@ $this->params['breadcrumbs'][] = $this->title;
     $grupos = app\models\GruposFormados::getDetalleGrupos($model->grupos_id);
     ?>
 
-<<<<<<< HEAD
     <h2 class="perfil-title">Chats asociados a los grupos <span>.</span></h2>
     <p>En cada asignatura, existe la posibilidad de crear configuraciones de grupo con un código específico. Estas
         configuraciones permiten crear varios grupos bajo una misma asignatura, lo cual se gestiona desde el menú
@@ -122,16 +121,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <?php endforeach; ?>
     </div>
-=======
-    <?php
-    $chatsxGrupo = app\models\Chats::getChatsGrupos($model->id);
-    ?>
-
-    <h2>Chats asociados a los grupos</h2>
-    <?php foreach ($chatsxGrupo as $alumno): ?>
-        Grupo <?= $alumno["grupos_formados_id"] ?> - <?= $alumno["alumnos"] ?> [<?= Html::a('ver chat', ['chats/grupo', 'chatid' => Yii::$app->security->encryptByPassword($alumno["id"], $oUser->password)]) ?>]<br/>
-    <?php endforeach; ?>
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
 
 </div>
 

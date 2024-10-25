@@ -120,7 +120,6 @@ class UsuariosController extends Controller {
         } else {
             $model->tipo = 2;
         }
-<<<<<<< HEAD
     
         if ($model->load(Yii::$app->request->post())) {
             // Subida de la imagen de perfil
@@ -130,20 +129,6 @@ class UsuariosController extends Controller {
                 if ($file->saveAs($filePath)) {
                     $model->foto_perfil = $filePath; // Guardar la ruta del archivo en la BD
                 }
-=======
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {            //&& $model->aceptaterminos == 1
-            $rbac = Yii::$app->authManager;
-            if ($t == 'a') {
-                $estudiante = $rbac->getRole('estudiante');
-                $rbac->assign($estudiante, $model->id);
-            } elseif ($t == 'd') {
-                $profesor = $rbac->getRole('profesor');
-                $rbac->assign($profesor, $model->id);
-            } else {
-                $administrador = $rbac->getRole('administrador');
-                $rbac->assign($administrador, $model->id);
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
             }
     
             if ($model->save()) {
@@ -174,20 +159,6 @@ class UsuariosController extends Controller {
         ]);
     }
     
-
-    public function actionPromoverDocente($id) {
-        $usuario = Yii::$app->user->identity->id;
-        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
-        $idUsuario = Yii::$app->security->decryptByPassword($id, $oUser->password);
-
-        $rbac = Yii::$app->authManager;
-        $profesor = $rbac->getRole('profesor');
-        $rbac->assign($profesor, $idUsuario);
-        $usuarioActualizar = \app\models\Usuarios::findOne(['id' => $idUsuario]);
-        $usuarioActualizar->tipo = 1;
-        $usuarioActualizar->save();
-        return $this->render('promover-docente');
-    }
 
     public function actionPromoverDocente($id) {
         $usuario = Yii::$app->user->identity->id;
@@ -298,23 +269,6 @@ class UsuariosController extends Controller {
     }
     
     
-
-    public function actionActualizarPerfil($id) {
-        $usuario = Yii::$app->user->identity->id;
-        $oUser = \app\models\Usuarios::findOne(['id' => $usuario]);
-        $idUsuario = Yii::$app->security->decryptByPassword($id, $oUser->password);
-
-
-        $model = $this->findModel($idUsuario);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['ficha', 'id' => Yii::$app->security->encryptByPassword($model->id, $oUser->password)]);
-        }
-
-        return $this->render('actualizar-perfil', [
-                    'model' => $model,
-        ]);
-    }
 
     /**
      * Deletes an existing Usuarios model.

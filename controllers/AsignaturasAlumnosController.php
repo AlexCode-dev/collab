@@ -120,13 +120,10 @@ class AsignaturasAlumnosController extends Controller
         $model->year = date("Y");
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-<<<<<<< HEAD
             
             Yii::$app->runAction('desafios/verificar-asociar-primera-materia', ['usuario_id' => $model->usuarios_id]);
 
 
-=======
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
             return $this->redirect(['asignaturas/asignaturas-alumnos']);
         }
 

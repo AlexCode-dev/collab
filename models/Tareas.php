@@ -37,14 +37,9 @@ class Tareas extends \yii\db\ActiveRecord
     {
         return [
             [['nombre_t', 'year', 'asignaturas_id', 'grupos_id'], 'required'],
-<<<<<<< HEAD
             [['descripcion', 'consigna'], 'string'],
             [['puntaje_tarea'],'number'],
             [['tipo_tarea'], 'string', 'max'=> 255],
-=======
-            [['descripcion', 'consigna', 'descripcion_nota'], 'string'],
-            [['nota'], 'number'],
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
             [['year', 'asignaturas_id', 'grupos_id', 'usar_sentencias_apertura', 'reportar_estado_animo', 'reportar_conflicto'], 'integer'],
             [['nombre_t'], 'string', 'max' => 255],
             [['asignaturas_id'], 'exist', 'skipOnError' => true, 'targetClass' => Asignaturas::className(), 'targetAttribute' => ['asignaturas_id' => 'id']],
@@ -65,13 +60,8 @@ class Tareas extends \yii\db\ActiveRecord
             'reportar_conflicto' => 'Permitir Reportar Conflicto',
             'asignaturas_id' => 'Asignaturas ID',
             'grupos_id' => 'Cod. de Configuración de Grupo',
-<<<<<<< HEAD
             'puntaje_tarea'=>'Puntaje de la tarea',
             'tipo_tarea' => 'Tipo de tarea',
-=======
-            'nota' => 'Nota',
-            'descripcion_nota' => 'Descripción de la Nota',
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
         ];
     }
 

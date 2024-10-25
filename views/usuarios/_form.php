@@ -9,40 +9,11 @@ use yii\widgets\ActiveForm;
 ?>
 <div class="usuarios-form">
 
-<<<<<<< HEAD
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
 <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
 <?= $form->field($model, 'apellido')->textInput(['maxlength' => true]) ?>
-=======
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'apellido')->textInput(['maxlength' => true]) ?>
-
-    <?=
-    $form->field($model, 'fechanacimiento')->widget(\yii\jui\DatePicker::class, [
-        'language' => 'es',
-        'dateFormat' => 'dd/MM/yyyy',
-        'clientOptions' => [
-            'changeMonth' => 'true',
-            'changeYear' => 'true',
-        ],
-    ])
-    ?>
-
-    <?= $form->field($model, 'pais_idpais')->dropDownList(app\models\Pais::getListaPaises())->label('País') ?>
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
-    <?= ($operacion == 'alta') ? $form->field($model, 'username')->textInput(['maxlength' => true]) : '' ?>
-
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-    
-    <!--< $form->field($model, 'aceptaterminos')->checkbox() >-->
->>>>>>> 738f8d5f4e3524f9b29eacb1792cac1dc4cdf247
 
 <?= $form->field($model, 'fechanacimiento')->widget(\yii\jui\DatePicker::class, [
     'language' => 'es',

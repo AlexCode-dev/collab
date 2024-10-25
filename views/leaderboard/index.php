@@ -19,11 +19,17 @@ use yii\helpers\Html;
                 <?php endif; ?>
             </div>
             <div class="leaderboard-name"><?= Html::encode($usuario['nombre'] . ' ' . $usuario['apellido']) ?></div>
-            <div class="leaderboard-rank"><?= Html::encode($usuario['rango_nombre']) ?></div>
+            <div class="leaderboard-rank">
+                <?php if (!empty($usuario['rango_imagen'])): ?>
+                    <img src="<?= Yii::getAlias('@web/' . $usuario['rango_imagen']) ?>" alt="Imagen del rango" class="rank-image">
+                <?php endif; ?>
+                <?= Html::encode($usuario['rango_nombre']) ?>
+            </div>
             <div class="leaderboard-score"><?= Html::encode($usuario['puntaje']) ?> pts</div>
         </div>
     <?php endforeach; ?>
 </div>
+
 
 <!-- Paginación -->
 <div class="pagination-container text-center">
@@ -82,10 +88,18 @@ use yii\helpers\Html;
     .leaderboard-rank {
         margin-right: 10px;
         padding: 20px;
+        padding-top:10px;
+        padding-bottom: 10px;
         background: #fff;
         border-radius: 10px;
     }
     .pagination-container {
         margin-top: 20px;
     }
+    .leaderboard-rank .rank-image {
+    width: 41px;
+    height: 41px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
 </style>
