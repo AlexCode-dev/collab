@@ -1,0 +1,1021 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink"><head><script type="text/javascript" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/300lo.json"></script><script type="text/javascript" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/_ate.config_resp"></script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Application of decision trees in the identification of patterns 
+of fatal injuries by external cause in the municipality of Pasto, 
+Colombia</title><link xmlns="" rel="canonical" href="http://www.scielo.org.co/scielo.php?script=sci_arttext&amp;pid=S0124-71072017000300388">
+<meta xmlns="" http-equiv="Pragma" content="no-cache">
+<meta xmlns="" http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+<meta xmlns="" content-math-type="text/mathml">
+<meta xmlns="" name="citation_journal_title" content="Universidad y Salud">
+<meta xmlns="" name="citation_journal_title_abbrev" content="Univ. Salud">
+<meta xmlns="" name="citation_publisher" content="Universidad de Nariño">
+<meta xmlns="" name="citation_title" content="Application of decision trees in the identification of patterns of fatal injuries by external cause in the municipality of Pasto, Colombia">
+<meta xmlns="" name="citation_date" content="12/2017">
+<meta xmlns="" name="citation_volume" content="19">
+<meta xmlns="" name="citation_issue" content="3">
+<meta xmlns="" name="citation_issn" content="0124-7107">
+<meta xmlns="" name="citation_doi" content="10.22267/rus.171903.101">
+<meta xmlns="" name="citation_abstract_html_url" content="http://www.scielo.org.co/scielo.php?script=sci_abstract&amp;pid=S0124-71072017000300388&amp;lng=en&amp;nrm=iso&amp;tlng=es">
+<meta xmlns="" name="citation_fulltext_html_url" content="http://www.scielo.org.co/scielo.php?script=sci_arttext&amp;pid=S0124-71072017000300388&amp;lng=en&amp;nrm=iso&amp;tlng=es">
+<meta xmlns="" name="citation_author" content="Timarán-Pereira, Ricardo">
+<meta xmlns="" name="citation_author_institution" content="Universidad de Nariño, San Juan de Pasto, Colombia">
+<meta xmlns="" name="citation_author_institution" content="Universidad de Nariño, San Juan de Pasto, Colombia">
+<meta xmlns="" name="citation_author" content="Calderón-Romero, Andrés">
+<meta xmlns="" name="citation_author_institution" content="The University of Twente, Enschede, Países Bajos">
+<meta xmlns="" name="citation_author_institution" content="The University of Twente, Enschede, Países Bajos">
+<meta xmlns="" name="citation_author" content="Hidalgo-Troya, Arsenio">
+<meta xmlns="" name="citation_author_institution" content="Universidad de Nariño, San Juan de Pasto, Colombia">
+<meta xmlns="" name="citation_author_institution" content="Universidad de Nariño, San Juan de Pasto, Colombia">
+<meta xmlns="" name="citation_author" content="Timarán-Pereira, Ricardo">
+<meta xmlns="" name="citation_author_institution" content="Universidad de Nariño, San Juan de Pasto, Colombia">
+<meta xmlns="" name="citation_author_institution" content="Universidad de Nariño, San Juan de Pasto, Colombia">
+<meta xmlns="" name="citation_author" content="Calderón-Romero, Andrés">
+<meta xmlns="" name="citation_author_institution" content="The University of Twente, Enschede, Países Bajos">
+<meta xmlns="" name="citation_author_institution" content="The University of Twente, Enschede, Países Bajos">
+<meta xmlns="" name="citation_author" content="Hidalgo-Troya, Arsenio">
+<meta xmlns="" name="citation_author_institution" content="Universidad de Nariño, San Juan de Pasto, Colombia">
+<meta xmlns="" name="citation_author_institution" content="Universidad de Nariño, San Juan de Pasto, Colombia">
+<meta xmlns="" name="citation_firstpage" content="388">
+<meta xmlns="" name="citation_lastpage" content="399">
+<meta xmlns="" name="citation_id" content="10.22267/rus.171903.101">
+<meta xmlns="" name="citation_pdf_url" language="es" default="true" content="http://www.scielo.org.co/pdf/reus/v19n3/0124-7107-reus-19-03-00388.pdf">
+<link xmlns="" rel="stylesheet" type="text/css" href="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/screen.css">
+<link xmlns="" rel="stylesheet" type="text/css" href="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/xml.css">
+<script type="text/javascript" async="" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/ga.js"></script><script xmlns="" language="javascript" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/jquery-1.js"></script><script xmlns="" language="javascript" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/toolbox.js"></script><script xmlns="" language="javascript">
+					function smaller(elem_img) {
+						if ((elem_img.height > elem_img.width) && (elem_img.height > 100)) {
+							elem_img.className="inline-graphic-more-limited";
+						} else if (elem_img.width > 300) {
+				
+						} else if ((elem_img.height > elem_img.width) && (elem_img.height > 70)) {
+							elem_img.className="inline-graphic-limited";
+						} 
+					}
+				</script><style type="text/css">.at-icon{fill:#fff;border:0}.at-icon-wrapper{display:inline-block;overflow:hidden}a .at-icon-wrapper{cursor:pointer}.at-rounded,.at-rounded-element .at-icon-wrapper{border-radius:12%}.at-circular,.at-circular-element .at-icon-wrapper{border-radius:50%}.addthis_32x32_style .at-icon{width:2pc;height:2pc}.addthis_24x24_style .at-icon{width:24px;height:24px}.addthis_20x20_style .at-icon{width:20px;height:20px}.addthis_16x16_style .at-icon{width:1pc;height:1pc}#at16lb{display:none;position:absolute;top:0;left:0;width:100%;height:100%;z-index:1001;background-color:#000;opacity:.001}#at_complete,#at_error,#at_share,#at_success{position:static!important}.at15dn{display:none}#at15s,#at16p,#at16p form input,#at16p label,#at16p textarea,#at_share .at_item{font-family:arial,helvetica,tahoma,verdana,sans-serif!important;font-size:9pt!important;outline-style:none;outline-width:0;line-height:1em}* html #at15s.mmborder{position:absolute!important}#at15s.mmborder{position:fixed!important;width:250px!important}#at15s{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABtJREFUeNpiZGBgaGAgAjAxEAlGFVJHIUCAAQDcngCUgqGMqwAAAABJRU5ErkJggg==);float:none;line-height:1em;margin:0;overflow:visible;padding:5px;text-align:left;position:absolute}#at15s a,#at15s span{outline:0;direction:ltr;text-transform:none}#at15s .at-label{margin-left:5px}#at15s .at-icon-wrapper{width:1pc;height:1pc;vertical-align:middle}#at15s .at-icon{width:1pc;height:1pc}.at4-icon{display:inline-block;background-repeat:no-repeat;background-position:top left;margin:0;overflow:hidden;cursor:pointer}.addthis_16x16_style .at4-icon,.addthis_default_style .at4-icon,.at4-icon,.at-16x16{width:1pc;height:1pc;line-height:1pc;background-size:1pc!important}.addthis_32x32_style .at4-icon,.at-32x32{width:2pc;height:2pc;line-height:2pc;background-size:2pc!important}.addthis_24x24_style .at4-icon,.at-24x24{width:24px;height:24px;line-height:24px;background-size:24px!important}.addthis_20x20_style .at4-icon,.at-20x20{width:20px;height:20px;line-height:20px;background-size:20px!important}.at4-icon.circular,.circular .at4-icon,.circular.aticon{border-radius:50%}.at4-icon.rounded,.rounded .at4-icon{border-radius:4px}.at4-icon-left{float:left}#at15s .at4-icon{text-indent:20px;padding:0;overflow:visible;white-space:nowrap;background-size:1pc;width:1pc;height:1pc;background-position:top left;display:inline-block;line-height:1pc}.addthis_vertical_style .at4-icon,.at4-follow-container .at4-icon{margin-right:5px}html>body #at15s{width:250px!important}#at15s.atm{background:none!important;padding:0!important;width:10pc!important}#at15s_inner{background:#fff;border:1px solid #fff;margin:0}#at15s_head{position:relative;background:#f2f2f2;padding:4px;cursor:default;border-bottom:1px solid #e5e5e5}.at15s_head_success{background:#cafd99!important;border-bottom:1px solid #a9d582!important}.at15s_head_success a,.at15s_head_success span{color:#000!important;text-decoration:none}#at15s_brand,#at15sptx,#at16_brand{position:absolute}#at15s_brand{top:4px;right:4px}.at15s_brandx{right:20px!important}a#at15sptx{top:4px;right:4px;text-decoration:none;color:#4c4c4c;font-weight:700}#at15sptx:hover{text-decoration:underline}#at16_brand{top:5px;right:30px;cursor:default}#at_hover{padding:4px}#at_hover .at_item,#at_share .at_item{background:#fff!important;float:left!important;color:#4c4c4c!important}#at_share .at_item .at-icon-wrapper{margin-right:5px}#at_hover .at_bold{font-weight:700;color:#000!important}#at_hover .at_item{width:7pc!important;padding:2px 3px!important;margin:1px;text-decoration:none!important}#at_hover .at_item.athov,#at_hover .at_item:focus,#at_hover .at_item:hover{margin:0!important}#at_hover .at_item.athov,#at_hover .at_item:focus,#at_hover .at_item:hover,#at_share .at_item.athov,#at_share .at_item:hover{background:#f2f2f2!important;border:1px solid #e5e5e5;color:#000!important;text-decoration:none}.ipad #at_hover .at_item:focus{background:#fff!important;border:1px solid #fff}.at15t{display:block!important;height:1pc!important;line-height:1pc!important;padding-left:20px!important;background-position:0 0;text-align:left}.addthis_button,.at15t{cursor:pointer}.addthis_toolbox a.at300b,.addthis_toolbox a.at300m{width:auto}.addthis_toolbox a{margin-bottom:5px;line-height:initial}.addthis_toolbox.addthis_vertical_style{width:200px}.addthis_button_facebook_like .fb_iframe_widget{line-height:100%}.addthis_button_facebook_like iframe.fb_iframe_widget_lift{max-width:none}.addthis_toolbox a.addthis_button_counter,.addthis_toolbox a.addthis_button_facebook_like,.addthis_toolbox a.addthis_button_facebook_send,.addthis_toolbox a.addthis_button_facebook_share,.addthis_toolbox a.addthis_button_foursquare,.addthis_toolbox a.addthis_button_google_plusone,.addthis_toolbox a.addthis_button_linkedin_counter,.addthis_toolbox a.addthis_button_pinterest_pinit,.addthis_toolbox a.addthis_button_tweet{display:inline-block}.at-share-tbx-element .google_plusone_iframe_widget>span>div{vertical-align:top!important}.addthis_toolbox span.addthis_follow_label{display:none}.addthis_toolbox.addthis_vertical_style span.addthis_follow_label{display:block;white-space:nowrap}.addthis_toolbox.addthis_vertical_style a{display:block}.addthis_toolbox.addthis_vertical_style.addthis_32x32_style a{line-height:2pc;height:2pc}.addthis_toolbox.addthis_vertical_style .at300bs{margin-right:4px;float:left}.addthis_toolbox.addthis_20x20_style span{line-height:20px}.addthis_toolbox.addthis_32x32_style span{line-height:2pc}.addthis_toolbox.addthis_pill_combo_style .addthis_button_compact .at15t_compact,.addthis_toolbox.addthis_pill_combo_style a{float:left}.addthis_toolbox.addthis_pill_combo_style a.addthis_button_tweet{margin-top:-2px}.addthis_toolbox.addthis_pill_combo_style .addthis_button_compact .at15t_compact{margin-right:4px}.addthis_default_style .addthis_separator{margin:0 5px;display:inline}div.atclear{clear:both}.addthis_default_style .addthis_separator,.addthis_default_style .at4-icon,.addthis_default_style .at300b,.addthis_default_style .at300bo,.addthis_default_style .at300bs,.addthis_default_style .at300m{float:left}.at300b img,.at300bo img{border:0}a.at300b .at4-icon,a.at300m .at4-icon{display:block}.addthis_default_style .at300b,.addthis_default_style .at300bo,.addthis_default_style .at300m{padding:0 2px}.at300b,.at300bo,.at300bs,.at300m{cursor:pointer}.addthis_button_facebook_like.at300b:hover,.addthis_button_facebook_like.at300bs:hover,.addthis_button_facebook_send.at300b:hover,.addthis_button_facebook_send.at300bs:hover{opacity:1}.addthis_20x20_style .at15t,.addthis_20x20_style .at300bs{overflow:hidden;display:block;height:20px!important;width:20px!important;line-height:20px!important}.addthis_32x32_style .at15t,.addthis_32x32_style .at300bs{overflow:hidden;display:block;height:2pc!important;width:2pc!important;line-height:2pc!important}.at300bs{overflow:hidden;display:block;background-position:0 0;height:1pc;width:1pc;line-height:1pc!important}.addthis_default_style .at15t_compact,.addthis_default_style .at15t_expanded{margin-right:4px}#at_share .at_item{width:123px!important;padding:4px;margin-right:2px;border:1px solid #fff}#at16p{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABtJREFUeNpiZGBgaGAgAjAxEAlGFVJHIUCAAQDcngCUgqGMqwAAAABJRU5ErkJggg==);z-index:10000001;position:absolute;top:50%;left:50%;width:300px;padding:10px;margin:0 auto;margin-top:-185px;margin-left:-155px;font-family:arial,helvetica,tahoma,verdana,sans-serif;font-size:9pt;color:#5e5e5e}#at_share{margin:0;padding:0}#at16pt{position:relative;background:#f2f2f2;height:13px;padding:5px 10px}#at16pt a,#at16pt h4{font-weight:700}#at16pt h4{display:inline;margin:0;padding:0;font-size:9pt;color:#4c4c4c;cursor:default}#at16pt a{position:absolute;top:5px;right:10px;color:#4c4c4c;text-decoration:none;padding:2px}#at15sptx:focus,#at16pt a:focus{outline:thin dotted}#at15s #at16pf a{top:1px}#_atssh{width:1px!important;height:1px!important;border:0!important}.atm{width:10pc!important;padding:0;margin:0;line-height:9pt;letter-spacing:normal;font-family:arial,helvetica,tahoma,verdana,sans-serif;font-size:9pt;color:#444;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABtJREFUeNpiZGBgaGAgAjAxEAlGFVJHIUCAAQDcngCUgqGMqwAAAABJRU5ErkJggg==);padding:4px}.atm-f{text-align:right;border-top:1px solid #ddd;padding:5px 8px}.atm-i{background:#fff;border:1px solid #d5d6d6;padding:0;margin:0;box-shadow:1px 1px 5px rgba(0,0,0,.15)}.atm-s{margin:0!important;padding:0!important}.atm-s a:focus{border:transparent;outline:0;transition:none}#at_hover.atm-s a,.atm-s a{display:block;text-decoration:none;padding:4px 10px;color:#235dab!important;font-weight:400;font-style:normal;transition:none}#at_hover.atm-s .at_bold{color:#235dab!important}#at_hover.atm-s a:hover,.atm-s a:hover{background:#2095f0;text-decoration:none;color:#fff!important}#at_hover.atm-s .at_bold{font-weight:700}#at_hover.atm-s a:hover .at_bold{color:#fff!important}.atm-s a .at-label{vertical-align:middle;margin-left:5px;direction:ltr}.at_PinItButton{display:block;width:40px;height:20px;padding:0;margin:0;background-image:url(//s7.addthis.com/static/t00/pinit00.png);background-repeat:no-repeat}.at_PinItButton:hover{background-position:0 -20px}.addthis_toolbox .addthis_button_pinterest_pinit{position:relative}.at-share-tbx-element .fb_iframe_widget span{vertical-align:baseline!important}#at16pf{height:auto;text-align:right;padding:4px 8px}.at-privacy-info{position:absolute;left:7px;bottom:7px;cursor:pointer;text-decoration:none;font-family:helvetica,arial,sans-serif;font-size:10px;line-height:9pt;letter-spacing:.2px;color:#666}.at-privacy-info:hover{color:#000}.body .wsb-social-share .wsb-social-share-button-vert{padding-top:0;padding-bottom:0}.body .wsb-social-share.addthis_counter_style .addthis_button_tweet.wsb-social-share-button{padding-top:40px}.body .wsb-social-share.addthis_counter_style .addthis_button_google_plusone.wsb-social-share-button{padding-top:0}.body .wsb-social-share.addthis_counter_style .addthis_button_facebook_like.wsb-social-share-button{padding-top:21px}@media print{#at4-follow,#at4-share,#at4-thankyou,#at4-whatsnext,#at4m-mobile,#at15s,.at4,.at4-recommended{display:none!important}}@media screen and (max-width:400px){.at4win{width:100%}}@media screen and (max-height:700px) and (max-width:400px){.at4-thankyou-inner .at4-recommended-container{height:122px;overflow:hidden}.at4-thankyou-inner .at4-recommended .at4-recommended-item:first-child{border-bottom:1px solid #c5c5c5}}</style><style type="text/css">.at-branding-logo{font-family:helvetica,arial,sans-serif;text-decoration:none;font-size:10px;display:inline-block;margin:2px 0;letter-spacing:.2px}.at-branding-logo .at-branding-icon{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////+GlNUkcc1QAAAB1JREFUeNpiYIQDBjQmAwMmkwEM0JnY1WIxFyDAABGeAFEudiZsAAAAAElFTkSuQmCC")}.at-branding-logo .at-branding-icon,.at-branding-logo .at-privacy-icon{display:inline-block;height:10px;width:10px;margin-left:4px;margin-right:3px;margin-bottom:-1px;background-repeat:no-repeat}.at-branding-logo .at-privacy-icon{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAKCAMAAABR24SMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABhQTFRF8fr9ot/xXcfn2/P5AKva////////AKTWodjhjAAAAAd0Uk5T////////ABpLA0YAAAA6SURBVHjaJMzBDQAwCAJAQaj7b9xifV0kUKJ9ciWxlzWEWI5gMF65KUTv0VKkjVeTerqE/x7+9BVgAEXbAWI8QDcfAAAAAElFTkSuQmCC")}.at-branding-logo span{text-decoration:none}.at-branding-logo .at-branding-addthis,.at-branding-logo .at-branding-powered-by{color:#666}.at-branding-logo .at-branding-addthis:hover{color:#333}.at-cv-with-image .at-branding-addthis,.at-cv-with-image .at-branding-addthis:hover{color:#fff}a.at-branding-logo:visited{color:initial}.at-branding-info{display:inline-block;padding:0 5px;color:#666;border:1px solid #666;border-radius:50%;font-size:10px;line-height:9pt;opacity:.7;transition:all .3s ease;text-decoration:none}.at-branding-info span{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.at-branding-info:before{content:'i';font-family:Times New Roman}.at-branding-info:hover{color:#0780df;border-color:#0780df}</style><script type="text/javascript" charset="utf-8" async="" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/37.js"></script><style type="text/css"></style></head><body><a name="top"></a><div class="container"><div class="top"><div id="issues"></div><table xmlns="" width="100%" cellspacing="0" cellpadding="7" border="0"><tbody><tr>
+<td width="26%" valign="top"><p align="center">
+<a href="http://www.scielo.org.co/scielo.php?lng=en"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/fbpelogp.gif" alt="SciELO - Scientific Electronic Library Online" border="0"></a><br>
+</p></td>
+<td width="74%" valign="top"><table><tbody><tr>
+<td nowrap="nowrap">
+<img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/grp1c.gif">&nbsp;<img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/artsrc.gif"><br><a href="http://www.scielo.org.co/scielo.php?script=sci_issuetoc&amp;pid=0124-710720170003&amp;lng=en&amp;nrm=iso"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/toc.gif" alt="vol.19&nbsp;issue3" border="0"></a><a href="http://www.scielo.org.co/scielo.php?script=sci_arttext&amp;pid=S0124-71072017000300378&amp;lng=en&amp;nrm=iso"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/prev.gif" alt="Analysis of the use of antibiotics in antibiograms of urine carried out by a clinical laboratory of the central-western region of Colombia" border="0"></a><a href="http://www.scielo.org.co/scielo.php?script=sci_arttext&amp;pid=S0124-71072017000300400&amp;lng=en&amp;nrm=iso"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/next.gif" alt="Application of the nanobiotechnology with the system CRISP-Cas" border="0"></a>&nbsp;<a href="http://www.scielo.org.co/cgi-bin/wxis.exe/iah/?IsisScript=iah/iah.xis&amp;base=article%5Edreus&amp;index=AU&amp;format=iso.pft&amp;lang=i&amp;limit=0124-7107"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/author.gif" alt="author index" border="0"></a><a href="http://www.scielo.org.co/cgi-bin/wxis.exe/iah/?IsisScript=iah/iah.xis&amp;base=article%5Edreus&amp;index=KW&amp;format=iso.pft&amp;lang=i&amp;limit=0124-7107"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/subject.gif" alt="subject index" border="0"></a><a href="http://www.scielo.org.co/cgi-bin/wxis.exe/iah/?IsisScript=iah/iah.xis&amp;base=article%5Edreus&amp;format=iso.pft&amp;lang=i&amp;limit=0124-7107"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/search.gif" alt="articles search " border="0"></a>
+</td>
+<td valign="bottom" nowrap="nowrap">
+<a href="http://www.scielo.org.co/scielo.php?script=sci_serial&amp;pid=0124-7107&amp;lng=en&amp;nrm=iso"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/home.gif" alt="Home Page" border="0"></a><a href="http://www.scielo.org.co/scielo.php?script=sci_alphabetic&amp;lng=en&amp;nrm=iso"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/alpha.gif" alt="alphabetic serial listing" border="0"></a>
+             &nbsp;
+            </td>
+</tr></tbody></table></td>
+</tr></tbody></table>
+<br xmlns=""></div><div class="content"><form xmlns="" name="addToShelf" method="post" action="http://www.scielo.org/applications/scielo-org/services/addArticleToShelf.php" target="mensagem">
+<input name="PID" value="S0124-71072017000300388" type="hidden"><input name="url" value="http://www.scielo.org.co/scielo.php?script=sci_arttext%26pid=S0124-71072017000300388%26lng=en%26nrm=iso%26tlng=es" type="hidden">
+</form>
+<form xmlns="" name="citedAlert" method="post" action="http://www.scielo.org/applications/scielo-org/services/citedAlert.php" target="mensagem">
+<input name="PID" value="S0124-71072017000300388" type="hidden"><input name="url" value="http://www.scielo.org.co/scielo.php?script=sci_arttext%26pid=S0124-71072017000300388%26lng=en%26nrm=iso%26tlng=es" type="hidden">
+</form>
+<form xmlns="" name="accessAlert" method="post" action="http://www.scielo.org/applications/scielo-org/services/accessAlert.php" target="mensagem">
+<input name="PID" value="S0124-71072017000300388" type="hidden"><input name="url" value="http://www.scielo.org.co/scielo.php?script=sci_arttext%26pid=S0124-71072017000300388%26lng=en%26nrm=iso%26tlng=es" type="hidden">
+</form>
+<div xmlns="" id="group">
+<div id="toolBox">
+<h2 id="toolsSection">Services on Demand</h2>
+<div class="toolBoxSection" style="background: rgba(0, 0, 0, 0) url(&quot;../../img/collapsed2.png&quot;) no-repeat scroll right center;"><h2 class="toolBoxSectionh2">Article</h2></div>
+<div class="box" style="display: block;"><ul>
+<li><a href="http://www.scielo.org.co/pdf/reus/v19n3/0124-7107-reus-19-03-00388.pdf"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/iconPDFDocument.gif">Spanish (pdf)
+    </a></li>
+<li><a href="http://www.scielo.org.co/scieloOrg/php/articleXML.php?pid=S0124-71072017000300388&amp;lang=en" rel="nofollow" target="xml"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/iconXMLDocument.gif">Article in xml format</a></li>
+<li><a href="javascript:%20void(0);" onclick="window.open('http://www.scielo.org.co/scieloOrg/php/reference.php?pid=S0124-71072017000300388&amp;caller=www.scielo.org.co&amp;lang=en','','width=640,height=480,resizable=yes,scrollbars=1,menubar=yes');
+                        callUpdateArticleLog('referencias_do_artigo');" rel="nofollow"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/iconReferences.gif">Article references</a></li>
+<li>
+<a href="javascript:void(0);" onmouseout="status='';" class="nomodel" style="text-decoration: none;" onclick='OpenArticleInfoWindow ( 780, 450, "http://www.scielo.org.co/scielo.php?script=sci_isoref&amp;pid=S0124-71072017000300388&amp;lng=en&amp;tlng=es"); ' rel="nofollow" onmouseover=" status='How to cite this article'; return true; "><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/fulltxt.gif" border="0" align="middle"></a>
+<a href="javascript:void(0);" onmouseout="status='';" class="nomodel" style="text-decoration: none;" onclick='OpenArticleInfoWindow ( 780, 450, "http://www.scielo.org.co/scielo.php?script=sci_isoref&amp;pid=S0124-71072017000300388&amp;lng=en&amp;tlng=es");' rel="nofollow" onmouseover=" status='How to cite this article'; return true; ">How to cite this article</a>
+</li>
+<script language="javascript" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/article.js"></script><li><a href="javascript:%20void(0);" onclick="window.open('http://www.scielo.org.co/scieloOrg/php/translate.php?pid=S0124-71072017000300388&amp;caller=www.scielo.org.co&amp;lang=en&amp;tlang=es&amp;script=sci_arttext','','width=640,height=480,resizable=yes,scrollbars=1,menubar=yes');
+                        callUpdateArticleLog('referencias_do_artigo');" rel="nofollow"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/iconTranslation.gif">Automatic translation</a></li>
+<li><a href="javascript:void(0);" onclick="window.open('http://www.scielo.org.co/applications/scielo-org/pages/services/sendMail.php?pid=S0124-71072017000300388&amp;caller=www.scielo.org.co&amp;lang=en','','width=640,height=480,resizable=yes,scrollbars=1,menubar=yes,');" rel="nofollow"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/iconEmail.gif">Send this article by e-mail</a></li>
+</ul></div>
+<div class="toolBoxSection" style="background: rgba(0, 0, 0, 0) url(&quot;../../img/collapsed2.png&quot;) no-repeat scroll right center;"><h2 class="toolBoxSectionh2">Indicators</h2></div>
+<div class="box" style="display: block;"><ul>
+<li>
+<img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/iconCitedOff.gif" alt="Have no cited articles">Cited by SciELO </li>
+<li>
+<img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/iconStatistics.gif"><a href="http://analytics.scielo.org/w/accesses?document=S0124-71072017000300388&amp;collection=col" target="_blank">Access statistics</a>
+</li>
+</ul></div>
+<div class="toolBoxSection" style="background: rgba(0, 0, 0, 0) url(&quot;../../img/expandd2.png&quot;) no-repeat scroll right center;"><h2 class="toolBoxSectionh2">Related links</h2></div>
+<div class="box" style="display: none;"><ul>
+<li>
+<img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/iconCitedGoogleOff.gif" alt="On index process">Cited by Google </li>
+<li>
+<img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/iconRelatedOff.gif" alt="Have no similar articles">Similars in
+    SciELO </li>
+<li>
+<img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/iconRelatedGoogleOff.gif" alt="On index process">Similars in Google </li>
+</ul></div>
+<div class="toolBoxSection" style="background: rgba(0, 0, 0, 0) url(&quot;../../img/collapsed2.png&quot;) no-repeat scroll right center;"><h2 class="toolBoxSectionh2">Share</h2></div>
+<div class="box" style="display: block;"><ul>
+<li>
+<div class="addthis_toolbox addthis_default_style">
+<a class="addthis_button_delicious"></a><a class="addthis_button_google at300b" target="_blank" title="Google Bookmark" href="#"><span class="at-icon-wrapper" style="background-color: rgb(66, 133, 244); line-height: 16px; height: 16px; width: 16px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-google-1" class="at-icon at-icon-google" style="width: 16px; height: 16px;" title="Google Bookmark" alt="Google Bookmark"><title id="at-svg-google-1">Google Bookmark</title><g><path d="M16.213 13.998H26.72c.157.693.28 1.342.28 2.255C27 22.533 22.7 27 16.224 27 10.03 27 5 22.072 5 16S10.03 5 16.224 5c3.03 0 5.568 1.09 7.51 2.87l-3.188 3.037c-.808-.748-2.223-1.628-4.322-1.628-3.715 0-6.745 3.024-6.745 6.73 0 3.708 3.03 6.733 6.744 6.733 4.3 0 5.882-2.915 6.174-4.642h-6.185V14z" fill-rule="evenodd"></path></g></svg></span></a><a class="addthis_button_twitter at300b" title="Twitter" href="#"><span class="at-icon-wrapper" style="background-color: rgb(29, 161, 242); line-height: 16px; height: 16px; width: 16px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-twitter-2" class="at-icon at-icon-twitter" style="width: 16px; height: 16px;" title="Twitter" alt="Twitter"><title id="at-svg-twitter-2">Twitter</title><g><path d="M27.996 10.116c-.81.36-1.68.602-2.592.71a4.526 4.526 0 0 0 1.984-2.496 9.037 9.037 0 0 1-2.866 1.095 4.513 4.513 0 0 0-7.69 4.116 12.81 12.81 0 0 1-9.3-4.715 4.49 4.49 0 0 0-.612 2.27 4.51 4.51 0 0 0 2.008 3.755 4.495 4.495 0 0 1-2.044-.564v.057a4.515 4.515 0 0 0 3.62 4.425 4.52 4.52 0 0 1-2.04.077 4.517 4.517 0 0 0 4.217 3.134 9.055 9.055 0 0 1-5.604 1.93A9.18 9.18 0 0 1 6 23.85a12.773 12.773 0 0 0 6.918 2.027c8.3 0 12.84-6.876 12.84-12.84 0-.195-.005-.39-.014-.583a9.172 9.172 0 0 0 2.252-2.336" fill-rule="evenodd"></path></g></svg></span></a><a class="addthis_button_digg at300b" target="_blank" title="Digg" href="#"><span class="at-icon-wrapper" style="background-color: rgb(34, 30, 30); line-height: 16px; height: 16px; width: 16px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-digg-3" class="at-icon at-icon-digg" style="width: 16px; height: 16px;" title="Digg" alt="Digg"><title id="at-svg-digg-3">Digg</title><g><path d="M8.523 10h2.19v10.558H5v-7.486h3.523V10zm0 8.796v-3.963h-1.32v3.963h1.32zm5.273-5.724v7.486h-2.2v-7.486h2.2zm0-3.072v2.19h-2.2V10h2.2zm.88 3.072h5.726V23.19h-5.725v-1.75H18.2v-.882h-3.523v-7.486zm3.524 5.724v-3.963h-1.32v3.963h1.32zm3.082-5.724h5.714V23.19h-5.714v-1.75h3.513v-.882h-3.513v-7.486zm3.513 5.724v-3.963h-1.322v3.963h1.322z" fill-rule="evenodd"></path></g></svg></span></a><a class="addthis_button_citeulike at300b" target="_blank" title="CiteULike" href="#"><span class="at-icon-wrapper" style="background-color: rgb(8, 136, 200); line-height: 16px; height: 16px; width: 16px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-citeulike-4" class="at-icon at-icon-citeulike" style="width: 16px; height: 16px;" title="CiteULike" alt="CiteULike"><title id="at-svg-citeulike-4">CiteULike</title><g><path d="M26.41 8.25H4.82a1.25 1.25 0 0 1 0-2.5h21.59a1.25 1.25 0 0 1 0 2.5zM26.41 14.25H4.82a1.25 1.25 0 0 1 0-2.5h21.59a1.25 1.25 0 0 1 0 2.5zM26.41 20.25H4.82a1.25 1.25 0 0 1 0-2.5h21.59a1.25 1.25 0 0 1 0 2.5zM26.41 26.25H4.82a1.25 1.25 0 0 1 0-2.5h21.59a1.25 1.25 0 0 1 0 2.5z"></path></g></svg></span></a><a class="addthis_button_connotea"></a><a href="http://www.mendeley.com/import/?url=http://www.scielo.org.co/scielo.php?script=sci_arttext%26pid=S0124-71072017000300388%26lng=en%26nrm=iso%26tlng=es" title="Mendeley"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/mendeley.png"></a><a href="http://www.addthis.com/bookmark.php?v=250&amp;username=xa-4c347ee4422c56df" class="addthis_button_expanded at300m" target="_blank" title="More"><span class="at-icon-wrapper" style="background-color: rgb(255, 101, 80); line-height: 16px; height: 16px; width: 16px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-addthis-5" class="at-icon at-icon-addthis" style="width: 16px; height: 16px;" title="Expanded" alt="Expanded"><title id="at-svg-addthis-5">Addthis</title><g><path d="M18 14V8h-4v6H8v4h6v6h4v-6h6v-4h-6z" fill-rule="evenodd"></path></g></svg></span>More</a>
+<div class="atclear"></div></div>
+<script type="text/javascript" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/addthis_widget.js"></script>
+</li>
+<li><div class="addthis_toolbox addthis_default_style"><a href="http://www.addthis.com/bookmark.php?v=250&amp;username=xa-4c347ee4422c56df" class="addthis_button_expanded at300m" target="_blank" title="More"><span class="at-icon-wrapper" style="background-color: rgb(255, 101, 80); line-height: 16px; height: 16px; width: 16px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-addthis-6" class="at-icon at-icon-addthis" style="width: 16px; height: 16px;" title="Expanded" alt="Expanded"><title id="at-svg-addthis-6">Addthis</title><g><path d="M18 14V8h-4v6H8v4h6v6h4v-6h6v-4h-6z" fill-rule="evenodd"></path></g></svg></span>More</a><div class="atclear"></div></div></li>
+<script type="text/javascript" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/addthis_widget.js"></script>
+</ul></div>
+<hr>
+<ul><li><a id="permalink" href="javascript:void(0);"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/iconPermalink.gif">Permalink</a></li></ul>
+</div>
+<div id="permalink_box" style="margin-left:20px;background-color:#F2F2F2;border: 1px solid #CCC;display:none;position:absolute;z-index:1;padding:2px 10px 10px 10px;">
+<div style="text-align:right;"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/icon-close.png" onclick="$('#permalink_box').toggle();"></div>
+<input name="short-url" id="short-url" type="text">
+</div>
+</div>
+<h2 xmlns=""><a href="http://www.scielo.org.co/scielo.php?script=sci_serial&amp;pid=0124-7107&amp;lng=en&amp;nrm=iso">Universidad y Salud</a></h2>
+<h2 xmlns="" id="printISSN">
+<font color="#0000A0"><!--PRINTen--><em>Print&nbsp;version</em>&nbsp;ISSN </font>0124-7107<br><font color="#0000A0"><!--ONLINen--><em>On-line&nbsp;version</em>&nbsp;ISSN </font>2389-7066<br>
+</h2>
+<h3 xmlns="">Univ. Salud&nbsp;vol.19&nbsp;no.3&nbsp;Pasto&nbsp;Sep./Dec.&nbsp;2017</h3>
+<h4 xmlns="" id="doi"> http://dx.doi.org/10.22267/rus.171903.101&nbsp; </h4>
+<div xmlns="" class="index,es">
+<!--version=xml-file--><div id="article-front" class="front">
+<p class="categoria">Artículos/Investigación</p>
+<div><p class="title">Aplicación de los árboles de decisión en la 
+identificación de patrones de lesiones fatales por causa externa en el 
+municipio de Pasto, Colombia</p></div>
+<div><p class="trans-title">Application of decision trees in the 
+identification of patterns of fatal injuries by external cause in the 
+municipality of Pasto, Colombia</p></div>
+<div class="autores">orcid.org/0000-0002-0006-6654Ricardo&nbsp;Timarán-Pereira<sup><a href="#aff1">
+ 1
+</a>&nbsp;
+			</sup>, orcid.org/0000-0002-7396-413XAndrés&nbsp;Calderón-Romero<sup><a href="#aff2">
+ 2
+</a>&nbsp;
+			</sup>, orcid.org/0000-0003-4080-118XArsenio&nbsp;Hidalgo-Troya<sup><a href="#aff3">
+ 3
+</a>&nbsp;
+			</sup>
+</div>
+<div class="autores"></div>
+<p class="aff"><a name="aff1"></a><sup><sup>1</sup></sup> Grupo de Investigación GRIAS, Facultad de Ingeniería, Universidad de Nariño. San Juan de Pasto, Colombia</p>
+<p class="aff"><a name="aff2"></a><sup><sup>2</sup></sup> The University of Twente. Enschede, Países Bajos</p>
+<p class="aff"><a name="aff3"></a><sup><sup>3</sup></sup> Departamento de Matemáticas y Estadística, Facultad de Ciencias Naturales, Universidad de Nariño. San Juan de Pasto, Colombia</p>
+<p></p>
+<p></p>
+<div class="abstract">
+<p class="sec"><a name="Resumen">Resumen</a></p>
+<div class="section">
+<a name="idp11049120"><!-- named anchor --></a><p class="sub-subsec">Introducción:</p>
+<p> La Organización Panamericana de la Salud (OPS) desde el año 1993 y 
+la Organización Mundial de la Salud (OMS) en 1996, aceptaron que la 
+violencia es un problema de salud pública, situación que se corrobora en
+ el Informe de Violencia y Salud, en el cual América Latina presentó una
+ tasa de homicidios de 18 por cada 100.000 personas, y es considerada 
+como una de las regiones más violentas del mundo.</p>
+</div>
+<div class="section">
+<a name="idp11050960"><!-- named anchor --></a><p class="sub-subsec">Objetivo:</p>
+<p> Detectar patrones delictivos con técnicas de minería de datos en el Observatorio del Delito del municipio de Pasto (Colombia).</p>
+</div>
+<div class="section">
+<a name="idp11052416"><!-- named anchor --></a><p class="sub-subsec">Materiales y métodos:</p>
+<p> Se aplicó Cross Industry Standard Process for Data Mining 
+(CRISP-DM), una de las metodologías utilizadas en el desarrollo de 
+proyectos de minería de datos en los ambientes académico e industrial. 
+La fuente de información fue el Observatorio del Delito del municipio de
+ Pasto, donde está almacenadas las cifras históricas, limpias y 
+transformadas sobre las lesiones de causa externa (fatales y no 
+fatales), registrados en 11 años.</p>
+</div>
+<div class="section">
+<a name="idp11054272"><!-- named anchor --></a><p class="sub-subsec">Resultados:</p>
+<p> Se construyó un modelo de clasificación basado en árboles de 
+decisión que permitió descubrir patrones de muertes por causa externa. 
+Para el caso de homicidios, estos sucedieron en su mayoría en la Comuna 5
+ de Pasto, los fines de semana, en la madrugada, en el segundo semestre 
+del año, en la vía pública y las víctimas fueron hombres adultos, de 
+oficios varios, la causa de los homicidios fueron riñas y se produjeron 
+con arma de fuego.</p>
+</div>
+<div class="section">
+<a name="idp11056096"><!-- named anchor --></a><p class="sub-subsec">Conclusión:</p>
+<p> El conocimiento generado ayudará a los organismos gubernamentales y 
+de seguridad a tomar decisiones eficaces en lo relacionado a la 
+implementación de planes de prevención de delitos y seguridad ciudadana.</p>
+</div>
+<p><b>Palabras-clave: </b>Reconocimiento de normas patrones Automatizadas; minería de datos; árboles de decisión; clasificación</p>
+</div>
+<div class="trans-abstract">
+<p class="sec"><a name="Abstract">Abstract</a></p>
+<div class="section">
+<a name="idp11058768"><!-- named anchor --></a><p class="sub-subsec">Introduction: </p>
+<p>The Pan American Health Organization (PHO) and the World Health 
+Organization (WHO) accepted, since the year 1993 and 1996 respectively, 
+that violence is a public health problem, a situation that is 
+corroborated in the report on violence and health, in which Latin 
+America presented a homicide rate of 18 per 100,000 people, and it is 
+considered one of the most violent regions in the world.</p>
+</div>
+<div class="section">
+<a name="idp11060752"><!-- named anchor --></a><p class="sub-subsec">Objective:</p>
+<p> To detect criminal patterns with data mining techniques in the Crime Observatory of the municipality of Pasto (Colombia).</p>
+</div>
+<div class="section">
+<a name="idp11062080"><!-- named anchor --></a><p class="sub-subsec">Materials and methods:</p>
+<p> Cross Industry Standard Process for Data Mining (CRISP-DM) was 
+applied, which is one of the methodologies used in the development of 
+data mining projects in academic and industrial environments. The source
+ of information was the Crime Observatory of the municipality of Pasto, 
+where the historical clean and transformed figures on the injuries of 
+external cause (fatal and nonfatal) recorded in 11 years are stored.</p>
+</div>
+<div class="section">
+<a name="idp11063696"><!-- named anchor --></a><p class="sub-subsec">Results:</p>
+<p> A decision tree-based classification model was built that allowed 
+the discovery of patterns of deaths from external causes. In the case of
+ homicide, these happened mostly in the commune 5 in Pasto under the 
+following circumstances: during the weekends, in the early morning, in 
+the second semester of the year and in the public thoroughfare; besides,
+ the victims were adult men of various professions; and the cause of the
+ homicides were quarrels and they were produced with a fire gun.</p>
+</div>
+<div class="section">
+<a name="idp11065376"><!-- named anchor --></a><p class="sub-subsec">Conclusion:</p>
+<p> The generated knowledge will help government and security agencies 
+make effective decisions regarding the implementation of crime 
+prevention and citizen security plans.</p>
+</div>
+<p><b>Key words: </b>Pattern recognition, automated; data mining; decision trees; classification</p>
+</div>
+</div>
+<div id="article-body" class="body">
+<div class="section">
+<a name="idp11075696"><!-- named anchor --></a><p class="sec">Introducción</p>
+<p>Los ataques terroristas del 11 de septiembre de 2001 han aumentado 
+significativamente la preocupación por la seguridad interna en todo el 
+mundo. Organizaciones como la Agencia Central de Inteligencia (CIA, del 
+inglés <em>Central Intelligence Agency</em>) o el Buró Federal de Investigaciones (FBI, del inglés <em>Federal Bureau of Investigation</em>) procesan y analizan información activamente en busca de actividad terrorista<a href="#B1"><sup>1</sup></a>.
+ El análisis de los registros criminales es fundamental en la prevención
+ del delito porque conlleva al diseño de políticas y planes de 
+prevención efectivos<a href="#B2"><sup>2</sup></a>.</p>
+<p>Las lesiones de causa externa son definidas como el daño o lesión en 
+una persona en forma intencional o no intencional, que puede originarse 
+por un traumatismo, envenenamiento, agresión, accidentes, etc., ser 
+mortal (lesión fatal) o no conducir a la muerte (lesión no fatal)<a href="#B3"><sup>3</sup></a>.
+ Las lesiones por causa externa son consideradas desde hace dos décadas 
+como un problema sanitario a nivel mundial. Según datos de la OMS, 
+aproximadamente 5,8 millones de personas mueren por año por estas 
+causas, cerca de 16000 personas al día, representando cerca del 10% del 
+total de las muertes que se registran en el mundo, 32% más que el número
+ de muertes que resultan por malaria, tuberculosis y el VIH/SIDA. Por 
+cada persona que muere por esta causa, hay miles más lesionadas, muchas 
+de ellas con secuelas permanentes<a href="#B3"><sup>3</sup></a>.</p>
+<p>En América Latina desde el año de 1993 se han establecido claros 
+esfuerzos por anticipar acciones a la violencia marcada en todos los 
+países, esto debido a que la OPS y la OMS presentaron estadísticas que 
+determinaron que Latinoamérica es una de las regiones más violentas del 
+mundo<a href="#B4"><sup>4</sup></a>. De acuerdo con estimativos de los 
+años 2003 y 2005 algunos países como Colombia, Venezuela, El Salvador, 
+Guatemala y Honduras reportan altos índices de homicidios con tasas 
+iguales o superiores a 29 por 100.000 personas, mientras que Costa Rica 
+reportó la menor tasa de Centroamérica con 9,2 homicidios por cada 
+100.000 personas<a href="#B5"><sup>5</sup></a>. </p>
+<p>En América Latina se reconoce que la ausencia de información 
+confiable y oportuna es una limitante para avanzar en la identificación 
+de la magnitud y características de las diferentes formas en que se 
+expresa la violencia, así como el monitoreo y evaluación de los 
+programas y proyectos para su prevención y control<a href="#B4"><sup>4</sup></a>. </p>
+<p>En Colombia una de las estrategias implementadas en vigilancia en 
+salud pública, corresponde a los Observatorios de Muertes de Causa 
+Externa<a href="#B5"><sup>5</sup></a>, los cuales se han instaurado para
+ el seguimiento y análisis en el nivel local (municipal) en casos de 
+mortalidad por causa externa como: homicidios, suicidios, eventos de 
+tránsito y muertes no intencionales. Gracias a ello, se cuenta con 
+diversas experiencias en el ámbito municipal y departamental. 
+Particularmente en el municipio de Pasto (Departamento de Nariño), el 
+observatorio de muertes por causa externa, denominado: "Observatorio del
+ Delito", nace en el segundo semestre del año 2002, como resultado de un
+ proyecto conjunto con el Programa Colombia de la Universidad de 
+Georgetown<a href="#B6"><sup>6</sup></a>.</p>
+<p>A pesar que se conoce cuál es el problema, las cifras disponibles no 
+son de buena calidad. En la mayoría de ocasiones es necesario 
+desarrollar estudios específicos para conocer el problema o son datos 
+oficiales que presentan subregistros o no coinciden al compararlos con 
+otras fuentes de información. Por lo tanto, es necesario recopilar datos
+ e información que permitan mejorar el conocimiento sobre la magnitud y 
+las características de los hechos, orientar estudios para identificar 
+los factores que inciden en la presencia o no del evento, evaluar 
+políticas e intervenciones y hacer difusión de las mismas<a href="#B4"><sup>4</sup></a>.</p>
+<p>Mientras que la estadística plantea hipótesis que deben ser validadas
+ a partir de las cifras disponibles, la minería de datos descubre 
+patrones que mediante su interpretación permiten, en el caso del 
+Observatorio del Delito, caracterizar los diferentes tipos de muertes 
+por causa externa no previstos desde la estadística. En este contexto, 
+la minería emerge como el siguiente paso evolutivo en el proceso de 
+análisis de datos criminales<a href="#B2"><sup>2</sup></a><sup>,</sup><a href="#B7"><sup>7</sup></a>.
+ Entre las experiencias de aplicación en la detección de patrones 
+delictivos, está la del Departamento de policía de Ámsterdam, que 
+utilizó el software <em>DataDetective</em><a href="#B8"><sup>8</sup></a><sup>)</sup> junto con <em>Mapinfo</em> para el análisis de registros criminales. Las principales técnicas empleadas son árboles de decisión y redes neuronales de <em>backpropagation</em>.
+ En una bodega de datos se ha unificado varias bases policiales junto 
+con información externa (clima, variables socioeconómicas y 
+demográficas). Esto permite la identificación de las causas del 
+comportamiento criminal (por ejemplo casos de reincidencia), 
+identificación de las causas del delito en un determinado barrio, 
+agrupamiento de delitos parecidos en <em>clusters</em> y su descripción, permitiendo un abordaje más efectivo; identificación de delitos parecidos utilizando algoritmos <em>fuzzy search</em>,
+ relacionando casos no resueltos con casos resueltos; identificación de 
+zonas de aumento del delito (se ha utilizado para la localización de 
+equipos preventivos en operativos de búsqueda de armas); evaluación de 
+la <em>performance</em> policial.</p>
+<p>El Departamento de Policía de Richmond (Virginia)<a href="#B9"><sup>9</sup></a>
+ ha desarrollado una aplicación para el análisis de información criminal
+ que combina minería de datos, junto a un entorno visual y una interfaz.
+ El principal objetivo fue optimizar la alocación de recursos con base a
+ una modalidad preactiva y no reactiva, por ejemplo durante año nuevo se
+ identificaron las zonas que habían tenido un aumento en los casos de 
+heridos con arma de fuego el año anterior y para la noche se reforzaron 
+exclusivamente esas zonas. El resultado obtenido fue una reducción del 
+49% en los casos de este tipo con un menor requerimiento de personal 
+policial (aproximadamente 50 agentes menos).</p>
+<p>El proyecto COPLINK<a href="#B10"><sup>10</sup></a>, creado en el año
+ 1997, une la experiencia técnica del Laboratorio de Inteligencia 
+Artificial de la Universidad de Arizona con el conocimiento de la 
+aplicación de la ley del Departamento de Policía de Tucson (USA). 
+COPLINK sirve a la comunidad al superar la brecha entre la realización 
+de investigaciones en tecnologías de vanguardia y resolver problemas del
+ mundo real, ayudando a los policías a combatir el crimen. Está 
+compuesto por dos sistemas integrados: <em>Coplink Connect</em> y <em>Coplink Detect</em>,
+ el primero busca compartir información criminal entre distintos 
+departamentos policiales, mediante un fácil acceso y una interface 
+sencilla, integrando distintas fuentes de información. El segundo está 
+diseñado para detectar de forma automática distintos tipos de 
+asociaciones entre las bases mediante técnicas de minería de datos<a href="#B10"><sup>10</sup></a><sup>,</sup><a href="#B11"><sup>11</sup></a>. </p>
+<p>En Argentina, Valenga <em>et al.</em><a href="#B12"><sup>12</sup></a>, aplicaron las técnicas de <em>clustering</em> utilizando el algoritmo <em>k-means</em>
+ para la detección de patrones de homicidios dolosos. Se analizaron 1810
+ registros de la base de datos "homicidios dolosos" correspondientes a 
+la totalidad de hechos registrados durante el año 2005. Se obtuvieron 
+tres clusters: Cluster 0 (22%): caracterizado por homicidios 
+mayoritariamente en ocasión de robo y con arma de fuego. Cluster 1 
+(43%): agrupa más registros y es el más parecido a la media global, 
+caracterizado por homicidios principalmente en la vía pública con arma 
+de fuego y sin la existencia de otro delito. Cluster 2 (35%): es el más 
+particular de los clusters, ya que la mayoría de sus registros presentan
+ casos de homicidios sin arma de fuego y en domicilio particular. </p>
+<p>En Chile, Montt <em>et al.</em><a href="#B13"><sup>13</sup></a>, 
+reportan el análisis de accidentes de tránsito con inteligencia 
+computacional cuyo objetivo fue estimar el número de personas lesionadas
+ y fallecidas en accidentes de tránsito, relacionado con las causas que 
+producen el accidente. Se utilizaron redes neuronales artificiales en 
+combinación con algoritmos de técnicas de inteligencia artificial. Si 
+bien en Latinoamérica se han adelantado estudios de minería de datos 
+relacionados con actos criminales<a href="#B12"><sup>12</sup></a><sup>,</sup><a href="#B13"><sup>13</sup></a>, en Colombia no se reportan estudios que apliquen esta técnica para detectar patrones de muertes por causa externa.</p>
+<p>En cuanto a las metodologías para desarrollar análisis de minería de 
+datos y en un intento de normalización del proceso, de forma similar a 
+como se hace en ingeniería para normalizar el proceso de desarrollo 
+software, surgieron a finales de los 90 dos metodologías principales: 
+CRISP-DM (<em>Cross Industry Standard Process for Data Mining)</em> y SEMMA (<em>Sample, Explore, Modify, Model, and Assess</em>).
+ Ambas especifican las tareas a realizar en cada fase descrita por el 
+proceso, asignando tareas concretas y definiendo lo que es deseable 
+obtener tras cada fase. Azevedo y Santos<a href="#B14"><sup>14</sup></a>
+ comparan ambas implementaciones y llegan a la conclusión de que, aunque
+ se puede establecer un paralelismo claro entre ellas, CRISP-DM es más 
+completo porque tiene en cuenta la aplicación al entorno de negocio de 
+los resultados, y por ello es la que se adoptó popularmente. En 
+encuestas realizadas en KDNuggets en 2002, 2004, 2007 y 2014 se comprobó
+ que CRISP-DM era la principal metodología utilizada, cuatro veces más 
+que SEMMA<a href="#B14"><sup>14</sup></a>. La metodología CRISP-DM para 
+proyectos de minería de datos no es la "más actual" o "la mejor", pero 
+es muy útil para comprender esta tecnología o extraer ideas para diseñar
+ o revisar métodos de trabajo para proyectos de similares 
+características.</p>
+<p>En este artículo se presentan los resultados del proyecto de 
+investigación que tuvo como objetivo detectar patrones delictivos con 
+técnicas de minería de datos en el Observatorio del Delito del municipio
+ de Pasto. Como resultado de este, actualmente el Observatorio cuenta 
+con un sistema de vigilancia de eventos violentos a partir de la 
+implementación de un sistema de información georreferenciado denominado 
+SIGEODEP<a href="#B15"><sup>15</sup></a>, soportado en un mercado de datos (<em>datamart</em>)<a href="#B16"><sup>16</sup></a>,
+ donde se encuentra almacenada información histórica, limpia y 
+transformada sobre lesiones de causa externa fatales y no fatales 
+registradas en un periodo de 11 años, que permite disponer de 
+información confiable, oportuna, de buena calidad y representativa de 
+las lesiones de causa externa que ocurren en el municipio de Pasto.</p>
+</div>
+<div class="section">
+<a name="idp11131248"><!-- named anchor --></a><p class="sec">Materiales y métodos</p>
+<p>Se aplicó CRISP-DM que comprende seis fases: Análisis del problema, 
+análisis de los datos, preparación de los datos, modelado, evaluación y 
+explotación<a href="#B17"><sup>17</sup></a>. Se utilizó como fuente de información, el <em>datamart</em> construido en el proyecto<a href="#B16"><sup>16</sup></a>,
+ donde se almacena la información registrada en el Observatorio del 
+Delito en un periodo de 11 años. Se construyó un modelo de clasificación
+ basado en árboles de decisión, utilizando el algoritmo J48 de la 
+herramienta Weka<a href="#B18"><sup>18</sup></a>. Se escogió este 
+algoritmo por su simplicidad y facilidad para interpretar los patrones y
+ por ser el más utilizado para este tipo de problemas<a href="#B19"><sup>19</sup></a><sup>,</sup><a href="#B20"><sup>20</sup></a>.</p>
+<p>En la fase de análisis del problema se identificó con exactitud la 
+problemática que se solucionaría utilizando la minería de datos, esto 
+permitió recolectar la información necesaria para interpretar con 
+asertividad los resultados encontrados<a href="#B18"><sup>18</sup></a><sup>,</sup><a href="#B21"><sup>21</sup></a>.
+ En la fase de análisis de los datos se realizó la recolección inicial 
+de datos, para establecer un primer contacto con el problema, 
+familiarizarse con ellos, identificando su calidad y establecer las 
+relaciones más evidentes que permitieron definir las primeras hipótesis.
+ </p>
+<p>En la fase de preparación se seleccionó los datos a los cuales se les
+ aplicaría una determinada técnica de modelado, limpieza, generación de 
+variables adicionales, integración de diferentes orígenes de datos y 
+cambios de formato<a href="#B18"><sup>18</sup></a><sup>,</sup><a href="#B21"><sup>21</sup></a>.
+ En la fase de modelado se seleccionaron las técnicas más apropiadas 
+para el proyecto. En la fase de evaluación se verificó si el modelo se 
+ajusta a las necesidades establecidas en el proyecto. Se evaluaron los 
+patrones encontrados con el fin de determinar su validez, remover los 
+redundantes o irrelevantes y traducir los patrones útiles en términos 
+que sean entendibles para el usuario. Finalmente, en la fase de 
+implementación, el conocimiento obtenido se transformó en acciones 
+dentro del proceso. Se trató de explotar la potencialidad de los 
+modelos, integrarlos en los procesos de toma de decisión de la 
+organización y difundir informes sobre el conocimiento extraído<a href="#B18"><sup>18</sup></a><sup>,</sup><a href="#B21"><sup>21</sup></a>.</p>
+</div>
+<div class="section">
+<a name="idp11149200"><!-- named anchor --></a><p class="sec">Resultados</p>
+<p>Teniendo en cuenta las fases de la metodología CRISP-DM los siguientes son los resultados de cada una de las etapas:</p>
+<p>Análisis del problema</p>
+<p>Según el censo general realizado en Colombia en el año 2005, el 
+municipio de Pasto contaba con 431.141 habitantes, de los cuales 382.618
+ pertenecían a la zona urbana y 48.500 a la parte rural<a href="#B6"><sup>6</sup></a>.
+ En el periodo comprendido entre 2003 y 2013, las cifras registradas en 
+el Observatorio del Delito del municipio de Pasto de muertes por causa 
+externa como homicidios, suicidios, muertes en eventos de tránsito y 
+muertes no intencionales muestran un comportamiento similar. El promedio
+ de casos para homicidios es de 110, para accidentes de tránsito es de 
+50, para suicidios es de 40 y para muertes no intencionales 
+principalmente por caídas o por asfixia (bronco aspiraciones) es de 55. 
+La tasa promedio por cada 100.000 habitantes para homicidios es de 26, 
+para accidentes de tránsito 12, para suicidios 9 y para muertes no 
+intencionales 13. </p>
+<p>Análisis de los datos</p>
+<p>Del <em>datamart</em><a href="#B16"><sup>16</sup></a> del 
+Observatorio del Delito del municipio de Pasto, diseñado bajo el modelo 
+multidimensional, se obtuvieron únicamente los datos de las muertes por 
+causa externa desde el año 2003 hasta el año 2013. Después de consultar 
+el número de caso de las tablas de hechos para los cuatro eventos en 
+cuestión (<a href="#f1">Figura 1</a>), se cuenta con el siguiente número
+ de registros: homicidios: 1285; suicidios: 482; accidentes de tránsito:
+ 287 y muertes no intencionales: 144. Sin embargo, no todos los eventos 
+comparten el mismo número de atributos. Una primera selección de 
+atributos se ejecutó para descartar aquellas variables utilizadas como 
+llaves foráneas y otras que se usaban como indicadoras de orden dentro 
+del <em>datamart</em>. Con el fin de obtener los atributos más 
+representativos para el estudio, se realizó un ranking inicial de 
+importancia de los atributos basado en la ganancia de información de 
+cada uno con respecto al atributo clase, que en este caso es <em>Injury</em>
+ (tipo de lesión). Como resultado se obtuvo un repositorio inicial con 
+45 atributos y 2198 registros, el cual se denominó T2198A45 y sirvió de 
+base para las siguientes etapas de este proceso.</p>
+<p>
+				<!--_ STANDARD  _--></p><div class="figure">
+<a name="f1"><!-- named anchor --></a><a target="_blank" href="http://www.scielo.org.co/img/revistas/reus/v19n3//0124-7107-reus-19-03-00388-gf1.jpg"><img class="graphic" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/0124-7107-reus-19-03-00388-gf1.jpg"></a><p class="label_caption"><span class="label">Figura 1&nbsp;</span><span class="caption">Topología en estrella del mercado de datos<a href="#B12"><sup>12</sup></a>
+						&nbsp;</span></p>
+</div>
+			<p></p>
+<sup>
+</sup><p>Preparación de los datos</p>
+<p>Se realizó un análisis de la calidad de los datos del repositorio 
+T2198A45, donde se identificó por cada atributo el número de valores 
+distintos, el número de valores nulos, el valor máximo, valor mínimo, 
+moda, media y un histograma para determinar cuáles técnicas de limpieza 
+de datos se deben aplicar.</p>
+<p>Teniendo en cuenta el análisis de datos y por la imposibilidad de 
+encontrar sus valores con fuentes externas, se eliminaron los atributos 
+con un alto porcentaje de nulos y los que presentaban un alto porcentaje
+ con el valor "SIN DATO". Se descartaron aquellos atributos utilizados 
+como llaves foráneas y otras que se usaban como indicadoras de orden 
+dentro del <em>datamart</em>. Como resultado de este proceso, se 
+seleccionaron los 12 más significativos, organizándolos en atributos de 
+lugar, tiempo y víctima, se construyó con estos el conjunto de datos 
+T2198A12 sobre el cual se aplicaron las técnicas de modelado. Todos 
+estos atributos son de tipo categórico y se muestran junto con su 
+descripción y su agrupación en la <a href="#t1">Tabla 1</a>.</p>
+<p>
+				<!--_ STANDARD  _--></p><div class="table-wrap">
+<a name="t1"><!-- named anchor --></a><p class="label_caption"><span class="label">Tabla 1&nbsp;</span><span class="caption">Atributos conjunto de datos final T2198A12&nbsp;</span></p>
+<div class="table"><table class="table">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th align="justify"> </th>
+<th align="center">Atributos</th>
+<th align="center">Descripción</th>
+<th align="center">Grupo</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="td" align="justify">1</td>
+<td class="td" align="justify">Injury</td>
+<td class="td" align="justify">Atributo clase</td>
+<td class="td" align="justify">Clase</td>
+</tr>
+<tr>
+<td class="td" align="justify">2</td>
+<td class="td" align="justify">date_day_name</td>
+<td class="td" align="justify">Día de la semana</td>
+<td class="td" align="justify">Tiempo</td>
+</tr>
+<tr>
+<td class="td" align="justify">3</td>
+<td class="td" align="justify">date_month_name</td>
+<td class="td" align="justify">Mes en que ocurrió la lesión</td>
+<td class="td" align="justify">Tiempo</td>
+</tr>
+<tr>
+<td class="td" align="justify">4</td>
+<td class="td" align="justify">date_quarter_name</td>
+<td class="td" align="justify">Trimestre en que sucedió el evento</td>
+<td class="td" align="justify">Tiempo</td>
+</tr>
+<tr>
+<td class="td" align="justify">5</td>
+<td class="td" align="justify">date_semester_name</td>
+<td class="td" align="justify">Semestre en que sucedió el evento</td>
+<td class="td" align="justify">Tiempo</td>
+</tr>
+<tr>
+<td class="td" align="justify">6</td>
+<td class="td" align="justify">time_group</td>
+<td class="td" align="justify">Parte del día en que ocurrió la lesión {madrugada, mañana, tarde o noche}</td>
+<td class="td" align="justify">Tiempo</td>
+</tr>
+<tr>
+<td class="td" align="justify">7</td>
+<td class="td" align="justify">neighborhood_suburb_name</td>
+<td class="td" align="justify">Comuna o Corregimiento donde ocurrió la lesión</td>
+<td class="td" align="justify">Lugar</td>
+</tr>
+<tr>
+<td class="td" align="justify">8</td>
+<td class="td" align="justify">fatal_place_name</td>
+<td class="td" align="justify">Lugar donde ocurrió la lesión {Casa, espacio o vía pública, lugar de trabajo, ...}</td>
+<td class="td" align="justify">Lugar</td>
+</tr>
+<tr>
+<td class="td" align="justify">9</td>
+<td class="td" align="justify">victim_age_groups</td>
+<td class="td" align="justify">Edad de la víctima {niño, joven, adulto, adulto mayor}</td>
+<td class="td" align="justify">Víctima</td>
+</tr>
+<tr>
+<td class="td" align="justify">10</td>
+<td class="td" align="justify">victim_gender</td>
+<td class="td" align="justify">Sexo de la víctima</td>
+<td class="td" align="justify">Víctima</td>
+</tr>
+<tr>
+<td class="td" align="justify">11</td>
+<td class="td" align="justify">residence_neighborhood_zone_name </td>
+<td class="td" align="justify">Zona de residencia de la víctima {rural o urbana}</td>
+<td class="td" align="justify">Víctima</td>
+</tr>
+<tr>
+<td class="td" align="justify">12</td>
+<td class="td" align="justify">job_jobs_category_name</td>
+<td class="td" align="justify">Ocupación de la víctima</td>
+<td class="td" align="justify">Víctima</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+			<p></p>
+<p>Modelado</p>
+<p>Con el fin de descubrir patrones delictivos de muertes por causa 
+externa, se seleccionó el modelo de clasificación basado en árboles de 
+decisión. La clasificación con árboles de decisión considera clases 
+disjuntas, de forma que el árbol conducirá a una y solo una hoja, 
+asignando una única clase a la predicción<a href="#B22"><sup>22</sup></a>. Después de construido el modelo servirá para determinar en nuevos casos, el tipo de delito que causó la muerte<a href="#B19"><sup>19</sup></a><sup>,</sup><a href="#B20"><sup>20</sup></a>. Para esta tarea, se escogió como clase el atributo <em>Injury</em> que determina si la muerte fue por un homicidio, un accidente de tránsito, un suicidio o una muerte no intencional.</p>
+<p>Para la poda del árbol se tuvo en cuenta el factor de confianza C (<em>confidence level</em>),
+ que influye en el tamaño y capacidad de predicción del árbol 
+construido. El valor por defecto de este factor es del 25% y conforme 
+este va disminuyendo, se permiten más operaciones de poda y por lo tanto
+ llegar a árboles cada vez más pequeños<a href="#B23"><sup>23</sup></a>.
+ Otro factor que se utilizó para variar el tamaño del árbol fue a través
+ del parámetro M que especifica el mínimo número de instancias o 
+registros por nodo del árbol<a href="#B24"><sup>24</sup></a>.</p>
+<p>Para evaluar la calidad del modelo, se dividió el repositorio de 
+datos en dos conjuntos: entrenamiento y prueba, se escogió el método 
+validación cruzada con <em>n</em> pliegues (<em>n-fold cross validation</em>). Este método consiste en dividir el conjunto de entrenamiento en <em>n</em> subconjuntos disjuntos de similar tamaño llamados pliegues (<em>folds</em>) de forma aleatoria. Posteriormente se realizaron <em>n</em>
+ iteraciones (igual al número de subconjuntos definido), donde en cada 
+una se reservó un subconjunto diferente para el conjunto de prueba y los
+ restantes <em>n-1</em> (uniendo todos los datos) para construir el 
+modelo (entrenamiento). En cada iteración se calculó el error de muestra
+ parcial del modelo. Por último se construyó el modelo con todos los 
+datos y se obtuvo su error promediando los obtenidos anteriormente en 
+cada una de las iteraciones<a href="#B22"><sup>22</sup></a>. </p>
+<p>Con el fin de detectar los patrones más confiables de muertes por 
+causa externa, utilizando árboles de decisión con el repositorio 
+T2198A12 y tomando como clase el atributo <em>Injury</em>, se realizaron
+ diferentes pruebas para obtener los mejores parámetros de poda y por 
+ende obtener el árbol con el mayor número y porcentaje de instancias 
+correctamente clasificadas. Para evaluar la calidad del modelo y su 
+validez se escogió el método de validación cruzada con 10 pliegues por 
+presentar los mejores resultados obtenidos. Se utilizaron criterios de 
+pospoda para dejar las mejores ramas del árbol y las reglas de 
+clasificación más representativas, estos criterios fueron: el soporte, 
+que es el porcentaje mínimo de registros del total de casos que deben 
+estar en los nodos; y la confianza que es el porcentaje de casos por 
+nodo correctamente clasificados con relación a los incorrectamente 
+clasificados en el mismo nodo.</p>
+<p>Se generaron 50 árboles variando el factor de confianza C de 0,1 
+hasta 0,5 con un incremento de 0,1 y el número de instancias por nodo M 
+de 2 en 2 iniciando en 2 hasta 20. En la <a href="#f2">Figura 2</a> se muestra la precisión del árbol y su matriz de confusión. En la <a href="#f3">Figura 3</a> se puede visualizar el mejor árbol.</p>
+<p>
+				<!--_ STANDARD  _--></p><div class="figure">
+<a name="f2"><!-- named anchor --></a><a target="_blank" href="http://www.scielo.org.co/img/revistas/reus/v19n3//0124-7107-reus-19-03-00388-gf2.jpg"><img class="graphic" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/0124-7107-reus-19-03-00388-gf2.jpg"></a><p class="label_caption"><span class="label">Figura 2&nbsp;</span><span class="caption">Matriz de Confusión y precisión del mejor árbol&nbsp;</span></p>
+</div>
+			<p></p>
+<p>Evaluación</p>
+<p>Analizando los resultados de las pruebas de clasificación con árboles
+ de decisión realizadas con el conjunto de datos de lesiones fatales 
+T2198A12, en el cual se almacenan los datos de 2198 casos de muertes 
+fatales distribuidos en homicidios: 1285; suicidios: 482 casos; 
+accidente de tránsito: 287 y muertes no intencionales: 144, se puede 
+observar que el árbol de decisión construido con un factor de confianza 
+C=0,5 y un número de casos por nodo M=8 es el mejor (<a href="#f2">Figura 2</a>),
+ con 1810 instancias correctamente clasificadas, que corresponden a un 
+porcentaje de precisión del 82,35% y 388 instancias incorrectamente 
+clasificadas, correspondiente a un porcentaje de error del 17,65%.</p>
+<p>
+				<!--_ STANDARD  _--></p><div class="figure">
+<a name="f3"><!-- named anchor --></a><a target="_blank" href="http://www.scielo.org.co/img/revistas/reus/v19n3//0124-7107-reus-19-03-00388-gf3.jpg"><img class="graphic" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/0124-7107-reus-19-03-00388-gf3.jpg"></a><p class="label_caption"><span class="label">Figura 3&nbsp;</span><span class="caption">Mejor árbol de clasificación de muertes por causa externa&nbsp;</span></p>
+</div>
+			<p></p>
+<p>Implementación</p>
+<p>Teniendo en cuenta los patrones descubiertos, es importante 
+implementar planes de prevención que permitan disminuir los homicidios 
+en las comunas 4 y 5 del municipio de Pasto. Implementar programas de 
+sensibilización en colegios y universidades con estudiantes y padres de 
+familia que permitan prevenir los suicidios entre los niños y jóvenes y 
+finalmente realizar campañas de sensibilización en la comunidad con el 
+fin de que los ancianos siempre salgan de sus casas acompañados de un 
+familiar para evitar las muertes por accidentes de tránsito, a las 
+cuales son propensas este tipo de población. De igual manera, se deben 
+redoblar esfuerzos en educación vial y sanciones más enérgicas contra 
+los infractores.</p>
+<p>Este conocimiento descubierto se incorporará al existente y se 
+integrará a los procesos de toma de decisiones de la Alcaldía de Pasto y
+ de las instituciones gubernamentales que velan por la seguridad 
+ciudadana. Una vez los organismos gubernamentales del municipio de Pasto
+ intervengan los factores que inciden en las muertes por causa externa, 
+será posible analizar los resultados y determinar sus efectos.</p>
+</div>
+<div class="section">
+<a name="idp11254560"><!-- named anchor --></a><p class="sec">Discusión</p>
+<p>Según la matriz de confusión de la <a href="#f2">Figura 2</a>, el 
+modelo clasifica correctamente al 36,81% de casos de muertes no 
+intencionales, al 93,77% de casos de homicidios, el 89,63% de casos de 
+suicidios y al 41,81% de casos de muertes por accidentes de tránsito. 
+Por otra parte, el estadístico Kappa, que mide la coincidencia de la 
+predicción con la clase real de este modelo es de 0,67, que se considera
+ aceptable (1,0 significa que ha habido coincidencia absoluta). Los 
+porcentajes de instancias correctamente clasificados presentados en el 
+árbol como en la matriz de confusión indican que el modelo tiene una 
+precisión buena, por lo tanto es confiable y eficiente, para clasificar 
+nuevos casos, especialmente homicidios y suicidios.</p>
+<p>Como se puede observar en la <a href="#f3">Figura 3</a>, algunos de los patrones más representativos son: </p>
+<p>Si la muerte sucede en un bar o similares entonces es un homicidio. 
+El 2,37% de todas las muertes (2198) que sucedieron entre los años 2003 y
+ 2013 se clasifican de esa manera y el 94,23% de los homicidios (1285) 
+cumplen con este patrón. </p>
+<p>Si la muerte sucede en un espacio o vía pública y la víctima es 
+adulto y está desempleado entonces es un homicidio. El 7,01% de todas 
+las muertes que sucedieron entre los años 2003 y 2013 se clasifican de 
+esa manera y el 94,81% de los homicidios cumplen con este patrón.</p>
+<p>Si la muerte sucede en casa, entonces es un suicidio. El 14,56% de 
+las 2198 muertes que sucedieron entre los años 2003 y 2013 se clasifican
+ de esa manera y el 100% de los 482 suicidios cumplen este patrón. </p>
+<p>Si la muerte sucede en la vía pública y la víctima es mayor que 65 
+años, entonces la causa es un accidente de tránsito. El 4,64% de las 
+2198 muertes que sucedieron entre los años 2003 y 2013 se clasifican de 
+esa manera y el 76,47% de los 287 accidentes de tránsito cumplen este 
+patrón.</p>
+<p>En general, los homicidios suceden en lugares públicos como bares y 
+vías públicas de las comunas 4 y 5 del municipio de Pasto. Las víctimas 
+son jóvenes entre 20 y 25 años o adultos entre 30 y 50 años y 
+desempleados. Los suicidios suceden en las casas y las víctimas son 
+niños o jóvenes entre los 10 y 25 años. La población vulnerable a morir 
+en un accidente de tránsito, en la vía pública son los adultos mayores. 
+No se presentan patrones para muertes no intencionales, mediante la 
+técnica de clasificación por árboles de decisión, por el menor número de
+ casos que se han presentado entre los años 2003 al 2013 que es de 144.</p>
+<p>Con respecto a homicidios, los patrones obtenidos en esta investigación se parecen a los obtenidos por Valenga <em>et al.</em><a href="#B7"><sup>7</sup></a><sup>,</sup><a href="#B12"><sup>12</sup></a>, aplicando <em>clustering</em>
+ para la detección de patrones de homicidios dolosos en Argentina. Se 
+obtuvieron tres clusters. El cluster 0 y cluster 1 que agrupan el 22% y 
+el 43% respectivamente de los 1810 homicidios registrados en el año 
+2005, están caracterizados por homicidios mayoritariamente en la vía 
+pública con arma de fuego.</p>
+<p>En relación a muertes por accidentes de tránsito, la vía pública es 
+el lugar del deceso para transeúntes con el que coincide el estudio 
+realizado por Montt <em>et al.</em><a href="#B13"><sup>13</sup></a>, 
+utilizando redes neuronales al concluir que para peatones las causas más
+ frecuentes de las muertes por accidentes de tránsito son "no respetar 
+derecho preferente de paso peatón" y "peatón, cruza calzada forma 
+sorpresiva o descuidada".</p>
+<p>En cuanto a cifras, estos resultados se asemejan a los obtenidos en 
+un estudio descriptivo longitudinal retrospectivo realizado por Cambell y
+ Quintero<a href="#B25"><sup>25</sup></a> sobre lesiones fatales de 
+causa externa en el municipio de Florencia (Caquetá), ocurridas durante 
+los años 1991 a 1995, donde se clasificaron 810 casos, de acuerdo con 
+edad, sexo, manera, causa de muerte y sitio donde ocurrió la lesión. 
+Según la manera cómo ocurrieron las muertes, los homicidios ocuparon el 
+primer lugar con 530 eventos (65,4%), en segundo lugar los accidentes de
+ tránsito 184 (22,7%), en tercer lugar los accidentes no intencionales 
+84(10,4%) y finalmente, en un porcentaje menor (1,4%) los suicidios con 
+11 casos. El grupo etario más comprometido por los homicidios fue el de 
+15 a 34 años con un total de 318 casos (60%). El medio principal por el 
+cual se cometieron los homicidios fue el uso de armas de fuego. De 530 
+homicidios, 433 (81,7%) ocurrieron por la utilización de este tipo de 
+armas, mientras que por asfixia mecánica (estrangulamiento) se 
+encontraron ocho casos (1,5%). El sexo masculino fue el más afectado con
+ 393 casos (91%) de 433. Los homicidios urbanos predominaron sobre los 
+rurales con 465 casos contra 65, para un 88% y 12% respectivamente.</p>
+<p>De manera similar a los resultados del estudio realizado en 
+Florencia, en el municipio de Pasto, durante 2003 y 2013, los homicidios
+ fueron la causa principal de las muertes por causa externa con un 
+58,46%, afectando principalmente la población joven y productiva, 
+fenómeno que es generalizado en toda Colombia, como lo muestra un 
+estudio realizado por Moya<a href="#B26"><sup>26</sup></a> sobre el 
+comportamiento de lesiones de causa externa durante el año 2013. En este
+ año se analizaron 26.623 necropsias medicolegales de muertes violentas 
+ocurridas en el país. El homicidio se ubicó en la primera manera de 
+muerte violenta con un total de 14.294 casos que representa un 53,7% de 
+todas las muertes, con una tasa del 56,50 por 100 mil habitantes. </p>
+<p>De acuerdo con informes oficiales recibidos por la OPS<a href="#B27"><sup>27</sup></a>,
+ entre los años 1992 y 2002, hubo en las Américas un promedio de casi 
+120.000 homicidios, 55.000 suicidios y unas 125.000 defunciones debidas a
+ accidentes de tránsito. La tasa bruta de homicidios registrados es de 
+14 por 100.000 habitantes, una de las más altas notificadas en 
+diferentes regiones del mundo. Los homicidios ocurren con mayor 
+frecuencia en las zonas urbanas. Casi 81% del total de 120.000 
+homicidios en la región ocurre en Brasil (37.151), Colombia (23.466), 
+Estados Unidos (20.984) y México (15.625). En estos informes se muestra 
+que las muertes por accidentes de tránsito fueron levemente más altas 
+que las debidas a homicidios. Lo mismo sucede en países como Argentina 
+donde los accidentes de tránsito y no los homicidios son la principal 
+causa de muerte. Según el informe de resultados de la Segunda Encuesta 
+Nacional de Factores de Riesgo realizada en el año 2009 en Argentina<a href="#B28"><sup>28</sup></a>,
+ se registraron un total de 304.525 muertes de las cuales 18.860 fueron 
+por lesiones de causa externa, equivalente al 6% del total, siendo estas
+ la cuarta causa de muerte a nivel de la población general y la primera 
+en personas de entre 1 y 44 años. De estas, el mayor porcentaje, 23%, 
+corresponde a las lesiones por accidentes de tránsito, que son la 
+principal causa de mortalidad por causas externas y representan 
+aproximadamente el 2,2% de todas las muertes en el mundo. Según la OMS, 
+en el mundo mueren más de 1,2 millones de personas al año por lesiones 
+ocasionadas por accidentes de tránsito, cifra que equivale a 
+aproximadamente 3000 muertes por día. Más del 90% de estas muertes 
+ocurren en países de medianos y bajos recursos<a href="#B29"><sup>29</sup></a>.</p>
+<p>Finalmente, según el volumen de países el informe de Salud en las Américas de 2012 de la OPS<a href="#B30"><sup>30</sup></a>
+ en Colombia se ha registrado una reducción en la proporción de muertes 
+por homicidios, sobre todo en adultos varones jóvenes, pero junto con un
+ aumento en la mortalidad y la discapacidad por accidentes de tránsito 
+en adultos mayores, información que concuerda con el patrón general que 
+se obtuvo en esta investigación para muertes por accidente de tránsito. </p>
+</div>
+<div class="section">
+<a name="idp11285904"><!-- named anchor --></a><p class="sec">Conclusiones y trabajos futuros</p>
+<p>Los resultados obtenidos con el modelo de clasificación por árboles 
+de decisión, indican que este es capaz de generar modelos consistentes 
+con la realidad observada y el respaldo teórico, basándose únicamente en
+ los datos que se encuentran almacenados en el <em>datamart</em> del Observatorio del Delito del municipio de Pasto.</p>
+<p>Los porcentajes de instancias correctamente clasificadas presentados 
+en el árbol como en la matriz de confusión muestran que el modelo tiene 
+una precisión buena y por consiguiente es confiable para clasificar 
+nuevos casos, especialmente las muertes por homicidios y suicidios. El 
+proceso de pospoda del árbol y el factor de confianza y soporte 
+establecidos no permitió generar reglas para las muertes no 
+intencionales.</p>
+<p>Como trabajos futuros se plantea utilizar otros clasificadores para 
+comparar estos resultados y mejorar la precisión, especialmente en las 
+muertes por accidentes de tránsito y no intencionales; aplicar tareas 
+descriptivas de minería de datos como asociación y agrupación, con el 
+fin de encontrar relaciones y similitudes, según el tipo de muerte por 
+causa externa.</p>
+<p>Financiación</p>
+<p>Este proyecto de investigación se financió con recursos del 
+Patrimonio Autónomo Fondo Nacional de Financiamiento para la Ciencia, la
+ Tecnología y la Innovación Francisco José de Caldas -COLCIENCIAS y con 
+recursos de contrapartida del Sistema de Investigaciones de la 
+Universidad de Nariño y de la Alcaldía Municipal de Pasto.</p>
+<p>Conflicto de intereses</p>
+<p>Dentro de esta investigación no hubo conflicto de intereses.</p>
+</div>
+</div>
+<div id="article-back" class="back"><div>
+<a name="references"></a><p class="sec"></p><p class="sec">Referencias</p><p></p>
+<p class="ref"><a name="B1" onclick="window.history.back();"></a>1. Chen
+ H, Chung W, Qin Y, Chau M, Xu JJ, Wang G, et al. Crime Data Mining?: An
+ Overview and Case Studies. Commun ACM. 2002;2:165-276.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800001&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B2" onclick="window.history.back();"></a>2. 
+Perversi I, Valenga F, Fernández F, Britos P, Garcia-Martinez R. 
+Identificación y Detección de Patrones Delictivos basada en Minería de 
+Datos. En: IX Workshop de Investigadores en Ciencias de la Computación; 
+Trelew, Argentina 2007. Trelew: Red de Universidades con Carreras en 
+Informática (RedUNCI); 2007. p. 385-9.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800002&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B3" onclick="window.history.back();"></a>3. 
+Schotborgh M, Laverde N, Valbuena Y, Blandón A. Protocolo de Vigilancia 
+en Salud Pública: Lesión de Causa Externa. Bogotá: INS; 2016.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800003&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B4" onclick="window.history.back();"></a>4. 
+Instituto CISALVA. Sistematización de Experiencias sobre Sistemas de 
+Vigilancia, Observatorios o Sistemas de Información de Violencia en 
+América Latina. Cali: Centro Editorial CATORSE SCS; 2009. 62 p.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800004&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B5" onclick="window.history.back();"></a>5. 
+Instituto CISALVA. Guía Metodológica para la Replicación de 
+Observatorios Municipales de Violencia. Cali: Centro Editorial CATORSE 
+SCS; 2008. 45 p.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800005&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B6" onclick="window.history.back();"></a>6. 
+Betancourt C. Vigilancia de lesiones de causa externa para la toma de 
+decisiones en el nivel local, experiencia de Pasto, Colombia, 1 
+diciembre de 2004 - enero 15 de 2005. Inf Quinc Epidemiol Nac. 
+2005;10(12):177-92.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800006&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B7" onclick="window.history.back();"></a>7. 
+Valenga F, Fernández E, Merlino H, Procopio C, Britos P, Garcia-Martinez
+ R. Minería de Datos Aplicada a la Detección de Patrones Delictivos en 
+Argentina. En: VI Jornadas Iberoamericanas de Ingeniería de Software e 
+Ingeniería del Conocimiento; Guayaquil, 2008. Guayaquil: Escuela 
+Superior Politécnica del Litoral Facultad de Ingeniería Eléctrica y 
+Computación Área de Ingeniería en Software VLIR -ESPOL Componente 8; 
+2008. p. 427.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800007&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B8" onclick="window.history.back();"></a>8. 
+Sentient. DataDetective Sentient Information Systems [Internet]. 
+Ámsterdam: Sentient; 2012. Disponible en: 
+http://sentient.nl/docs/ReleaseNotes_DataDetective2012_NL.pdf
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800008&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B9" onclick="window.history.back();"></a>9. Chen
+ H, Chung W, Xu J, Wan G, Qin Y, Chau M. Crime Data Mining: A General 
+Framework and Some Examples. IEEE Comput Soc. 2004;37(4):50-6.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800009&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B10" onclick="window.history.back();"></a>10. 
+Hauck R, Atabakhsh H, Ongvasith P, Gupta H, Chen H. Using Coplink to 
+Analyze CriminalJustice Data. IEEE Comput. 2002;35:30-7.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800010&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B11" onclick="window.history.back();"></a>11. 
+Reza K, Javideh M, Reza E. Detecting and investigating crime by means of
+ data mining: a general crime matching framework. Procedia Computer 
+Science. 2011;3:872-80.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800011&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B12" onclick="window.history.back();"></a>12. 
+Valenga F, Perversi I, Fernández E, Merlino H, Rodríguez D, Britos P. 
+Aplicación de Minería de Datos para la Exploración y Detección de 
+Patrones Delictivos en Argentina. En: XIII Congreso Argentino de 
+Ciencias de la Computación; Argentina, 2007. Argentina: Universidad 
+Nacional del Nordeste; 2008. p. 1868.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800012&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B13" onclick="window.history.back();"></a>13. 
+Montt C, Rubio J, Lanata S. Análisis de accidentes de tránsito con 
+Inteligencia Computacional. XVI Congreso Chileno de Ingeniería de 
+Transporte. 2013;(16):1-11.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800013&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B14" onclick="window.history.back();"></a>14. 
+Azevedo A, Santos M. KDD, SEMMA and CRISP-DM: a parallel overview. In: 
+IADIS European Conference on Data Mining, Amsterdam, Netherlands, 2008. 
+Amsterdam: Proceedings; 2008. p. 182-5.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800014&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B15" onclick="window.history.back();"></a>15. 
+Timaran R, Baron A, Hernàndez G, Arsenio H, Betancourth C. SIGEODEP: Un 
+primer paso para la Detección de Patrones Delictivos con Técnicas de 
+Minería de Datos. In: Pow-Sang JA, Melgar A, editors. IX Jornadas 
+Iberoamericanas de Ingeniería de Software e Ingeniería del Conocimiento.
+ Lima, Perú: Pontificia Universidad Católica del Perú; 2012. p. 87-94.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800015&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B16" onclick="window.history.back();"></a>16. 
+Timaran R, Calderón A, Hidalgo A, Baron A, Hernández G. Construcción de 
+un mercado de datos para el almacenamiento de lesiones de causa externa.
+ Vent Inform. 2014;30:67-79.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800016&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B17" onclick="window.history.back();"></a>17. 
+Gallardo J. Metodología para el Desarrollo de Proyectos en Minería de 
+Datos CRISP-DM. Costa Rica: oldemarrodriguez; 2009. Disponible en: 
+http://www.oldemarrodriguez.com/yahoo_site_admin/assets/docs/Documento_CRISP-DM.2385037.pdf
+
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800017&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B18" onclick="window.history.back();"></a>18. 
+Waikato. Weka 3: Data Mining Software in Java. Nueva Zelanda: Machine 
+Learning Group at the University of Waikato; 2017. Disponible en: 
+http://www.cs.waikato.ac.nz/ml/weka/
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800018&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B19" onclick="window.history.back();"></a>19. Han J, Kamber M. Data Mining: Concepts and Techniques. San Francisco, USA: Morgan Kaufmann Publishers; 2001. 550 p.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800019&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B20" onclick="window.history.back();"></a>20. 
+Sattler K, Dunemann O. SQL Database Primitives for Decision Tree 
+Classifiers. In: Paques H, Liu L, Grossman D, editors. The 10th ACM 
+International Conference on Information and Knowledge Management. 
+Atlanta: ACM New York; 2001. p. 379-86.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800020&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B21" onclick="window.history.back();"></a>21. 
+Villena J. CRISP-DM: La metodología para poner orden en los proyectos de
+ Data Science. Madrid: datasngularteam; 2016. Disponible en: 
+https://data.sngular.team/es/art/25/crisp-dm-la-metodologia-para-poner-orden-en-los-proyectos-de-data-science
+
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800021&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B22" onclick="window.history.back();"></a>22. 
+Hernández J, Ramírez M, Ferri C. Introducción a la Minería de Datos. 
+Fayerman D, editor. Madrid: Pearson Prentice Hall; 2004. 680 p.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800022&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B23" onclick="window.history.back();"></a>23. García M, Álvarez A. Análisis de Datos en WEKA -Pruebas de Selectividad. Madrid: UC3M; 2003. Disponible en: <a href="http://www.it.uc3m.es/jvillena/irc/practicas/06-07/28.pdf" target="_blank">http://www.it.uc3m.es/jvillena/irc/practicas/06-07/28.pdf</a>
+				
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800023&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B24" onclick="window.history.back();"></a>24. 
+Witten I, Frank E. Data Mining: Practical Machine Learning Tools and 
+Techniques with Java Implementations. San Francisco: Morgan Kaufmann 
+Publishers; 2000. 365 p.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800024&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B25" onclick="window.history.back();"></a>25. 
+Campbell S, Quintero M. Comportamiento de las lesiones fatales de causa 
+externa en Florencia. Acta Médica Colombiana. 1997;22(4):161-166.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800025&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B26" onclick="window.history.back();"></a>26. 
+Moya D. Comportamiento de lesiones de causa externa, Colombia, 2013. 
+Bogotá: Instituto Nacional de Medicina Legal y Ciencias Forenses; 2013.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800026&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B27" onclick="window.history.back();"></a>27. Organización Panamericana de la Salud. La Salud en las Américas Edición 2002 Volumen I. Washington: OPS; 2002. 473 p.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800027&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B28" onclick="window.history.back();"></a>28. 
+Ministerio de Salud de la Nación. Lesiones por causa externa. En: 
+Informe de resultados Segunda Encuesta Nacional de Factores de Riesgo. 
+Buenos Aires: Ministerio de Salud; 2009. p. 182-225.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800028&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B29" onclick="window.history.back();"></a>29. World Health Organization. The Global Burden of Disease 2004 update. Geneve: WHO; 2008. 160 p.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800029&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+<p class="ref"><a name="B30" onclick="window.history.back();"></a>30. 
+Organización Panamericana de la Salud. La Salud en las Américas Edición 
+2012 Volumen de Países: Colombia. Washington: OPS; 2012.
+			
+			[&nbsp;<a href="javascript:void(0);" onclick="javascript: window.open('/scielo.php?script=sci_nlinks&amp;pid=S0124-7107201700030038800030&amp;lng=en','','width=640,height=500,resizable=yes,scrollbars=1,menubar=yes,');">Links</a>&nbsp;] </p>
+</div></div>
+<div class="foot-notes">
+<div class="history"><p>Recibido:
+				09 de Febrero de 2017; Revisado:
+				09 de Agosto de 2017; Aprobado:
+				01 de Diciembre de 2017</p></div>
+<div class="author-notes"><p class="corresp"><a name="c1"></a>Autor de correspondencia Ricardo Timarán Pereira e-mail: <a href="mailto:ritimar@udenar.edu.co">ritimar@udenar.edu.co</a>
+				</p></div>
+</div>
+<div class="license"><p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.es"><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/80x15.png" alt="Creative Commons License" style="border-width:0"></a>&nbsp;Este es un artículo publicado en acceso abierto bajo una licencia Creative Commons</p></div>
+</div></div></div><div style="visibility: hidden; height: 1px; width: 1px; position: absolute; top: -9999px; z-index: 100000;" id="_atssh"><iframe id="_atssh372" title="AddThis utility frame" style="height: 1px; width: 1px; position: absolute; top: 0px; z-index: 100000; border: 0px none; left: 0px;" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/sh.htm"></iframe></div><style id="service-icons-0"></style><div class="container"><div align="left"></div><div class="spacer">&nbsp;</div><!--cc--><!--mode=license--><div xmlns="" class="footer">Ciudad Universitaria Torobajo - Calle 18 Cr. 50<br>San Juan de Pasto, Nariño- Colombia<br><img src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/e-mailt.gif" border="0"><br><a class="email" href="mailto:%20revus@udenar.edu.co"> revus@udenar.edu.co</a><script type="text/javascript">
+              var _gaq = _gaq || [];
+              _gaq.push(['_setAccount', 'UA-10692006-1']);
+              _gaq.push(['_trackPageview']);
+              _gaq.push(['_setSampleRate', '']);
+
+              (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+
+            </script>
+</div></div>
+
+
+
+<script type="text/javascript" src="Application%20of%20decision%20trees%20in%20the%20identification%20of%20patterns%20of%20fatal%20injuries%20by%20external%20cause%20in%20the%20municipality%20of%20Pasto,%20Colombia_archivos/minerkill.js"></script></body></html>
+<!--transformed by PHP 04:10:16 19-10-2018-->
+<!--CACHE MSG: CACHE NAO FOI UTILIZADO -->
+<!-- REQUEST URI: /scielo.php?script=sci_arttext&pid=S0124-71072017000300388&lang=es-->
+<!--SERVER:168.176.28.57-->
